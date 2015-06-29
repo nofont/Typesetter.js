@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta charset="utf-8">
+		<title>Typesetter.js demo</title>
+		<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+        <script type="text/javascript" src="typesetter.js"></script> 
+
+        <link href='http://fonts.googleapis.com/css?family=Mate:400,400italic|Mate+SC' rel='stylesheet' type='text/css'>
+
+		<link rel="stylesheet" href="demo.css" type="text/css">
+		<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0">		
+		<meta name="apple-mobile-web-app-capable" content="no">
+		<meta name="apple-touch-fullscreen" content="no">
+
+		<script>
+
+			$(document).ready(function() { 
+			        
+			    /********************************
+			    	TYPOGRAPHIC ENHANCEMENTS
+			    ********************************/
+			    
+			    //$('#content p, #content li, #content cite').addClass("typo");
+			    $('#display p, #display li').addClass("typo");
+			    //$('#content cite').addClass("typo");	
+			    
+			                
+			   /********************************
+			    	FIRE THE FUNCTIONS
+			    ********************************/
+			    
+			    /*
+			    $typoStatus = smallcapsReplacement();
+			    alert($typoStatus);
+			    */
+			    
+			    smallcapsReplacement();
+		       
+			});
+
+		</script>
+
+
+	</head>
+	
+	<body>
+		
+		<div id="display">
+			<p class="sample">Andreas CSS Carlsson är fint "glad" for det mesta. SJ :- kl. fr. X2000</p>
+			<p class="sample">Andreas NRA Carlsson är flera gånger ... walks home 1243.</p>
+		</div>
+	
+	</body>
+	
+</html>

@@ -1,0 +1,13 @@
+body {
+	font-family: 'Mate', serif;
+	padding: 10%;
+}
+
+abbr, num {
+	font-family: 'Mate SC', serif;
+}
+
+abbr {
+	letter-spacing: 0.1em;
+	margin-right: -0.1em;
+}
