@@ -25,7 +25,7 @@ var charReplacements = function() {
 		var quoteCharClose = "&raquo;";
 		var quoteCharOpen = "&laquo;";
 		var triggerID = "#display";
-		var smallcapsClass = "smallcaps"
+		var smallcapsClass = "num"
 		
 		// END SETTINGS
 	  		
@@ -44,7 +44,7 @@ var charReplacements = function() {
 			    		$(this).html( $(this).html().replace(/"([\s\.\,])/g, quoteCharClose + "$1")); // Replaces | " | space | with | » | space |
 			    		$(this).html( $(this).html().replace(/\s"/g, " " +  quoteCharOpen)); // Replaces | space | " | with | space | « |
 			    		
-			    		$(this).html( $(this).html().replace(/(\d+)(?=((?!<\/a>).)*(<a|$))/g, '<span class="' + smallcapsClass + '">$1</span>')); // wraps digits in <smallcaps>-tag but ignors digits within a <a>-tag. Read full explanation here http://www.phpbuilder.com/board/archive/index.php/t-10221442.html
+			    		$(this).html( $(this).html().replace(/(\d+)(?=((?!<\/a>).)*(<a|$))/g, '<' + smallcapsClass + '>$1</span>')); // wraps digits in <smallcaps>-tag but ignors digits within a <a>-tag. Read full explanation here http://www.phpbuilder.com/board/archive/index.php/t-10221442.html
 			    		
    	     	    		if ( (($(this).children().length) === 0) || ($('this:contains("u00a9")')) ) {
    			    		   	$(this).html( $(this).html().replace(/\u00a9/g, "<sup class=\"sup\">&copy;</sup>") ); // Superscripts (c)
