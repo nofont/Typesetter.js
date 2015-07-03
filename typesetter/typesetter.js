@@ -22,10 +22,12 @@ var charReplacements = function() {
 		” = &#8221;
 		*/
 		
-		var quoteCharClose = "&raquo;";
-		var quoteCharOpen = "&laquo;";
+		var doubleQuoteCharClose = "&#8221;";
+		var doubleQuoteCharOpen = "&#8220;";
+		var singleQuoteCharClose = "&#8217;";
+		var singleQuoteCharOpen = "&#8216;";
 		var triggerID = "#display";
-		var smallcapsClass = "num"
+		var numeralClass = "num"
 		
 		// END SETTINGS
 	  		
@@ -41,11 +43,13 @@ var charReplacements = function() {
 		  	    		$(this).html( $(this).html().replace(/fl/g, "&#xFB02;")); // Replaces fl with ligature
 		  	    		$(this).html( $(this).html().replace(/fi/g, "&#xFB01;")); // Replaces fi with ligature
 			    		$(this).html( $(this).html().replace(/\s-\s/g, " &#8210; ")); // Replaces | space | en-dash | space | with | space | em-dash | space |
-			    		$(this).html( $(this).html().replace(/"([\s\.\,])/g, quoteCharClose + "$1")); // Replaces | " | space | with | » | space |
-			    		$(this).html( $(this).html().replace(/\s"/g, " " +  quoteCharOpen)); // Replaces | space | " | with | space | « |
-			    		
-			    		$(this).html( $(this).html().replace(/(\d+)(?=((?!<\/a>).)*(<a|$))/g, '<' + smallcapsClass + '>$1</span>')); // wraps digits in <smallcaps>-tag but ignors digits within a <a>-tag. Read full explanation here http://www.phpbuilder.com/board/archive/index.php/t-10221442.html
-			    		
+			    		$(this).html( $(this).html().replace(/"([\s\.\,])/g, doubleQuoteCharClose + "$1")); // Replaces | " | space | with | » | space |
+			    		$(this).html( $(this).html().replace(/\s"/g, " " +  doubleQuoteCharOpen)); // Replaces | space | " | with | space | « |
+			    		$(this).html( $(this).html().replace(/'([\s\.\,])/g, singleQuoteCharClose + "$1")); // Replaces | " | space | with | » | space |
+			    		$(this).html( $(this).html().replace(/\s'/g, " " +  singleQuoteCharOpen)); // Replaces | space | " | with | space | « |
+
+			    		$(this).html( $(this).html().replace(/(\d+)(?=((?!<\/a>).)*(<a|$))/g, '<'+numeralClass+'>$1</'+numeralClass+'>')); // wraps digits in <num>-tag but ignors digits within a <a>-tag. Read full explanation here http://www.phpbuilder.com/board/archive/index.php/t-10221442.html
+
    	     	    		if ( (($(this).children().length) === 0) || ($('this:contains("u00a9")')) ) {
    			    		   	$(this).html( $(this).html().replace(/\u00a9/g, "<sup class=\"sup\">&copy;</sup>") ); // Superscripts (c)
    			    			$(this).html( $(this).html().replace(/\u00ae/g, "<sup class=\"sup\">&reg;</sup>") ); // Superscripts (R)
@@ -112,7 +116,7 @@ var smallcapsReplacement = function() {
 		return classElements;	
 	}
 	  	
-	function replaceTypo() {
+	function findAbbrevations() {
 	
 	foundObjects = getElementsByClass(document,'typo','*'); // Gets all the elements with the "typo"-class
 	
@@ -235,15 +239,11 @@ var smallcapsReplacement = function() {
 				// The original array is converted to a string and that string is inserted into the DOM.
 				
 			} // END foundObjects = null test
-	
-		if (((foundObjects.length)-1)==(a+1)) { 
-		// When all ".typo"-objects are tested we are calling the charReplacements-function that checks and replaces special-charachters.
-		charReplacements();
-			}
 		} // END foundObjects for-loop
-	} // END replaceTypo function
+	} // END findAbbrevations function
 
-replaceTypo();
+charReplacements();
+findAbbrevations();
 
 }; // END VARIABLE
 
