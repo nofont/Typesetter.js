@@ -1,6 +1,19 @@
 body {
 	font-family: 'Mate', serif;
 	padding: 10%;
+	font-size: 18px;
+	line-height: 28px;
+	width: 65%;
+	margin: 0 auto;
+	margin-top: 150px;
+}
+
+article {
+	font-size: 18px;
+	line-height: 28px;
+	width: 65%;
+	margin: 0 auto;
+	margin-top: 150px;
 }
 
 abbr, num {

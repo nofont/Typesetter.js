@@ -157,6 +157,7 @@ var smallcapsReplacement = function() {
 							&& 
 							((lowercaseTester.charCodeAt(0) < 47) || (lowercaseTester.charCodeAt(0) > 58)) // Not digit
 							) 
+							
 							console.log('Testing: '+currentWord);
 							/* && (currentWord.charCodeAt(lastCharTester) != 46) ) */ { // LOWERCASETEST - if the first character in the word is not within lowercase ASCII-value range or a "space" AND the last character is not a : then the test below shall be run.
 						
@@ -188,6 +189,8 @@ var smallcapsReplacement = function() {
 											(unicodeValue === 8250) ||
 											(unicodeValue === 8220) ||
 											(unicodeValue === 8221) ||
+											(unicodeValue === 8211) ||
+											(unicodeValue === 8212) ||
 											(unicodeValue === 147) ||
 											(unicodeValue === 148) ||
 											(unicodeValue === 145) ||
@@ -197,17 +200,20 @@ var smallcapsReplacement = function() {
 											(unicodeValue === 45) ||
 											(unicodeValue === 40) || 
 											(unicodeValue === 34) || 
-											(unicodeValue === 44) || 
+											(unicodeValue === 39) || 
 											(unicodeValue === 46) || 
+											(unicodeValue === 196) || 
 											(unicodeValue === 58) 
 										) { // APOSTROPHE-TEST This is a test/exception that is made if the word that is being tested contains all uppercase letters AND an apostrophe or hyphen or such. If it does then it shall be treated like a "all-caps"-word. If the word contains all caps and apostrophe/hyphen BUT ends with lowercase letters then the word shall not be treated as an "all-caps"-word. This is a decision made by me cos there are no good/clear rules in typography on how to handle such words.
 									// 8217 = Apostrophe
-									// 45 = en-dash
+									// 45 = minus sign - hyphen
+									// 8211 = en-dash
+									// 8212 = em-dash
 									// 58 = colon
 									// 46 = period
 									// 40 = paranthesis
-									// 34 = double quotationmark
-									// 44 = single quotationmark
+									// 34 = inch-mark
+									// 39 = foot-mark
 									// 147 = left double quotation mark “
 									// 148 = right double quotation mark ”
 									// 145 = left single quotation mark ‘
@@ -221,8 +227,12 @@ var smallcapsReplacement = function() {
 										upperCaseCounter++; // Increased every time a uppercase character is found.
 									
 									} else {
-										if ((unicodeValue >= 33) == (unicodeValue <= 90)) {
+										if ( 
+											((unicodeValue >= 33) == (unicodeValue <= 90)) 
+											|| (unicodeValue === 115) )
+										{
 										// If the unicode-value of currentLetter is within 65-90 then it is an uppercase letter or a diacrit. 
+										// The OR statement at the end is to catch abbrevations with posessive 's at the end. Like NASA's
 											console.log(currentLetter+ ' har unicodeValue: '+ unicodeValue +' och är en versal');
 											upperCaseCounter++; // Increased every time a uppercase character is found.
 										
@@ -240,6 +250,7 @@ var smallcapsReplacement = function() {
 									}
 
 							} // END CURRENTWORD LOOP 
+
 					}  // END LOWERCASE TEST LOOP 
 				// } // END SPECIAL CHAR TEST
 			} // END CurrentString loop	
@@ -295,7 +306,11 @@ var smallcapsReplacement = function() {
 									(unicodeCounter === 58) 
 								) { 
 							*/
-							if ((unicodeCounter < 64) || (unicodeCounter > 91)) {
+							if ( 
+								((unicodeCounter < 64) || (unicodeCounter > 91))
+								&& 
+								((unicodeCounter < 47) || (unicodeCounter > 58)) // Not digit
+								) {
 							// If a words first character is a . (period), example .PPT or .DDT, the period canno´t be converted to lower-case but the CloseTagIndex shall be increased so that the </abbr> is places correctly.
 								console.log(theLetter+ ' har unicodeCounter: '+ unicodeCounter +' och skall räknas med för closeTagIndex men inte konverteras till gemen');
 
