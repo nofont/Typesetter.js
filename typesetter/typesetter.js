@@ -28,6 +28,7 @@ var charReplacements = function() {
 		var doubleQuoteCharOpen = "&#8220;";
 		var singleQuoteCharClose = "&#8217;";
 		var singleQuoteCharOpen = "&#8216;";
+		var posessiveS = "&#8217;";
 		var triggerID = "#display";
 		var numeralClass = "num"
 		
@@ -47,10 +48,11 @@ var charReplacements = function() {
 			    		$(this).html( $(this).html().replace(/\s-\s/g, " &#8210; ")); // Replaces | space | en-dash | space | with | space | em-dash | space |
 			    		$(this).html( $(this).html().replace(/"([\s\.\,])/g, doubleQuoteCharClose + "$1")); // Replaces | " | space | with | » | space |
 			    		$(this).html( $(this).html().replace(/\s"/g, " " +  doubleQuoteCharOpen)); // Replaces | space | " | with | space | « |
-			    		$(this).html( $(this).html().replace(/'([\s\.\,])/g, singleQuoteCharClose + "$1")); // Replaces | " | space | with | » | space |
-			    		$(this).html( $(this).html().replace(/\s'/g, " " +  singleQuoteCharOpen)); // Replaces | space | " | with | space | « |
+			    		$(this).html( $(this).html().replace(/'([\s\.\,])/g, singleQuoteCharClose + "$1")); // Replaces | ' | space | with | ’ | space |
+			    		$(this).html( $(this).html().replace(/\s'/g, " " +  singleQuoteCharOpen)); // Replaces | space | ' | with | space | ‘ |
+			    		$(this).html( $(this).html().replace(/'([sS])/g, posessiveS + "$1")); // Replaces | ' | s | with | ’ | s | to catch possessive s in English.
 
-			    		$(this).html( $(this).html().replace(/(\d+)(?=((?!<\/a>).)*(<a|$))/g, '<'+numeralClass+'>$1</'+numeralClass+'>')); // wraps digits in <num>-tag but ignors digits within a <a>-tag. Read full explanation here http://www.phpbuilder.com/board/archive/index.php/t-10221442.html
+			    		$(this).html( $(this).html().replace(/(\d+)(?=((?!<\/a>).)*(<a|$))/g, '<'+numeralClass+'>$1</'+numeralClass+'>')); // wraps digits in <num>-tag but ignores digits within a <a>-tag. Read full explanation here http://www.phpbuilder.com/board/archive/index.php/t-10221442.html
 
    	     	    		if ( (($(this).children().length) === 0) || ($('this:contains("u00a9")')) ) {
    			    		   	$(this).html( $(this).html().replace(/\u00a9/g, "<sup class=\"sup\">&copy;</sup>") ); // Superscripts (c)
@@ -69,34 +71,11 @@ var charReplacements = function() {
 
 TYPESETTER.JS
 
-Current version 0.3.5 
-
-Updated 2012-02-01 by Andreas Carlsson.
-
 Ideas:
 Need to rewrite the testing logics so that it checks if the first character is NOT a lowercase and then if the second is an uppercase.
 
 Known bugs
 - Words ending with . : ; , gets an <abbr> around the first character.
-
-Changes in 0.3.5:
-- Cleaned up the code
-- Translated comments
-- Merged Individual character replacement and Typesetter.js into one file.
-
-Changes in 0.3:
-- Removed all jQuery and switched back to pure javascript.
-- Cleaned up comments and optional code.
-- Added exceptions to deal with bug that places empty <abbr> before single & - – between words. 
-- Added support for words like ".PPT"
-
-Fixed in 0.2:
-- En-teckens ord som inleder en mening sätta som < abbr > trots att det inte skall vara det.
-- Inline html i textfilerna strippas av typography.js scriptet. T.ex. försvinner allt efter < cite > i em mening.
-
-Changes in 0.2:
-- Switched the find classes function to jQuery
-- Switched the find insert html at the end to jQuery
 
 ************************/
 
@@ -158,7 +137,6 @@ var smallcapsReplacement = function() {
 							((lowercaseTester.charCodeAt(0) < 47) || (lowercaseTester.charCodeAt(0) > 58)) // Not digit
 							) 
 							
-							console.log('Testing: '+currentWord);
 							/* && (currentWord.charCodeAt(lastCharTester) != 46) ) */ { // LOWERCASETEST - if the first character in the word is not within lowercase ASCII-value range or a "space" AND the last character is not a : then the test below shall be run.
 						
 							// TO-DO! Is it possible to build an "inArray"-function/check that checks every exception; words that has . - space as the first character and words that has . : ; , and such as the last character?.
@@ -221,9 +199,6 @@ var smallcapsReplacement = function() {
 									// 174 = «
 									// 175 = »
 										
-										console.log(currentLetter+ ' har unicodeValue: '+ unicodeValue +' skall räknas som versal');
-										//console.log('CapsIndex ökas i Apostrof-testet');
-										
 										upperCaseCounter++; // Increased every time a uppercase character is found.
 									
 									} else {
@@ -233,7 +208,6 @@ var smallcapsReplacement = function() {
 										{
 										// If the unicode-value of currentLetter is within 65-90 then it is an uppercase letter or a diacrit. 
 										// The OR statement at the end is to catch abbrevations with posessive 's at the end. Like NASA's
-											console.log(currentLetter+ ' har unicodeValue: '+ unicodeValue +' och är en versal');
 											upperCaseCounter++; // Increased every time a uppercase character is found.
 										
 										} // END If Unicode är inom Versal Value
@@ -244,7 +218,6 @@ var smallcapsReplacement = function() {
 											
 										// If the length of the word is equal to the count of uppercase letters then it's an uppercase abbrevation. Aphostrophes are included so that a word like API's is treated as an uppercase-abbrevation. 'lengthOfCurrentWord > 1' is used to avoid setting one letter "words" in small-caps.
 												
-										console.log('CapsIndex ökas för att det är ett versalt ord');
 										capsIndex[y] = i; // capsIndex is assigned the index of the word that has been tested. When every word has been tested capsIndex contains indexes for all the words that shall be replaced.
 										y++;
 									}
@@ -255,7 +228,6 @@ var smallcapsReplacement = function() {
 				// } // END SPECIAL CHAR TEST
 			} // END CurrentString loop	
 			
-			console.log('Dessa ord skall ersättas: '+capsIndex);
 			//debugger;
 			var wordIndex = 0; // Is declared "globaly" so that it can be used outside the loop below.
 			
@@ -263,8 +235,6 @@ var smallcapsReplacement = function() {
 			
 				{	
 					wordIndex = capsIndex[z]; // Index of the word to relpace 
-					console.log('Replacing word with index: '+wordIndex);
-					console.log('currentStringArray[wordIndex]: '+currentStringArray[wordIndex]);
 					var wordToReplace = currentStringArray[wordIndex]; // The actual word from currentStringArray
 					var lettersToReplace = new Array(); 
 					// An array is created to contain every character from the word.
@@ -273,7 +243,6 @@ var smallcapsReplacement = function() {
 					
 					currentStringArray[wordIndex] = '<abbr>'; 
 
-					console.log('currentStringArray[wordIndex] efter <abbr>-addition: '+currentStringArray[wordIndex]);
 					// An <abbr> tag is inserted before the word that is about to get replaced. Once the replacement is completed an </abbr> tag is inserted after the word.
 					
 					var closeTagIndex = 0; 
@@ -312,7 +281,6 @@ var smallcapsReplacement = function() {
 								((unicodeCounter < 47) || (unicodeCounter > 58)) // Not digit
 								) {
 							// If a words first character is a . (period), example .PPT or .DDT, the period canno´t be converted to lower-case but the CloseTagIndex shall be increased so that the </abbr> is places correctly.
-								console.log(theLetter+ ' har unicodeCounter: '+ unicodeCounter +' och skall räknas med för closeTagIndex men inte konverteras till gemen');
 
 								closeTagIndex = closeTagIndex + 1;
 							
@@ -321,8 +289,6 @@ var smallcapsReplacement = function() {
 													
 								lettersToReplace[p] = String.fromCharCode(newUnicodeLetter); 
 								// The new lowercase character is inserded into the original string
-								
-								console.log(theLetter+ ' har unicodeCounter: '+ unicodeCounter +' och skall konverteras till gemen');
 
 								closeTagIndex = closeTagIndex + 1;
 							
@@ -333,15 +299,11 @@ var smallcapsReplacement = function() {
 					lettersToReplace.splice(closeTagIndex,0,"</abbr>"); 
 					// When the whole word is tested/replaced then the </abbr> is inserted.
 					
-					console.log('Inserting new string (lettersToReplace): '+lettersToReplace);
-
 					currentStringArray[wordIndex] = currentStringArray[wordIndex] + lettersToReplace.join(''); 
-
-					console.log('New currentStringArray[wordIndex] is: '+currentStringArray[wordIndex]);
 					// The new all-lowercase word is inserted into the original array.
+				
 				} // END capsIndex loop 
 				
-				console.log('Will insert '+currentStringArray.join(' ')+' into: '+foundObjects[a].innerHTML);
 				foundObjects[a].innerHTML=currentStringArray.join(' '); 
 				// The original array is converted to a string and that string is inserted into the DOM.
 				

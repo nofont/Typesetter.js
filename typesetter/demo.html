@@ -49,10 +49,63 @@
 	
 	<body>
 		
-		<div id="display">
-			<p class="sample">Andreas CSS Carlsson är fint "glad" for det mesta. SJ :- kl. fr. X2000</p>
-			<p class="sample">Andreas NRA Carlsson är flera gånger ... walks home 1243.</p>
+		<!--
+		<div>
+			<h3>No javascript replacements is applied:</h3><br>
+			<p>When arabic numerals joined the roman alphabet, they too were given both lowercase and uppercase forms. Typographers call the former text figures, hanging figures, lowercase figures, or old-style figures (OSF for short) and make a point of using them whenever the surrounding text is set in lowercase letters or small caps. The alternative forms are called titling figures, ranging figures or lining figures, because they range or align with the upper case.</p>
+			<p>[Text figures] are basic parts of typographic speech, and they are a sign that dollars are not really twice as important as ideas, and numbers are not afraid to consort on an equal footing with words. […] However common it may be, the use of titling figures in running text is illiterate: it spurns the truth of letters.”</p>
+			<p>Many core web fonts (indeed most digital fonts) ship with only one case of figures: Arial, Comic Sans, Helvetica, Tahoma, Times, Times New Roman, Trebuchet and Verdana all ship with titling figures only. Georgia is the sole holder of text figures (but lacks titling figures).
+			</p>
+			<p>Microsoft's new 'C' fonts however, are very strong with respect to their numerals. All six typefaces (including the fixed-width Consolas) have both titling and text figures included in the base fonts. Further, three of the fonts default to titling figures (Calibri, Cambria, and Consolas), the other three to text figures (Candara, Constantia, and Corbel). Constantia and Corbel even include small variants of their lining figures for use with text set in small capitals.
+			</p>
+			<p>Despite the bright hope for the future brought by Microsoft’s ‘C’ fonts, CSS currently makes no provision for the control of numeral case, this means the default figures will always be used, regardless of context.
+
+			<h3>The Future</h3>
+
+			<p>The CSS3 fonts module is still a working draft, but is being actively revised. The current editor’s draft includes a proposal for supporting specification of lining or old-style numbers through the font-variant-numeric property.</p>
+
+			<p>In typography, a typeface (also known as font family) is a set of one or more fonts each composed of glyphs that share common design features. Each font of a typeface has a specific weight, style, condensation, width, slant, italicization, ornamentation, and designer or foundry (and formerly size, in metal fonts). For example, "ITC Garamond Bold Condensed Italic" means the bold, condensed-width, italic version of ITC Garamond. It is a different font from "ITC Garamond Condensed Italic" and "ITC Garamond Bold Condensed," but all are fonts within the same typeface, "ITC Garamond." ITC Garamond is a different typeface from "Adobe Garamond" or "Monotype Garamond." (These are all alternative updates or digitisations of the typeface Garamond, originally created in the 16th century.) There are thousands of different typefaces in existence, with new ones being developed constantly.</p>
+			<p>The art and craft of designing typefaces is called type design. Designers of typefaces are called type designers and are often employed by type foundries. In digital typography, type designers are sometimes also called font developers or font designers.</p>
+			<p>Every typeface is a collection of glyphs, each of which represents an individual letter, number, punctuation mark, or other symbol. The same glyph may be used for characters from different scripts, e.g. Roman uppercase A looks the same as Cyrillic uppercase А and Greek uppercase alpha. There are typefaces tailored for special applications, such as map-making or astrology and mathematics.</p>
+			<p>The term typeface is frequently confused with the term font. Before the advent of digital typography and desktop publishing, the two terms had more clearly understood meanings.</p>
+			<h4>Terminology</h4>
+			<p>In professional typography, the term typeface is not interchangeable with the word font (originally "fount" in British English, and pronounced "font"), because the term font has historically been defined as a given alphabet and its associated characters in a single size. For example, 8-point Caslon Italic was one font, and 10-point Caslon Italic was another. Historically, fonts came in specific sizes determining the size of characters, and in quantities of sorts or number of each letter provided. The design of characters in a font took into account all these factors.</p>
+			<p>As the range of typeface designs increased and requirements of publishers broadened over the centuries, fonts of specific weight (blackness or lightness) and stylistic variants (most commonly regular or roman as distinct to italic, as well as condensed) have led to font families, collections of closely related typeface designs that can include hundreds of styles. A font family is typically a group of related fonts which vary only in weight, orientation, width, etc., but not design. For example, Times is a font family, whereas Times Roman, Times Italic and Times Bold are individual fonts making up the Times family. Font families typically include several fonts, though some, such as Helvetica, may consist of dozens of fonts.</p>
+			<p>The distinction between font and typeface is that a font designates a specific member of a type family such as roman, boldface, or italic type, while typeface designates a consistent visual appearance or style which can be a "family" or related set of fonts. For example, a given typeface such as Arial may include roman, bold, and italic fonts.[1] In the metal type era, a font also meant a specific point size, but with digital scalable outline fonts this distinction is no longer valid, as a single font may be scaled to any size.</p>
+			<p>The first "extended" font families, which included a wide range of widths and weights in the same general style emerged in the early 1900s, starting with ATF's Cheltenham (1902–1913), with an initial design by Bertram Grosvenor Goodhue, and many additional faces designed by Morris Fuller Benton.[2] Later examples include Futura, Lucida, ITC Officina. Some became superfamilies as a result of revival, such as Linotype Syntax, Linotype Univers; while others have alternate styling designed as compatible replacements of each other, such as Compatil, Generis.</p>
+			<p>PT Sans and PT Serif from the PT font superfamily, showing the similarities in letter structure.</p>
+			<p>Typeface superfamilies began to emerge when foundries began to include typefaces with significant structural differences, but some design relationship, under the same general family name. Arguably the first superfamily was created when Morris Fuller Benton created Clearface Gothic for ATF in 1910, a sans serif companion to the existing (serifed) Clearface. The superfamily label does not include quite different designs given the same family name for what would seem to be purely marketing, rather than design, considerations: Caslon Antique, Futura Black and Futura Display are structurally unrelated to the Caslon and Futura families, respectively, and are generally not considered part of those families by typographers, despite their names.</p>
+			<p>Additional or supplemental glyphs intended to match a main typeface have been in use for centuries. In some formats they have been marketed as separate fonts. In the early 1990s, the Adobe Systems type group introduced the idea of expert set fonts, which had a standardized set of additional glyphs, including small caps, old style figures, and additional superior letters, fractions and ligatures not found in the main fonts for the typeface. Supplemental fonts have also included alternate letters such as swashes, dingbats, and alternate character sets, complementing the regular fonts under the same family.[3] However, with introduction of font formats such as OpenType, those supplemental glyphs were merged into the main fonts, relying on specific software capabilities to access the alternate glyphs.</p>
+			<p>Since Apple's and Microsoft's operating systems supported different character sets in the platform related fonts, some foundries used expert fonts in a different way. These fonts included the characters which were missing on either Macintosh or Windows computers, e.g. fractions, ligatures or some accented glyphs. The goal was to deliver the whole character set to the customer regardless of which operating system was used.</p>
+			<p>The size of typefaces and fonts is traditionally measured in points;[4] point has been defined differently at different times, but now the most popular is the Desktop Publishing point of 1⁄72 in (0.0139 in or 0.35 mm). When specified in typographic sizes (points, kyus), the height of an em-square, an invisible box which is typically a bit larger than the distance from the tallest ascender to the lowest descender, is scaled to equal the specified size.[5] For example, when setting Helvetica at 12 point, the em square defined in the Helvetica font is scaled to 12 points or 1⁄6 in (0.17 in or 4.3 mm). Yet no particular element of 12-point Helvetica need measure exactly 12 points.</p>
+			<p>Frequently measurement in non-typographic units (feet, inches, meters) will be of the cap-height, the height of the capital letters. Font size is also commonly measured in millimeters (mm) and qs (a quarter of a millimeter, kyu in romanized Japanese) and inches.</p>
 		</div>
+		<br><hr>
+		-->
+		<div>
+			<h3>No javascript replacements is applied:</h3>
+			<p>Abbrevations A–Z, ATF's, A–Z, ATF’s wrapped in "ITC" and (ITC), a CSS typeface is in the ODE: 123, 124 (also family) is "ITC Garamond Bold Condensed Italic" </p>
+			<!-- 
+			<p>Tripple-periods is replaced with the correct ellipsis ... </p>
+			<p>Inch and footmarks are being replaced: 'lorem' och "ipsum".</p>			
+			<p>ABCDEFGHIJK NO SMALLCAPS</p>
+			<p>Non tab numbers 123,45 45.56 19:30</p>
+			<p class="tabular-nums">Tabular numbers: 123,45 45.56 19:30</p>
+		</div> -->
+		<hr>
+		<h3>Javascript replacements is applied:</h3>
+		<div id="display">
+			<p>Abbrevations A–Z, ATF's, A–Z, ATF’s wrapped in "ITC" and (ITC), a CSS typeface is in the ODE: 123, 124 (also family) is "ITC Garamond Bold Condensed Italic" </p>
+			<!-- 
+				<p>Tripple-periods is replaced with the correct ellipsis ... </p>
+				<p>Inch and footmarks are being replaced: 'lorem' och "ipsum".</p>			
+				<p>ABCDEFGHIJK NO SMALLCAPS</p>
+				<p>Non tab numbers 123,45 45.56 19:30</p>
+				<p class="tabular-nums">Tabular numbers: 123,45 45.56 19:30</p>
+			-->
+		</div>
+
+		<hr>
 	
 	</body>
 	
