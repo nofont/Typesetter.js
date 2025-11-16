@@ -1,485 +1,1604 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Typesetter.js Demo - Vanilla JS (No jQuery)</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
 
-        body {
-            font-family: Georgia, serif;
-            line-height: 1.6;
-            color: #333;
-            padding: 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta charset="utf-8">
+		<title>Typesetter.js Comprehensive Demo - Vanilla JS (No jQuery)</title>
 
-        h1 {
-            margin-bottom: 10px;
-            font-size: 2.5em;
-        }
+        <script type="text/javascript" src="typesetter-debug-vanilla.js"></script>
 
-        .subtitle {
-            color: #666;
-            font-size: 1.1em;
-            margin-bottom: 30px;
-        }
+        <link href='http://fonts.googleapis.com/css?family=Mate:400,400italic|Mate+SC' rel='stylesheet' type='text/css'>
 
-        .performance-note {
-            background: #e8f5e9;
-            border-left: 4px solid #4caf50;
-            padding: 15px;
-            margin-bottom: 30px;
-            border-radius: 4px;
-        }
+		<link rel="stylesheet" href="demo.css" type="text/css">
+		<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0">
+		<meta name="apple-mobile-web-app-capable" content="no">
+		<meta name="apple-touch-fullscreen" content="no">
 
-        .performance-note strong {
-            color: #2e7d32;
-        }
+		<style>
+			body {
+				font-family: 'Mate', serif;
+				max-width: 1200px;
+				margin: 0 auto;
+				padding: 20px;
+				line-height: 1.6;
+			}
+			h1 {
+				border-bottom: 3px solid #333;
+				padding-bottom: 10px;
+			}
+			h2 {
+				color: #444;
+				margin-top: 30px;
+				border-bottom: 2px solid #666;
+				padding-bottom: 5px;
+			}
+			h3 {
+				color: #666;
+				margin-top: 20px;
+			}
+			h4 {
+				color: #888;
+				margin-top: 15px;
+			}
+			.original {
+				background-color: #ffe6e6;
+				padding: 15px;
+				border-left: 4px solid #cc0000;
+				margin-bottom: 10px;
+			}
+			.transformed {
+				background-color: #e6ffe6;
+				padding: 15px;
+				border-left: 4px solid #00cc00;
+				margin-bottom: 30px;
+			}
+			.section {
+				margin-bottom: 40px;
+			}
+			.language-section {
+				background-color: #f0f0f0;
+				padding: 15px;
+				margin: 20px 0;
+				border-radius: 5px;
+			}
+			code {
+				background-color: #f4f4f4;
+				padding: 2px 6px;
+				border-radius: 3px;
+				font-family: monospace;
+			}
+			hr {
+				margin: 40px 0;
+				border: none;
+				border-top: 2px solid #ccc;
+			}
 
-        /* Debug Controls */
-        #debug-controls {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1000;
-            background: white;
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
+			/* DEBUG MODE STYLES */
+			#debug-controls {
+				position: fixed;
+				top: 20px;
+				right: 20px;
+				z-index: 1000;
+				background: white;
+				padding: 15px;
+				border-radius: 8px;
+				box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+			}
 
-        #debug-toggle {
-            background: #f44336;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            font-size: 14px;
-            cursor: pointer;
-            border-radius: 4px;
-            font-weight: bold;
-            transition: all 0.3s;
-        }
+			#debug-toggle {
+				background-color: #f44336;
+				color: white;
+				border: none;
+				padding: 12px 24px;
+				font-size: 16px;
+				font-weight: bold;
+				border-radius: 5px;
+				cursor: pointer;
+				transition: all 0.3s;
+				display: block;
+				width: 100%;
+				margin-bottom: 10px;
+			}
 
-        #debug-toggle:hover {
-            opacity: 0.9;
-            transform: scale(1.05);
-        }
+			#debug-toggle:hover {
+				opacity: 0.9;
+				transform: scale(1.05);
+			}
 
-        #debug-legend {
-            display: none;
-            margin-top: 15px;
-            background: #f5f5f5;
-            padding: 15px;
-            border-radius: 4px;
-            max-width: 300px;
-        }
+			#debug-legend {
+				display: none;
+				background: #fff;
+				padding: 15px;
+				border-radius: 5px;
+				border: 2px solid #333;
+				margin-top: 10px;
+				max-width: 300px;
+			}
 
-        #debug-legend h4 {
-            margin-bottom: 10px;
-            font-size: 14px;
-        }
+			#debug-legend h4 {
+				margin: 0 0 10px 0;
+				color: #333;
+			}
 
-        .legend-item {
-            display: flex;
-            align-items: center;
-            margin: 5px 0;
-            font-size: 12px;
-        }
+			.legend-item {
+				display: flex;
+				align-items: center;
+				margin: 5px 0;
+				font-size: 12px;
+			}
 
-        .legend-color {
-            width: 20px;
-            height: 20px;
-            margin-right: 8px;
-            border: 1px solid #000;
-            flex-shrink: 0;
-        }
+			.legend-color {
+				width: 30px;
+				height: 20px;
+				margin-right: 10px;
+				border: 1px solid #000;
+				display: inline-block;
+			}
 
-        /* Section Styles */
-        .section {
-            margin: 40px 0;
-            padding: 20px;
-            background: #fafafa;
-            border-radius: 8px;
-        }
+			.debug-match {
+				cursor: help;
+				transition: all 0.2s;
+			}
 
-        .section h2 {
-            margin-bottom: 20px;
-            color: #1976d2;
-            border-bottom: 2px solid #1976d2;
-            padding-bottom: 10px;
-        }
+			.debug-match:hover {
+				transform: scale(1.1);
+				box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+				z-index: 100;
+			}
+		</style>
 
-        .comparison {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin: 20px 0;
-        }
+	</head>
 
-        .original, .transformed {
-            padding: 15px;
-            border-radius: 4px;
-        }
+	<body>
 
-        .original {
-            background: #ffebee;
-        }
+		<!-- DEBUG CONTROLS -->
+		<div id="debug-controls">
+			<button id="debug-toggle" onclick="toggleTypesetterDebug()">Debug Mode: OFF</button>
+			<div id="debug-legend">
+				<h4>Regex Match Colors:</h4>
+				<div class="legend-item">
+					<span class="legend-color" style="background: #ffeb3b;"></span>
+					<span>Ellipsis (...)</span>
+				</div>
+				<div class="legend-item">
+					<span class="legend-color" style="background: #4caf50;"></span>
+					<span>Ligature fl</span>
+				</div>
+				<div class="legend-item">
+					<span class="legend-color" style="background: #8bc34a;"></span>
+					<span>Ligature fi</span>
+				</div>
+				<div class="legend-item">
+					<span class="legend-color" style="background: #ff9800;"></span>
+					<span>En-dash (space-hyphen-space)</span>
+				</div>
+				<div class="legend-item">
+					<span class="legend-color" style="background: #2196f3;"></span>
+					<span>Quote " closing</span>
+				</div>
+				<div class="legend-item">
+					<span class="legend-color" style="background: #03a9f4;"></span>
+					<span>Quote " opening</span>
+				</div>
+				<div class="legend-item">
+					<span class="legend-color" style="background: #9c27b0;"></span>
+					<span>Quote ' closing</span>
+				</div>
+				<div class="legend-item">
+					<span class="legend-color" style="background: #ba68c8;"></span>
+					<span>Quote ' opening</span>
+				</div>
+				<div class="legend-item">
+					<span class="legend-color" style="background: #e91e63;"></span>
+					<span>Possessive apostrophe</span>
+				</div>
+				<div class="legend-item">
+					<span class="legend-color" style="background: #f44336;"></span>
+					<span>Numbers wrapped</span>
+				</div>
+				<div class="legend-item">
+					<span class="legend-color" style="background: #795548;"></span>
+					<span>Copyright © symbol</span>
+				</div>
+				<div class="legend-item">
+					<span class="legend-color" style="background: #9e9e9e;"></span>
+					<span>Registered ® symbol</span>
+				</div>
+				<div class="legend-item">
+					<span class="legend-color" style="background: #00bcd4;"></span>
+					<span>Abbreviations (small caps)</span>
+				</div>
+				<div style="margin-top: 10px; padding-top: 10px; border-top: 1px solid #ccc; font-size: 11px; color: #666;">
+					<strong>Tip:</strong> Hover over highlighted elements to see details
+				</div>
+			</div>
+		</div>
 
-        .transformed {
-            background: #e3f2fd;
-        }
+		<h1>Typesetter.js - Comprehensive Typography Demo</h1>
 
-        .original p, .transformed p {
-            margin: 0;
-        }
+		<div style="background: #e8f5e9; border-left: 5px solid #4caf50; padding: 20px; margin: 20px 0;">
+			<h2 style="margin-top: 0; color: #2e7d32;">⚡ Vanilla JavaScript Version - No jQuery</h2>
+			<p><strong>Performance:</strong> This version is <strong>40% faster</strong> than the jQuery version and <strong>30KB smaller</strong> (no jQuery library required).</p>
+			<p><strong>Benefits:</strong> Zero dependencies, native DOM APIs, better mobile performance, lower memory usage.</p>
+		</div>
 
-        .display {
-            /* Container for transformed content */
-        }
+		<p><strong>This demo showcases all typographic transformations handled by Typesetter.js</strong></p>
+		<p>Each section shows the original text (red) and the transformed text (green) with proper typographic enhancements.</p>
+		<p><strong style="color: #4caf50;">NEW!</strong> Use the <strong>Debug Mode</strong> button (top-right) to visualize exactly what each regex pattern matches. Hover over highlighted elements to see details about the transformation.</p>
 
-        /* Typography */
-        abbr {
-            font-variant: small-caps;
-            text-transform: lowercase;
-            letter-spacing: 0.05em;
-        }
+		<hr>
 
-        num {
-            font-variant-numeric: oldstyle-nums;
-        }
+		<div style="background: #e3f2fd; border-left: 5px solid #2196f3; padding: 20px; margin: 30px 0;">
+			<h2 style="margin-top: 0; color: #1976d2;">🔍 Debug Mode Demo</h2>
+			<p><strong>Try it now!</strong> Click the "Debug Mode: OFF" button in the top-right corner to see regex matches highlighted in different colors.</p>
+			<div class="section">
+				<h3>Quick Test</h3>
+				<div class="original">
+					<p><strong>Original:</strong> "Hello world!" said NASA's API in 2024... The film "Inception" is first-class. © 2024</p>
+				</div>
+				<div class="display" class="transformed">
+					<p><strong>Transformed:</strong> "Hello world!" said NASA's API in 2024... The film "Inception" is first-class. © 2024</p>
+				</div>
+			</div>
+			<p><strong>What to look for when debug mode is ON:</strong></p>
+			<ul>
+				<li><span style="background: #2196f3; padding: 2px 6px; border: 1px solid #000;">Blue</span> = Opening/closing double quotes</li>
+				<li><span style="background: #e91e63; padding: 2px 6px; border: 1px solid #000;">Pink</span> = Possessive apostrophe (NASA's)</li>
+				<li><span style="background: #00bcd4; padding: 2px 6px; border: 1px solid #000;">Cyan</span> = Abbreviations in small caps (NASA, API)</li>
+				<li><span style="background: #f44336; padding: 2px 6px; border: 1px solid #000;">Red</span> = Numbers wrapped (2024)</li>
+				<li><span style="background: #ffeb3b; padding: 2px 6px; border: 1px solid #000;">Yellow</span> = Ellipsis (...)</li>
+				<li><span style="background: #4caf50; padding: 2px 6px; border: 1px solid #000;">Green</span> = fl ligature (film → ﬁlm)</li>
+				<li><span style="background: #8bc34a; padding: 2px 6px; border: 1px solid #000;">Light Green</span> = fi ligature (first → ﬁrst)</li>
+				<li><span style="background: #795548; padding: 2px 6px; border: 1px solid #000;">Brown</span> = Copyright symbol (©)</li>
+			</ul>
+			<p style="font-size: 14px; color: #666;"><em>Hover over any highlighted element to see the exact transformation that occurred!</em></p>
+		</div>
 
-        sup.sup {
-            font-size: 0.6em;
-            vertical-align: super;
-        }
+		<hr>
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .comparison {
-                grid-template-columns: 1fr;
-            }
+		<h2>1. Quotation Marks (Smart Quotes)</h2>
 
-            #debug-controls {
-                position: static;
-                margin-bottom: 20px;
-            }
-        }
+		<div class="section">
+			<h3>Double Quotes</h3>
+			<div class="original">
+				<p><strong>Original:</strong> He said "Hello world" and then "Goodbye".</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> He said "Hello world" and then "Goodbye".</p>
+			</div>
+		</div>
 
-        /* Benchmark Section */
-        .benchmark {
-            background: #fff3e0;
-            border-left: 4px solid #ff9800;
-            padding: 20px;
-            margin: 30px 0;
-            border-radius: 4px;
-        }
+		<div class="section">
+			<h3>Single Quotes</h3>
+			<div class="original">
+				<p><strong>Original:</strong> She said 'Wait here' and I replied 'Okay'.</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> She said 'Wait here' and I replied 'Okay'.</p>
+			</div>
+		</div>
 
-        .benchmark button {
-            background: #ff9800;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            font-size: 14px;
-            cursor: pointer;
-            border-radius: 4px;
-            margin: 5px;
-        }
+		<div class="section">
+			<h3>Possessive Apostrophes</h3>
+			<div class="original">
+				<p><strong>Original:</strong> It's John's book. Mary's car is in Bob's garage. The dog's collar is red.</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> It's John's book. Mary's car is in Bob's garage. The dog's collar is red.</p>
+			</div>
+		</div>
 
-        .benchmark button:hover {
-            background: #f57c00;
-        }
+		<div class="section">
+			<h3>Nested Quotes</h3>
+			<div class="original">
+				<p><strong>Original:</strong> "She told me 'never give up' and I believed her," he said.</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> "She told me 'never give up' and I believed her," he said.</p>
+			</div>
+		</div>
 
-        #benchmark-results {
-            margin-top: 15px;
-            font-family: monospace;
-            font-size: 13px;
-            white-space: pre;
-            background: #263238;
-            color: #aed581;
-            padding: 15px;
-            border-radius: 4px;
-            overflow-x: auto;
-        }
-    </style>
-</head>
-<body>
-    <h1>Typesetter.js Demo</h1>
-    <p class="subtitle">Vanilla JavaScript Version - No jQuery Dependency</p>
+		<hr>
 
-    <div class="performance-note">
-        <strong>⚡ Performance Boost:</strong> This version is <strong>40% faster</strong> than the jQuery version due to native DOM operations.
-        Combined with all optimizations: <strong>10-20x faster</strong> overall.
-        <br><strong>📦 Bundle Size:</strong> <strong>30KB smaller</strong> (no jQuery library).
-    </div>
+		<h2>2. Ligatures</h2>
 
-    <!-- Debug Controls -->
-    <div id="debug-controls">
-        <button id="debug-toggle" onclick="toggleTypesetterDebug()">Debug Mode: OFF</button>
-        <div id="debug-legend">
-            <h4>🎨 Transformation Legend</h4>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #ffeb3b;"></div>
-                <span>Ellipsis (... → …)</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #4caf50;"></div>
-                <span>FL Ligature (fl → ﬂ)</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #8bc34a;"></div>
-                <span>FI Ligature (fi → ﬁ)</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #ff9800;"></div>
-                <span>En-dash (space-hyphen-space)</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #2196f3;"></div>
-                <span>Closing Double Quote</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #03a9f4;"></div>
-                <span>Opening Double Quote</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #9c27b0;"></div>
-                <span>Closing Single Quote</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #ba68c8;"></div>
-                <span>Opening Single Quote</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #e91e63;"></div>
-                <span>Possessive Apostrophe</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #f44336;"></div>
-                <span>Number Wrapping</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #795548;"></div>
-                <span>Copyright Symbol</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #9e9e9e;"></div>
-                <span>Registered Symbol</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #00bcd4;"></div>
-                <span>Abbreviations (Small Caps)</span>
-            </div>
-        </div>
-    </div>
+		<div class="section">
+			<h3>fl and fi Ligatures</h3>
+			<div class="original">
+				<p><strong>Original:</strong> The film festival was filled with flowers, flamingos, and fiction writers finishing their final drafts.</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> The film festival was filled with flowers, flamingos, and fiction writers finishing their final drafts.</p>
+			</div>
+		</div>
 
-    <!-- Benchmark Section -->
-    <div class="benchmark">
-        <h3>⏱️ Performance Benchmark</h3>
-        <p>Test the performance of the vanilla JS implementation:</p>
-        <button onclick="runBenchmark(100)">Test 100 elements</button>
-        <button onclick="runBenchmark(500)">Test 500 elements</button>
-        <button onclick="runBenchmark(1000)">Test 1000 elements</button>
-        <button onclick="runAllBenchmarks()">Run All Tests</button>
-        <div id="benchmark-results"></div>
-    </div>
+		<div class="section">
+			<h3>More Ligature Examples</h3>
+			<div class="original">
+				<p><strong>Original:</strong>efile, profile, rifle,ffle,ffle, fiasco, fire, first, fish, flat, flight, flip, floor, fluid, fly.</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong>efile, profile, rifle,ffle,ffle, fiasco, fire, first, fish, flat, flight, flip, floor, fluid, fly.</p>
+			</div>
+		</div>
 
-    <!-- Demo Sections -->
-    <div class="section">
-        <h2>1. Quotation Marks</h2>
-        <div class="comparison">
-            <div class="original">
-                <p><strong>Original:</strong> She said "Hello, it's a beautiful day" and smiled.</p>
-            </div>
-            <div class="transformed display">
-                <p>She said "Hello, it's a beautiful day" and smiled.</p>
-            </div>
-        </div>
-    </div>
+		<hr>
 
-    <div class="section">
-        <h2>2. Ligatures</h2>
-        <div class="comparison">
-            <div class="original">
-                <p><strong>Original:</strong> The firefly flew swiftly through the field.</p>
-            </div>
-            <div class="transformed display">
-                <p>The firefly flew swiftly through the field.</p>
-            </div>
-        </div>
-    </div>
+		<h2>3. Punctuation & Dashes</h2>
 
-    <div class="section">
-        <h2>3. Punctuation & Dashes</h2>
-        <div class="comparison">
-            <div class="original">
-                <p><strong>Original:</strong> The meeting is today - don't be late... please.</p>
-            </div>
-            <div class="transformed display">
-                <p>The meeting is today - don't be late... please.</p>
-            </div>
-        </div>
-    </div>
+		<div class="section">
+			<h3>Ellipsis</h3>
+			<div class="original">
+				<p><strong>Original:</strong> Wait... I'm thinking... Maybe... Yes!</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> Wait... I'm thinking... Maybe... Yes!</p>
+			</div>
+		</div>
 
-    <div class="section">
-        <h2>4. Abbreviations & Small Caps</h2>
-        <div class="comparison">
-            <div class="original">
-                <p><strong>Original:</strong> NASA and IEEE collaborate on AI research. The USA's GDP grew.</p>
-            </div>
-            <div class="transformed display">
-                <p>NASA and IEEE collaborate on AI research. The USA's GDP grew.</p>
-            </div>
-        </div>
-    </div>
+		<div class="section">
+			<h3>En-Dash (for ranges)</h3>
+			<div class="original">
+				<p><strong>Original:</strong> The years 1990–2000 were significant. Pages 45 - 67 contain the answer. Office hours: 9 AM–5 PM.</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> The years 1990–2000 were significant. Pages 45 - 67 contain the answer. Office hours: 9 AM–5 PM.</p>
+			</div>
+		</div>
 
-    <div class="section">
-        <h2>5. Numbers</h2>
-        <div class="comparison">
-            <div class="original">
-                <p><strong>Original:</strong> The price is $1234.56 for 789 items.</p>
-            </div>
-            <div class="transformed display">
-                <p>The price is $1234.56 for 789 items.</p>
-            </div>
-        </div>
-    </div>
+		<hr>
 
-    <div class="section">
-        <h2>6. Symbols</h2>
-        <div class="comparison">
-            <div class="original">
-                <p><strong>Original:</strong> Copyright © 2024. TradeMark® registered.</p>
-            </div>
-            <div class="transformed display">
-                <p>Copyright © 2024. TradeMark® registered.</p>
-            </div>
-        </div>
-    </div>
+		<h2>4. Abbreviations & Small Caps</h2>
 
-    <div class="section">
-        <h2>7. Combined Example</h2>
-        <div class="comparison">
-            <div class="original">
-                <p><strong>Original:</strong> NASA's "flagship" project costs $1,234,567... The IEEE standards don't apply here - it's different.</p>
-            </div>
-            <div class="transformed display">
-                <p>NASA's "flagship" project costs $1,234,567... The IEEE standards don't apply here - it's different.</p>
-            </div>
-        </div>
-    </div>
+		<div class="section">
+			<h3>Simple Abbreviations</h3>
+			<div class="original">
+				<p><strong>Original:</strong> NASA, FBI, CIA, API, HTML, CSS, XML, JSON, HTTP, HTTPS, FTP, SSH, DNS, URL, URI, PDF, GIF, JPEG, PNG, SVG, USA, UK, EU, UN, NATO, WHO, UNESCO.</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> NASA, FBI, CIA, API, HTML, CSS, XML, JSON, HTTP, HTTPS, FTP, SSH, DNS, URL, URI, PDF, GIF, JPEG, PNG, SVG, USA, UK, EU, UN, NATO, WHO, UNESCO.</p>
+			</div>
+		</div>
 
-    <!-- Load the vanilla JS version -->
-    <script src="typesetter-debug-vanilla.js"></script>
+		<div class="section">
+			<h3>Possessive Abbreviations</h3>
+			<div class="original">
+				<p><strong>Original:</strong> NASA's mission, FBI's investigation, CIA's report, API's documentation, HTML's structure, CSS's styling.</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> NASA's mission, FBI's investigation, CIA's report, API's documentation, HTML's structure, CSS's styling.</p>
+			</div>
+		</div>
 
-    <script>
-        // Benchmark functionality
-        function runBenchmark(elementCount) {
-            var resultsDiv = document.getElementById('benchmark-results');
-            resultsDiv.textContent = 'Running benchmark for ' + elementCount + ' elements...\n';
+		<div class="section">
+			<h3>Abbreviations with Special Characters</h3>
+			<div class="original">
+				<p><strong>Original:</strong> Abbreviations A–Z, ATF's guide covers topics from A-Z. The range (A–Z) includes all letters.</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> Abbreviations A–Z, ATF's guide covers topics from A-Z. The range (A–Z) includes all letters.</p>
+			</div>
+		</div>
 
-            // Create test container
-            var testContainer = document.createElement('div');
-            testContainer.className = 'display';
-            testContainer.style.display = 'none';
+		<div class="section">
+			<h3>Abbreviations in Quotes and Parentheses</h3>
+			<div class="original">
+				<p><strong>Original:</strong> The "HTML" standard and (CSS) framework work together. "API" integration with (JSON) format.</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> The "HTML" standard and (CSS) framework work together. "API" integration with (JSON) format.</p>
+			</div>
+		</div>
 
-            for (var i = 0; i < elementCount; i++) {
-                var p = document.createElement('p');
-                p.className = 'typo';
-                p.textContent = 'This is a test of the "Typesetter.js" library with NASA and IEEE abbreviations, fl and fi ligatures, and numbers like 12345...';
-                p.setAttribute('data-original-html', p.innerHTML);
-                testContainer.appendChild(p);
-            }
+		<div class="section">
+			<h3>Organizations & Institutions</h3>
+			<div class="original">
+				<p><strong>Original:</strong> MIT, UCLA, NYU, IBM, HP, AMD, NVIDIA, ASUS, UNICEF, OPEC, NAFTA, ASEAN, IMF, WTO, NGO, CEO, CFO, CTO, VP, HR, PR, IT, R&D.</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> MIT, UCLA, NYU, IBM, HP, AMD, NVIDIA, ASUS, UNICEF, OPEC, NAFTA, ASEAN, IMF, WTO, NGO, CEO, CFO, CTO, VP, HR, PR, IT, R&D.</p>
+			</div>
+		</div>
 
-            document.body.appendChild(testContainer);
+		<hr>
 
-            // Benchmark
-            var start = performance.now();
+		<h2>5. Numbers</h2>
 
-            // Run transformations
-            var elements = testContainer.querySelectorAll('.typo');
-            elements.forEach(function(el) {
-                processTextNodes(el, applyCharacterReplacements);
-                processTextNodes(el, processAbbreviations);
-            });
+		<div class="section">
+			<h3>Basic Numbers</h3>
+			<div class="original">
+				<p><strong>Original:</strong> The year 2024 was significant. Call me at 555-1234 or 070-123 45 67.</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> The year 2024 was significant. Call me at 555-1234 or 070-123 45 67.</p>
+			</div>
+		</div>
 
-            var end = performance.now();
+		<div class="section">
+			<h3>Numbers in Context</h3>
+			<div class="original">
+				<p><strong>Original:</strong> There are 365 days in a year, 24 hours in a day, 60 minutes in an hour, and 60 seconds in a minute. The result is 123,456,789.</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> There are 365 days in a year, 24 hours in a day, 60 minutes in an hour, and 60 seconds in a minute. The result is 123,456,789.</p>
+			</div>
+		</div>
 
-            document.body.removeChild(testContainer);
+		<div class="section">
+			<h3>Decimals and Measurements</h3>
+			<div class="original">
+				<p><strong>Original:</strong> The temperature is 23.5 degrees. Pi equals approximately 3.14159. The distance is 42.195 kilometers.</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> The temperature is 23.5 degrees. Pi equals approximately 3.14159. The distance is 42.195 kilometers.</p>
+			</div>
+		</div>
 
-            var time = (end - start).toFixed(2);
-            var avgTime = (time / elementCount).toFixed(3);
+		<hr>
 
-            resultsDiv.textContent += '\n✓ Processed ' + elementCount + ' elements in ' + time + 'ms\n';
-            resultsDiv.textContent += '✓ Average: ' + avgTime + 'ms per element\n';
-            resultsDiv.textContent += '✓ Throughput: ' + Math.round(elementCount / (time / 1000)) + ' elements/second';
-        }
+		<h2>6. Symbols</h2>
 
-        function runAllBenchmarks() {
-            var resultsDiv = document.getElementById('benchmark-results');
-            resultsDiv.textContent = 'Running comprehensive benchmarks...\n\n';
+		<div class="section">
+			<h3>Copyright and Trademark</h3>
+			<div class="original">
+				<p><strong>Original:</strong> © 2024 OpenTypography. All rights reserved. Typesetter.js® is a registered trademark.</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> © 2024 OpenTypography. All rights reserved. Typesetter.js® is a registered trademark.</p>
+			</div>
+		</div>
 
-            var sizes = [10, 50, 100, 500, 1000];
-            var results = [];
+		<hr>
 
-            sizes.forEach(function(size) {
-                var testContainer = document.createElement('div');
-                testContainer.className = 'display';
-                testContainer.style.display = 'none';
+		<h2>7. Combined Examples</h2>
 
-                for (var i = 0; i < size; i++) {
-                    var p = document.createElement('p');
-                    p.className = 'typo';
-                    p.textContent = 'This is a test of the "Typesetter.js" library with NASA and IEEE abbreviations, fl and fi ligatures, and numbers like 12345...';
-                    p.setAttribute('data-original-html', p.innerHTML);
-                    testContainer.appendChild(p);
-                }
+		<div class="section">
+			<h3>Typography in Real Text</h3>
+			<div class="original">
+				<p><strong>Original:</strong> In typography, a typeface (also known as font family) is a set of one or more fonts each composed of glyphs that share common design features. The "ITC Garamond Bold Condensed Italic" is different from "ITC Garamond Condensed Italic" and "ITC Garamond Bold Condensed," but all are fonts within the same typeface, "ITC Garamond."</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> In typography, a typeface (also known as font family) is a set of one or more fonts each composed of glyphs that share common design features. The "ITC Garamond Bold Condensed Italic" is different from "ITC Garamond Condensed Italic" and "ITC Garamond Bold Condensed," but all are fonts within the same typeface, "ITC Garamond."</p>
+			</div>
+		</div>
 
-                document.body.appendChild(testContainer);
+		<div class="section">
+			<h3>Technical Writing</h3>
+			<div class="original">
+				<p><strong>Original:</strong> The HTML5 specification defines the API for DOM manipulation. CSS3's flexbox and grid layouts revolutionized web design in the 2010 - 2020 decade. JSON's simplicity made it NASA's choice for data interchange...</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> The HTML5 specification defines the API for DOM manipulation. CSS3's flexbox and grid layouts revolutionized web design in the 2010 - 2020 decade. JSON's simplicity made it NASA's choice for data interchange...</p>
+			</div>
+		</div>
 
-                var start = performance.now();
-                var elements = testContainer.querySelectorAll('.typo');
-                elements.forEach(function(el) {
-                    processTextNodes(el, applyCharacterReplacements);
-                    processTextNodes(el, processAbbreviations);
-                });
-                var end = performance.now();
+		<div class="section">
+			<h3>Original Demo Example</h3>
+			<div class="original">
+				<p><strong>Original:</strong> Abbreviations A–Z, ATF's, A–Z, ATF's wrapped in "ITC" and (ITC), a CSS typeface is in the ODE: 123, 124 (also family) is "ITC Garamond Bold Condensed Italic"</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> Abbreviations A–Z, ATF's, A–Z, ATF's wrapped in "ITC" and (ITC), a CSS typeface is in the ODE: 123, 124 (also family) is "ITC Garamond Bold Condensed Italic"</p>
+			</div>
+		</div>
 
-                document.body.removeChild(testContainer);
+		<hr>
 
-                var time = (end - start).toFixed(2);
-                results.push({
-                    size: size,
-                    time: time,
-                    avg: (time / size).toFixed(3)
-                });
-            });
+		<h2>8. Multi-Language Scenarios</h2>
 
-            // Display results in table format
-            resultsDiv.textContent += 'Elements | Total Time | Avg/Element | Throughput\n';
-            resultsDiv.textContent += '---------|------------|-------------|------------\n';
+		<div class="language-section">
+			<h3>English</h3>
+			<div class="original">
+				<p><strong>Original:</strong> "The quick brown fox jumps over the lazy dog," she said. It's a pangram that's been used for 100–200 years. The BBC, CNN, and NBC all reported it.</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> "The quick brown fox jumps over the lazy dog," she said. It's a pangram that's been used for 100–200 years. The BBC, CNN, and NBC all reported it.</p>
+			</div>
+		</div>
 
-            results.forEach(function(r) {
-                var throughput = Math.round(r.size / (r.time / 1000));
-                resultsDiv.textContent +=
-                    r.size.toString().padEnd(8) + ' | ' +
-                    (r.time + 'ms').padEnd(10) + ' | ' +
-                    (r.avg + 'ms').padEnd(11) + ' | ' +
-                    throughput + ' el/s\n';
-            });
+		<div class="language-section">
+			<h3>French</h3>
+			<div class="original">
+				<p><strong>Original:</strong> "Bonjour le monde," dit-il. C'est la phrase classique. L'UNESCO et l'ONU travaillent ensemble depuis 1945–2024. Les films "Amélie" et "Les Misérables" sont magnifiques...</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> "Bonjour le monde," dit-il. C'est la phrase classique. L'UNESCO et l'ONU travaillent ensemble depuis 1945–2024. Les films "Amélie" et "Les Misérables" sont magnifiques...</p>
+			</div>
+		</div>
 
-            resultsDiv.textContent += '\n📊 Performance Summary:\n';
-            resultsDiv.textContent += '✓ Vanilla JS (no jQuery)\n';
-            resultsDiv.textContent += '✓ Text node processing (no HTML corruption)\n';
-            resultsDiv.textContent += '✓ Pre-compiled regex patterns\n';
-            resultsDiv.textContent += '✓ Single DOM read/write per element\n';
-        }
-    </script>
-</body>
+		<div class="language-section">
+			<h3>German</h3>
+			<div class="original">
+				<p><strong>Original:</strong> "Guten Tag," sagte er. Das ist Deutschland's Hauptstadt. Die NATO und die EU arbeiten zusammen. Von 1990–2000 war es eine wichtige Zeit... "Wunderbar!" rief sie.</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> "Guten Tag," sagte er. Das ist Deutschland's Hauptstadt. Die NATO und die EU arbeiten zusammen. Von 1990–2000 war es eine wichtige Zeit... "Wunderbar!" rief sie.</p>
+			</div>
+		</div>
+
+		<div class="language-section">
+			<h3>Spanish</h3>
+			<div class="original">
+				<p><strong>Original:</strong> "Hola mundo," dijo ella. Es la frase típica. La ONU y la UNESCO trabajan juntos. Los años 1500–1600 fueron importantes. "Fantástico!" exclamó. FIFA's headquarters is in Switzerland.</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> "Hola mundo," dijo ella. Es la frase típica. La ONU y la UNESCO trabajan juntos. Los años 1500–1600 fueron importantes. "Fantástico!" exclamó. FIFA's headquarters is in Switzerland.</p>
+			</div>
+		</div>
+
+		<div class="language-section">
+			<h3>Italian</h3>
+			<div class="original">
+				<p><strong>Original:</strong> "Ciao mondo," disse lui. È la frase classica. L'UNESCO e l'ONU lavorano insieme. Gli anni 1400–1500 furono il Rinascimento... "Bellissimo!" esclamò. FIFA's tournaments attract millions.</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> "Ciao mondo," disse lui. È la frase classica. L'UNESCO e l'ONU lavorano insieme. Gli anni 1400–1500 furono il Rinascimento... "Bellissimo!" esclamò. FIFA's tournaments attract millions.</p>
+			</div>
+		</div>
+
+		<div class="language-section">
+			<h3>Portuguese</h3>
+			<div class="original">
+				<p><strong>Original:</strong> "Olá mundo," disse ela. É a frase clássica. A ONU e a UNESCO trabalham juntas. Os anos 1500–1600 foram importantes... "Maravilhoso!" exclamou. FIFA's Brazil hosted the 2014 World Cup.</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> "Olá mundo," disse ela. É a frase clássica. A ONU e a UNESCO trabalham juntas. Os anos 1500–1600 foram importantes... "Maravilhoso!" exclamou. FIFA's Brazil hosted the 2014 World Cup.</p>
+			</div>
+		</div>
+
+		<div class="language-section">
+			<h3>Swedish</h3>
+			<div class="original">
+				<p><strong>Original:</strong> "Hej världen," sa hon. Det är den klassiska frasen. FN och UNESCO arbetar tillsammans. Åren 1900–2000 var viktiga... "Fantastiskt!" utropade han. IKEA's furniture is worldwide.</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> "Hej världen," sa hon. Det är den klassiska frasen. FN och UNESCO arbetar tillsammans. Åren 1900–2000 var viktiga... "Fantastiskt!" utropade han. IKEA's furniture is worldwide.</p>
+			</div>
+		</div>
+
+		<div class="language-section">
+			<h3>Dutch</h3>
+			<div class="original">
+				<p><strong>Original:</strong> "Hallo wereld," zei hij. Het is de klassieke zin. De VN en UNESCO werken samen. De jaren 1600–1700 waren belangrijk... "Geweldig!" riep ze. KLM's flights connect the world.</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> "Hallo wereld," zei hij. Het is de klassieke zin. De VN en UNESCO werken samen. De jaren 1600–1700 waren belangrijk... "Geweldig!" riep ze. KLM's flights connect the world.</p>
+			</div>
+		</div>
+
+		<div class="language-section">
+			<h3>Norwegian</h3>
+			<div class="original">
+				<p><strong>Original:</strong> "Hei verden," sa han. Det er den klassiske setningen. FN og UNESCO jobber sammen. Årene 1800–1900 var viktige... "Fantastisk!" utbrøt hun.</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> "Hei verden," sa han. Det er den klassiske setningen. FN og UNESCO jobber sammen. Årene 1800–1900 var viktige... "Fantastisk!" utbrøt hun.</p>
+			</div>
+		</div>
+
+		<div class="language-section">
+			<h3>Danish</h3>
+			<div class="original">
+				<p><strong>Original:</strong> "Hej verden," sagde hun. Det er den klassiske sætning. FN og UNESCO arbejder sammen. Årene 1700–1800 var vigtige... "Fantastisk!" udbrød han.</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> "Hej verden," sagde hun. Det er den klassiske sætning. FN og UNESCO arbejder sammen. Årene 1700–1800 var vigtige... "Fantastisk!" udbrød han.</p>
+			</div>
+		</div>
+
+		<div class="language-section">
+			<h3>Finnish</h3>
+			<div class="original">
+				<p><strong>Original:</strong> "Hei maailma," hän sanoi. Se on klassinen lause. YK ja UNESCO työskentelevät yhdessä. Vuodet 1900–2000 olivat tärkeitä... "Fantastista!" hän huudahti.</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> "Hei maailma," hän sanoi. Se on klassinen lause. YK ja UNESCO työskentelevät yhdessä. Vuodet 1900–2000 olivat tärkeitä... "Fantastista!" hän huudahti.</p>
+			</div>
+		</div>
+
+		<div class="language-section">
+			<h3>Polish</h3>
+			<div class="original">
+				<p><strong>Original:</strong> "Witaj świecie," powiedział. To klasyczne zdanie. ONZ i UNESCO pracują razem. Lata 1900–2000 były ważne... "Fantastycznie!" wykrzyknęła.</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> "Witaj świecie," powiedział. To klasyczne zdanie. ONZ i UNESCO pracują razem. Lata 1900–2000 były ważne... "Fantastycznie!" wykrzyknęła.</p>
+			</div>
+		</div>
+
+		<div class="language-section">
+			<h3>Russian (Cyrillic)</h3>
+			<div class="original">
+				<p><strong>Original:</strong> "Привет мир," сказал он. Это классическая фраза. ООН и UNESCO работают вместе. Годы 1917–2000 были важными... "Фантастика!" воскликнула она. USSR's history is complex.</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> "Привет мир," сказал он. Это классическая фраза. ООН и UNESCO работают вместе. Годы 1917–2000 были важными... "Фантастика!" воскликнула она. USSR's history is complex.</p>
+			</div>
+		</div>
+
+		<div class="language-section">
+			<h3>Japanese (with Latin abbreviations)</h3>
+			<div class="original">
+				<p><strong>Original:</strong> HTML と CSS は重要です。The years 2000–2024 saw major changes. "技術は進化する," と彼は言った... NHK's broadcasts reach millions. JR's trains are punctual.</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> HTML と CSS は重要です。The years 2000–2024 saw major changes. "技術は進化する," と彼は言った... NHK's broadcasts reach millions. JR's trains are punctual.</p>
+			</div>
+		</div>
+
+		<div class="language-section">
+			<h3>Chinese (with Latin abbreviations)</h3>
+			<div class="original">
+				<p><strong>Original:</strong> HTML 和 CSS 很重要。The years 1949–2024 were transformative. "技术发展," 他说... CCTV's coverage is extensive. NBA's popularity is global.</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> HTML 和 CSS 很重要。The years 1949–2024 were transformative. "技术发展," 他说... CCTV's coverage is extensive. NBA's popularity is global.</p>
+			</div>
+		</div>
+
+		<div class="language-section">
+			<h3>Arabic (with Latin abbreviations)</h3>
+			<div class="original">
+				<p><strong>Original:</strong> HTML و CSS مهمان جداً. The years 1950–2024 brought changes. "التكنولوجيا تتطور," قال... BBC's Arabic service is popular. FIFA's tournaments unite nations.</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> HTML و CSS مهمان جداً. The years 1950–2024 brought changes. "التكنولوجيا تتطور," قال... BBC's Arabic service is popular. FIFA's tournaments unite nations.</p>
+			</div>
+		</div>
+
+		<hr>
+
+		<h2>9. Numbers & Amounts in Different Language Formats</h2>
+		<p><em>Testing how the script handles amounts formatted according to different language conventions</em></p>
+
+		<div class="language-section">
+			<h3>English (US) - Period for Decimals, Comma for Thousands</h3>
+			<div class="original">
+				<p><strong>Original:</strong> The company reported revenues of $1,234,567.89 in 2024. The cost was approximately $45.99 per unit. Population reached 7,890,123,456 people. Budget: $3.14 million or $3,140,000.00 exactly.</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> The company reported revenues of $1,234,567.89 in 2024. The cost was approximately $45.99 per unit. Population reached 7,890,123,456 people. Budget: $3.14 million or $3,140,000.00 exactly.</p>
+			</div>
+		</div>
+
+		<div class="language-section">
+			<h3>European (Germany, France, Spain, Italy) - Comma for Decimals, Period/Space for Thousands</h3>
+			<div class="original">
+				<p><strong>Original:</strong> Die Einnahmen betrugen 1.234.567,89 EUR im Jahr 2024. Der Preis war 45,99 EUR. Die Kosten: 3,14 Millionen oder genau 3.140.000,00 EUR. Temperature: 23,5°C.</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> Die Einnahmen betrugen 1.234.567,89 EUR im Jahr 2024. Der Preis war 45,99 EUR. Die Kosten: 3,14 Millionen oder genau 3.140.000,00 EUR. Temperature: 23,5°C.</p>
+			</div>
+		</div>
+
+		<div class="language-section">
+			<h3>French - Comma for Decimals, Space for Thousands</h3>
+			<div class="original">
+				<p><strong>Original:</strong> Les revenus s'élevaient à 1 234 567,89 EUR en 2024. Le prix était de 45,99 EUR l'unité. Budget: 3,14 millions soit exactement 3 140 000,00 EUR. Pi = 3,14159.</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> Les revenus s'élevaient à 1 234 567,89 EUR en 2024. Le prix était de 45,99 EUR l'unité. Budget: 3,14 millions soit exactement 3 140 000,00 EUR. Pi = 3,14159.</p>
+			</div>
+		</div>
+
+		<div class="language-section">
+			<h3>Swedish/Norwegian/Danish - Comma for Decimals, Space for Thousands</h3>
+			<div class="original">
+				<p><strong>Original:</strong> Intäkterna uppgick till 1 234 567,89 SEK år 2024. Priset var 45,99 kr per enhet. Budget: 3,14 miljoner eller exakt 3 140 000,00 SEK. Temperatur: 23,5°C.</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> Intäkterna uppgick till 1 234 567,89 SEK år 2024. Priset var 45,99 kr per enhet. Budget: 3,14 miljoner eller exakt 3 140 000,00 SEK. Temperatur: 23,5°C.</p>
+			</div>
+		</div>
+
+		<div class="language-section">
+			<h3>Swiss - Apostrophe for Thousands, Period for Decimals</h3>
+			<div class="original">
+				<p><strong>Original:</strong> Der Umsatz betrug 1'234'567.89 CHF im Jahr 2024. Der Preis war 45.99 CHF. Budget: 3.14 Millionen oder genau 3'140'000.00 CHF.</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> Der Umsatz betrug 1'234'567.89 CHF im Jahr 2024. Der Preis war 45.99 CHF. Budget: 3.14 Millionen oder genau 3'140'000.00 CHF.</p>
+			</div>
+		</div>
+
+		<div class="language-section">
+			<h3>Indian Numbering System - Lakhs and Crores</h3>
+			<div class="original">
+				<p><strong>Original:</strong> The budget was ₹12,34,567.89 (twelve lakh thirty-four thousand). Total: ₹1,23,45,678 (one crore twenty-three lakh). Small amount: ₹45.50 only.</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> The budget was ₹12,34,567.89 (twelve lakh thirty-four thousand). Total: ₹1,23,45,678 (one crore twenty-three lakh). Small amount: ₹45.50 only.</p>
+			</div>
+		</div>
+
+		<div class="language-section">
+			<h3>Large Numbers - Billions, Millions, Thousands</h3>
+			<div class="original">
+				<p><strong>Original:</strong> US GDP: $25,462,700,000,000 (25.46 trillion). World population: 8,045,311,447 people. Company valuation: $1,500,000,000 (1.5 billion). Annual revenue: $456,789,123.45 million.</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> US GDP: $25,462,700,000,000 (25.46 trillion). World population: 8,045,311,447 people. Company valuation: $1,500,000,000 (1.5 billion). Annual revenue: $456,789,123.45 million.</p>
+			</div>
+		</div>
+
+		<div class="language-section">
+			<h3>European Large Numbers</h3>
+			<div class="original">
+				<p><strong>Original:</strong> BIP Deutschland: 4.072.000.000.000 EUR (4,07 Billionen). Weltbevölkerung: 8.045.311.447 Menschen. Unternehmenswert: 1.500.000.000 EUR (1,5 Milliarden). Jahresumsatz: 456.789.123,45 EUR.</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> BIP Deutschland: 4.072.000.000.000 EUR (4,07 Billionen). Weltbevölkerung: 8.045.311.447 Menschen. Unternehmenswert: 1.500.000.000 EUR (1,5 Milliarden). Jahresumsatz: 456.789.123,45 EUR.</p>
+			</div>
+		</div>
+
+		<div class="language-section">
+			<h3>Mixed Formats in Same Text</h3>
+			<div class="original">
+				<p><strong>Original:</strong> The NASA budget was $25,200,000,000 (US format) while the ESA budget was 7.080.000.000 EUR (European format). Combined: approximately $32.28 billion or 30,15 Milliarden EUR at exchange rate 1.07.</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> The NASA budget was $25,200,000,000 (US format) while the ESA budget was 7.080.000.000 EUR (European format). Combined: approximately $32.28 billion or 30,15 Milliarden EUR at exchange rate 1.07.</p>
+			</div>
+		</div>
+
+		<div class="language-section">
+			<h3>Scientific Notation and Very Small Numbers</h3>
+			<div class="original">
+				<p><strong>Original:</strong> Speed of light: 299,792,458 m/s. Planck constant: 0.000000000000000000000000000000000662607015 (6.62607015×10⁻³⁴). Pi: 3.14159265358979323846. Avogadro: 602,214,076,000,000,000,000,000.</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> Speed of light: 299,792,458 m/s. Planck constant: 0.000000000000000000000000000000000662607015 (6.62607015×10⁻³⁴). Pi: 3.14159265358979323846. Avogadro: 602,214,076,000,000,000,000,000.</p>
+			</div>
+		</div>
+
+		<div class="language-section">
+			<h3>Financial Statements - Various Currencies</h3>
+			<div class="original">
+				<p><strong>Original:</strong> Revenue: $1,234,567.89 USD, £987,654.32 GBP, €1,111,222.33 EUR, ¥123,456,789 JPY, ₹12,34,567.89 INR, 1'234'567.89 CHF, $1,234,567.89 AUD, $1,234,567.89 CAD.</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> Revenue: $1,234,567.89 USD, £987,654.32 GBP, €1,111,222.33 EUR, ¥123,456,789 JPY, ₹12,34,567.89 INR, 1'234'567.89 CHF, $1,234,567.89 AUD, $1,234,567.89 CAD.</p>
+			</div>
+		</div>
+
+		<div class="language-section">
+			<h3>Percentages and Ratios</h3>
+			<div class="original">
+				<p><strong>Original:</strong> Growth rate: 3.14% (US) or 3,14% (EU). Market share: 23.456% vs 23,456% formatting. Ratio: 1:1.618 (golden ratio). Interest: 4.5% per annum or 4,5% p.a. Inflation: 2.3% to 2,3%.</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> Growth rate: 3.14% (US) or 3,14% (EU). Market share: 23.456% vs 23,456% formatting. Ratio: 1:1.618 (golden ratio). Interest: 4.5% per annum or 4,5% p.a. Inflation: 2.3% to 2,3%.</p>
+			</div>
+		</div>
+
+		<div class="language-section">
+			<h3>Measurements and Units</h3>
+			<div class="original">
+				<p><strong>Original:</strong> Distance: 1,234.56 km or 1.234,56 km. Weight: 45.67 kg or 45,67 kg. Volume: 2,345.67 liters or 2.345,67 Liter. Temperature: 23.5°C or 23,5°C or -40.0°F or -40,0°F.</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> Distance: 1,234.56 km or 1.234,56 km. Weight: 45.67 kg or 45,67 kg. Volume: 2,345.67 liters or 2.345,67 Liter. Temperature: 23.5°C or 23,5°C or -40.0°F or -40,0°F.</p>
+			</div>
+		</div>
+
+		<div class="language-section">
+			<h3>Complex Financial Data</h3>
+			<div class="original">
+				<p><strong>Original:</strong> "The Q4 2024 results show revenue of $12,345,678.90 million," said the CFO. Operating margin improved from 23.45% to 25.67%. EPS: $3.14 vs $2.89 YoY. Market cap: $456.78 billion. P/E ratio: 18.5x.</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> "The Q4 2024 results show revenue of $12,345,678.90 million," said the CFO. Operating margin improved from 23.45% to 25.67%. EPS: $3.14 vs $2.89 YoY. Market cap: $456.78 billion. P/E ratio: 18.5x.</p>
+			</div>
+		</div>
+
+		<hr>
+
+		<h2>10. Edge Cases & Special Scenarios</h2>
+
+		<div class="section">
+			<h3>Mixed Quotes and Abbreviations</h3>
+			<div class="original">
+				<p><strong>Original:</strong> The "NASA" program and 'FBI' investigation both used HTML5 technology. "It's the API's fault," they said, "not the SDK's."</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> The "NASA" program and 'FBI' investigation both used HTML5 technology. "It's the API's fault," they said, "not the SDK's."</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h3>Numbers with Abbreviations</h3>
+			<div class="original">
+				<p><strong>Original:</strong> NASA launched 150 missions. The FBI's 2024 report shows 1,234 cases. HTML5 and CSS3 were released in the 2010–2015 timeframe.</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> NASA launched 150 missions. The FBI's 2024 report shows 1,234 cases. HTML5 and CSS3 were released in the 2010–2015 timeframe.</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h3>All Features Combined</h3>
+			<div class="original">
+				<p><strong>Original:</strong> "In 2024," she said, "the API's documentation referenced NASA's findings from 1969–1972... It's a first-class example of fine typography!" The HTML file contained 1,234 lines. © 2024 by the W3C®.</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> "In 2024," she said, "the API's documentation referenced NASA's findings from 1969–1972... It's a first-class example of fine typography!" The HTML file contained 1,234 lines. © 2024 by the W3C®.</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h3>Lists with Abbreviations</h3>
+			<div class="original">
+				<ul>
+					<li>HTML – HyperText Markup Language</li>
+					<li>CSS – Cascading Style Sheets</li>
+					<li>JSON – JavaScript Object Notation</li>
+					<li>API – Application Programming Interface</li>
+					<li>NASA – National Aeronautics and Space Administration</li>
+					<li>FBI – Federal Bureau of Investigation</li>
+				</ul>
+			</div>
+			<div class="display" class="transformed">
+				<ul>
+					<li>HTML – HyperText Markup Language</li>
+					<li>CSS – Cascading Style Sheets</li>
+					<li>JSON – JavaScript Object Notation</li>
+					<li>API – Application Programming Interface</li>
+					<li>NASA – National Aeronautics and Space Administration</li>
+					<li>FBI – Federal Bureau of Investigation</li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="section">
+			<h3>Ligatures in Different Contexts</h3>
+			<div class="original">
+				<p><strong>Original:</strong> The office verified the official files. Fifty affluent officers were affiliated with the firm. The firefly flew first through the field of flowers...</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> The office verified the official files. Fifty affluent officers were affiliated with the firm. The firefly flew first through the field of flowers...</p>
+			</div>
+		</div>
+
+		<hr>
+
+		<h2>11. COMPREHENSIVE REGEX EDGE CASES TEST SUITE</h2>
+		<p><em>This section tests boundary conditions and potential gaps in the regex patterns</em></p>
+
+		<!-- ELLIPSIS EDGE CASES -->
+		<h3 style="background: #333; color: white; padding: 10px; margin-top: 30px;">A. Ellipsis Edge Cases</h3>
+
+		<div class="section">
+			<h4>A1. Two Dots Only (not handled)</h4>
+			<div class="original">
+				<p><strong>Original:</strong> Wait.. No.. Stop..</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> Wait.. No.. Stop..</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>A2. Four or More Dots</h4>
+			<div class="original">
+				<p><strong>Original:</strong> Wait.... Really.... Okay....</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> Wait.... Really.... Okay....</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>A3. Dots with Irregular Spacing</h4>
+			<div class="original">
+				<p><strong>Original:</strong> Wait. . . and see. . .what happens.  .  .  .</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> Wait. . . and see. . .what happens.  .  .  .</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>A4. Ellipsis at Start/End of Text</h4>
+			<div class="original">
+				<p><strong>Original:</strong> ...beginning of thought and end of thought...</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> ...beginning of thought and end of thought...</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>A5. Ellipsis with Other Punctuation</h4>
+			<div class="original">
+				<p><strong>Original:</strong> What...! How...? Why..., Really...;</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> What...! How...? Why..., Really...;</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>A6. Multiple Consecutive Ellipses</h4>
+			<div class="original">
+				<p><strong>Original:</strong> Wait...... and then......</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> Wait...... and then......</p>
+			</div>
+		</div>
+
+		<!-- QUOTE EDGE CASES -->
+		<h3 style="background: #333; color: white; padding: 10px; margin-top: 30px;">B. Quote Edge Cases</h3>
+
+		<div class="section">
+			<h4>B1. Quote at Paragraph Start (no space before)</h4>
+			<div class="original">
+				<p><strong>Original:</strong> "Hello world" said the program.</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> "Hello world" said the program.</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>B2. Multiple Consecutive Quotes</h4>
+			<div class="original">
+				<p><strong>Original:</strong> He said ""urgent"" and she replied '''immediately'''.</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> He said ""urgent"" and she replied '''immediately'''.</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>B3. Quote Followed by Punctuation (not space)</h4>
+			<div class="original">
+				<p><strong>Original:</strong> "Hello"! "Goodbye"? "Maybe"; "Perhaps":</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> "Hello"! "Goodbye"? "Maybe"; "Perhaps":</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>B4. Quote Without Spaces</h4>
+			<div class="original">
+				<p><strong>Original:</strong> He said"hello"and left. She replied'goodbye'quickly.</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> He said"hello"and left. She replied'goodbye'quickly.</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>B5. Contractions vs Possessives vs Quotes</h4>
+			<div class="original">
+				<p><strong>Original:</strong> It's John's book. Can't won't don't I'm we're they're shouldn't couldn't wouldn't.</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> It's John's book. Can't won't don't I'm we're they're shouldn't couldn't wouldn't.</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>B6. Nested Quotes Multiple Levels</h4>
+			<div class="original">
+				<p><strong>Original:</strong> He said "She told me 'He whispered "never" to her' yesterday" and left.</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> He said "She told me 'He whispered "never" to her' yesterday" and left.</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>B7. Empty Quotes</h4>
+			<div class="original">
+				<p><strong>Original:</strong> He said "" and she replied ''.</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> He said "" and she replied ''.</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>B8. Quote Before Comma/Period</h4>
+			<div class="original">
+				<p><strong>Original:</strong> He said "hello", then "goodbye". She said 'yes', then 'no'.</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> He said "hello", then "goodbye". She said 'yes', then 'no'.</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>B9. Apostrophes in Different Positions</h4>
+			<div class="original">
+				<p><strong>Original:</strong> 'twas 'til 'cause rock'n'roll o'clock 'bout '90s ma'am</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> 'twas 'til 'cause rock'n'roll o'clock 'bout '90s ma'am</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>B10. Possessive S with Capital S</h4>
+			<div class="original">
+				<p><strong>Original:</strong> John'S book Mary'S car (testing uppercase S after apostrophe)</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> John'S book Mary'S car (testing uppercase S after apostrophe)</p>
+			</div>
+		</div>
+
+		<!-- LIGATURE EDGE CASES -->
+		<h3 style="background: #333; color: white; padding: 10px; margin-top: 30px;">C. Ligature Edge Cases</h3>
+
+		<div class="section">
+			<h4>C1. Triple Ligatures (not supported)</h4>
+			<div class="original">
+				<p><strong>Original:</strong>ffleффlе shuffleboard baffled waffles scofflaw</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> fffle ffl shuffleboard baffled waffles scofflaw</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>C2. Uppercase Ligatures (should not transform)</h4>
+			<div class="original">
+				<p><strong>Original:</strong> FL FI FILM FLORAL FINISH FIFTY</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> FL FI FILM FLORAL FINISH FIFTY</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>C3. Ligatures at Word Start/End</h4>
+			<div class="original">
+				<p><strong>Original:</strong> fl fi flfi fifl flflfl fififi</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> fl fi flfi fifl flflfl fififi</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>C4. Ligatures in URLs (problematic)</h4>
+			<div class="original">
+				<p><strong>Original:</strong> Visit http://files.example.com or ftp://financial.server.org</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> Visit http://files.example.com or ftp://financial.server.org</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>C5. Ligatures in Code/Technical Terms</h4>
+			<div class="original">
+				<p><strong>Original:</strong> file.txt filename filter config flags</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> file.txt filename filter config flags</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>C6. Mixed Case Ligatures</h4>
+			<div class="original">
+				<p><strong>Original:</strong> Fl Fi FL FI fL fI Fl fi</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> Fl Fi FL FI fL fI Fl fi</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>C7. Ligatures with Special Characters</h4>
+			<div class="original">
+				<p><strong>Original:</strong> "film" 'finish' (flow) [first] {field} fl-ag fi-le</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> "film" 'finish' (flow) [first] {field} fl-ag fi-le</p>
+			</div>
+		</div>
+
+		<!-- DASH/HYPHEN EDGE CASES -->
+		<h3 style="background: #333; color: white; padding: 10px; margin-top: 30px;">D. Dash & Hyphen Edge Cases</h3>
+
+		<div class="section">
+			<h4>D1. Hyphen Without Spaces (should not transform)</h4>
+			<div class="original">
+				<p><strong>Original:</strong> state-of-the-art mother-in-law well-known twenty-one</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> state-of-the-art mother-in-law well-known twenty-one</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>D2. Multiple Hyphens/Dashes</h4>
+			<div class="original">
+				<p><strong>Original:</strong> -- --- ---- ----- Words - with - dashes - everywhere</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> -- --- ---- ----- Words - with - dashes - everywhere</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>D3. Dash at Start/End of Line</h4>
+			<div class="original">
+				<p><strong>Original:</strong> - beginning and end - </p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> - beginning and end - </p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>D4. Dash with Only One Space</h4>
+			<div class="original">
+				<p><strong>Original:</strong> word -space no-space- both</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> word -space no-space- both</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>D5. Dash vs Minus Sign</h4>
+			<div class="original">
+				<p><strong>Original:</strong> 5-3 = 2, temperature is -5 degrees, result is -10</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> 5-3 = 2, temperature is -5 degrees, result is -10</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>D6. Em-dash vs En-dash (not distinguished)</h4>
+			<div class="original">
+				<p><strong>Original:</strong> Long pause — like this or range 1990–2000 or London–Paris train</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> Long pause — like this or range 1990–2000 or London–Paris train</p>
+			</div>
+		</div>
+
+		<!-- NUMBER EDGE CASES -->
+		<h3 style="background: #333; color: white; padding: 10px; margin-top: 30px;">E. Number Edge Cases</h3>
+
+		<div class="section">
+			<h4>E1. Single Digits vs Multi-Digits</h4>
+			<div class="original">
+				<p><strong>Original:</strong> 0 1 2 3 4 5 6 7 8 9 10 100 1000 10000</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> 0 1 2 3 4 5 6 7 8 9 10 100 1000 10000</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>E2. Decimal Numbers</h4>
+			<div class="original">
+				<p><strong>Original:</strong> 3.14 2.5 0.5 100.00 1.234567</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> 3.14 2.5 0.5 100.00 1.234567</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>E3. Negative Numbers</h4>
+			<div class="original">
+				<p><strong>Original:</strong> -1 -10 -100 -3.14 -0.5</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> -1 -10 -100 -3.14 -0.5</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>E4. Numbers with Commas</h4>
+			<div class="original">
+				<p><strong>Original:</strong> 1,000 10,000 100,000 1,000,000 1,234,567,890</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> 1,000 10,000 100,000 1,000,000 1,234,567,890</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>E5. Phone Numbers and Dates</h4>
+			<div class="original">
+				<p><strong>Original:</strong> 555-1234 (555) 123-4567 01/15/2024 2024-01-15 15.01.2024</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> 555-1234 (555) 123-4567 01/15/2024 2024-01-15 15.01.2024</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>E6. Numbers in Links (should NOT be wrapped)</h4>
+			<div class="original">
+				<p><strong>Original:</strong> Visit <a href="http://example.com/page123">page 123</a> or call <a href="tel:5551234">555-1234</a></p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> Visit <a href="http://example.com/page123">page 123</a> or call <a href="tel:5551234">555-1234</a></p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>E7. Numbers at Start/End of Paragraph</h4>
+			<div class="original">
+				<p><strong>Original:</strong> 2024 was a great year and ended with 12345</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> 2024 was a great year and ended with 12345</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>E8. Numbers with Units and Currencies</h4>
+			<div class="original">
+				<p><strong>Original:</strong> 100km 5lb $50 €100 £25 50% 37°C 5'10" 6:30pm</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> 100km 5lb $50 €100 £25 50% 37°C 5'10" 6:30pm</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>E9. Mathematical Expressions</h4>
+			<div class="original">
+				<p><strong>Original:</strong> 2+2=4 5*3=15 10/2=5 100-50=50 2^8=256</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> 2+2=4 5*3=15 10/2=5 100-50=50 2^8=256</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>E10. Version Numbers and IP Addresses</h4>
+			<div class="original">
+				<p><strong>Original:</strong> v1.0.0 2.5.1 192.168.1.1 127.0.0.1 255.255.255.0</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> v1.0.0 2.5.1 192.168.1.1 127.0.0.1 255.255.255.0</p>
+			</div>
+		</div>
+
+		<!-- ABBREVIATION EDGE CASES -->
+		<h3 style="background: #333; color: white; padding: 10px; margin-top: 30px;">F. Abbreviation Edge Cases</h3>
+
+		<div class="section">
+			<h4>F1. Single Letters (should not transform, length > 1)</h4>
+			<div class="original">
+				<p><strong>Original:</strong> A B C D E F G H I J K L M N O P Q R S T U V W X Y Z</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> A B C D E F G H I J K L M N O P Q R S T U V W X Y Z</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>F2. Abbreviations with Periods (known issue)</h4>
+			<div class="original">
+				<p><strong>Original:</strong> U.S.A. Ph.D. M.D. B.A. M.A. e.g. i.e. etc. a.m. p.m.</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> U.S.A. Ph.D. M.D. B.A. M.A. e.g. i.e. etc. a.m. p.m.</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>F3. Abbreviations Ending with Punctuation (KNOWN BUG)</h4>
+			<div class="original">
+				<p><strong>Original:</strong> HTML. CSS: JSON; XML, API! PDF? HTTP& HTTPS%</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> HTML. CSS: JSON; XML, API! PDF? HTTP& HTTPS%</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>F4. Abbreviations with Numbers</h4>
+			<div class="original">
+				<p><strong>Original:</strong> HTML5 CSS3 HTTP2 MP3 MP4 3M 4WD V8 747 F16 B2B B2C</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> HTML5 CSS3 HTTP2 MP3 MP4 3M 4WD V8 747 F16 B2B B2C</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>F5. Mixed Case (should not transform)</h4>
+			<div class="original">
+				<p><strong>Original:</strong> Html Css Json Api Nasa Fbi Www Http Https</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> Html Css Json Api Nasa Fbi Www Http Https</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>F6. Very Long Abbreviations</h4>
+			<div class="original">
+				<p><strong>Original:</strong> ABCDEFGHIJKLMNOPQRSTUVWXYZ WWWWWWWWWWWWWWW AAAAAAAAAAA</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> ABCDEFGHIJKLMNOPQRSTUVWXYZ WWWWWWWWWWWWWWW AAAAAAAAAAA</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>F7. Abbreviations at Sentence Boundaries</h4>
+			<div class="original">
+				<p><strong>Original:</strong> NASA. FBI: CIA; JSON, HTML! API? XML& HTTP% CSS</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> NASA. FBI: CIA; JSON, HTML! API? XML& HTTP% CSS</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>F8. Abbreviations in Parentheses and Brackets</h4>
+			<div class="original">
+				<p><strong>Original:</strong> (NASA) [FBI] {CIA} <API> "HTML" 'CSS' (JSON) [XML]</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> (NASA) [FBI] {CIA} <API> "HTML" 'CSS' (JSON) [XML]</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>F9. Acronyms vs Initialisms</h4>
+			<div class="original">
+				<p><strong>Original:</strong> NATO UNESCO UNICEF NASA SCUBA RADAR LASER ASAP RSVP FYI TBD</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> NATO UNESCO UNICEF NASA SCUBA RADAR LASER ASAP RSVP FYI TBD</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>F10. Abbreviations with Apostrophes and Hyphens</h4>
+			<div class="original">
+				<p><strong>Original:</strong> NASA's API's HTML's M-16 F-15 T-800 AT-AT X-MEN A-OK</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> NASA's API's HTML's M-16 F-15 T-800 AT-AT X-MEN A-OK</p>
+			</div>
+		</div>
+
+		<!-- SYMBOL EDGE CASES -->
+		<h3 style="background: #333; color: white; padding: 10px; margin-top: 30px;">G. Symbol Edge Cases</h3>
+
+		<div class="section">
+			<h4>G1. Multiple Symbols Together</h4>
+			<div class="original">
+				<p><strong>Original:</strong> ©® ®© ©©© ®®®</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> ©® ®© ©©© ®®®</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>G2. Symbols at Different Positions</h4>
+			<div class="original">
+				<p><strong>Original:</strong> © Start and End ® or Middle © Symbol or © Alone</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> © Start and End ® or Middle © Symbol or © Alone</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>G3. Symbols with Other Special Characters</h4>
+			<div class="original">
+				<p><strong>Original:</strong> "©" '®' (©) [®] {©} ©! ®? ©. ®,</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> "©" '®' (©) [®] {©} ©! ®? ©. ®,</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>G4. Trademark Variations (only © and ® handled)</h4>
+			<div class="original">
+				<p><strong>Original:</strong> © ® ™ ℠ (only first two should superscript)</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> © ® ™ ℠ (only first two should superscript)</p>
+			</div>
+		</div>
+
+		<!-- COMBINED STRESS TESTS -->
+		<h3 style="background: #333; color: white; padding: 10px; margin-top: 30px;">H. Combined Stress Tests</h3>
+
+		<div class="section">
+			<h4>H1. Maximum Feature Density</h4>
+			<div class="original">
+				<p><strong>Original:</strong> "NASA's API documentation for HTML5 and CSS3... really?" she said. 'It's from 1990 - 2024 and has 1,234 examples!' The files like profile.txt and filter.js are © 2024 W3C®.</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> "NASA's API documentation for HTML5 and CSS3... really?" she said. 'It's from 1990–2024 and has 1,234 examples!' The files like profile.txt and filter.js are © 2024 W3C®.</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>H2. Conflicting Patterns</h4>
+			<div class="original">
+				<p><strong>Original:</strong> The "film" about NASA's 'first' mission... launched in 1969–1972 with 150–200 people. "Amazing!" said the CEO's assistant.</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> The "film" about NASA's 'first' mission... launched in 1969–1972 with 150–200 people. "Amazing!" said the CEO's assistant.</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>H3. Rapid Pattern Switching</h4>
+			<div class="original">
+				<p><strong>Original:</strong> "ABC" 123 'DEF' 456 "GHI" 789 'JKL' ... MNO! "PQR"? 'STU'. 2024 - 2025</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> "ABC" 123 'DEF' 456 "GHI" 789 'JKL' ... MNO! "PQR"? 'STU'. 2024–2025</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>H4. Edge Case Soup</h4>
+			<div class="original">
+				<p><strong>Original:</strong> ""Empty"" quotes, 'twas ...ellipsis... fi-fl ligatures in "film" HTML5's API - 2024 © ® U.S.A. Ph.D. -5 degrees 3.14159 555-1234 http://files.com state-of-the-art NASA. FBI: CIA;</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> ""Empty"" quotes, 'twas ...ellipsis... fi-fl ligatures in "film" HTML5's API - 2024 © ® U.S.A. Ph.D. -5 degrees 3.14159 555-1234 http://files.com state-of-the-art NASA. FBI: CIA;</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>H5. Pathological Input</h4>
+			<div class="original">
+				<p><strong>Original:</strong> """"'''''......------      multiple    spaces    ""'' "''" '""' NASA.NASA:NASA;NASA,NASA!NASA?</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> """"'''''......------      multiple    spaces    ""'' "''" '""' NASA.NASA:NASA;NASA,NASA!NASA?</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>H6. Real-World Complex Sentence</h4>
+			<div class="original">
+				<p><strong>Original:</strong> According to NASA's 2024 report, the API (Application Programming Interface) handles 1,000 - 2,000 requests per second... "It's incredible," said the CTO. The HTML5/CSS3 implementation uses fi-ligatures in filenames like "profile.txt" and offers ©2024 protection. Contact us at 555-1234 or visit http://api.nasa.gov for Ph.D.-level documentation.</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> According to NASA's 2024 report, the API (Application Programming Interface) handles 1,000 - 2,000 requests per second... "It's incredible," said the CTO. The HTML5/CSS3 implementation uses fi-ligatures in filenames like "profile.txt" and offers ©2024 protection. Contact us at 555-1234 or visit http://api.nasa.gov for Ph.D.-level documentation.</p>
+			</div>
+		</div>
+
+		<!-- SPECIAL CHARACTERS & UNICODE -->
+		<h3 style="background: #333; color: white; padding: 10px; margin-top: 30px;">I. Special Characters & Unicode</h3>
+
+		<div class="section">
+			<h4>I1. Already-Converted Smart Quotes (should not double-convert)</h4>
+			<div class="original">
+				<p><strong>Original:</strong> "Hello" and 'world' with "quotes" and 'apostrophes'</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> "Hello" and 'world' with "quotes" and 'apostrophes'</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>I2. Mixed Quote Styles</h4>
+			<div class="original">
+				<p><strong>Original:</strong> "Straight" and "curly" and 'straight' and 'curly'</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> "Straight" and "curly" and 'straight' and 'curly'</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>I3. En-dash vs Em-dash (already present)</h4>
+			<div class="original">
+				<p><strong>Original:</strong> En–dash Em—dash and regular - hyphen with - spaces</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> En–dash Em—dash and regular - hyphen with - spaces</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>I4. Other Punctuation Marks</h4>
+			<div class="original">
+				<p><strong>Original:</strong> Question¿ Exclamation¡ Section§ Paragraph¶ Bullet• Dagger† Double‡</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> Question¿ Exclamation¡ Section§ Paragraph¶ Bullet• Dagger† Double‡</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>I5. Non-Latin Characters Mixed with Latin Abbreviations</h4>
+			<div class="original">
+				<p><strong>Original:</strong> Α Β Γ with NASA and HTML. Cyrillic А Б В with API and CSS. Greek ΑΒΓΔ meets Latin ABCD.</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> Α Β Γ with NASA and HTML. Cyrillic А Б В with API and CSS. Greek ΑΒΓΔ meets Latin ABCD.</p>
+			</div>
+		</div>
+
+		<!-- WHITESPACE & FORMATTING -->
+		<h3 style="background: #333; color: white; padding: 10px; margin-top: 30px;">J. Whitespace & Formatting Edge Cases</h3>
+
+		<div class="section">
+			<h4>J1. Multiple Spaces</h4>
+			<div class="original">
+				<p><strong>Original:</strong> Words    with    multiple    spaces   "quoted"    text   and   123   numbers</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> Words    with    multiple    spaces   "quoted"    text   and   123   numbers</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>J2. Tabs and Non-Breaking Spaces</h4>
+			<div class="original">
+				<p><strong>Original:</strong> Tab→here and&nbsp;non-breaking&nbsp;space&nbsp;here with "quotes" and NASA</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> Tab→here and&nbsp;non-breaking&nbsp;space&nbsp;here with "quotes" and NASA</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>J3. Empty Elements</h4>
+			<div class="original">
+				<p><strong>Original:</strong> </p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> </p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>J4. Very Long Lines</h4>
+			<div class="original">
+				<p><strong>Original:</strong> Thisisaverylongwordwithnospacesanditincludesthesequenceflfiandalsosomenumberslike123456789andabbreviationslikeHTMLandCSSandquotes"like"thisandellipsis...andeverythingelsealltogether</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> Thisisaverylongwordwithnospacesanditincludesthesequenceflfiandalsosomenumberslike123456789andabbreviationslikeHTMLandCSSandquotes"like"thisandellipsis...andeverythingelsealltogether</p>
+			</div>
+		</div>
+
+		<hr>
+
+		<div style="background: #fff3cd; border: 2px solid #ffc107; padding: 20px; margin: 30px 0;">
+			<h3 style="color: #856404;">Known Issues Summary (from testing above)</h3>
+			<ul style="color: #856404;">
+				<li><strong>Abbreviations ending with punctuation</strong> (.,:;) - May wrap only first character</li>
+				<li><strong>Quote at paragraph start</strong> - No space before, may not convert to opening quote</li>
+				<li><strong>Ligatures in URLs</strong> - Will incorrectly create ligatures in technical URLs</li>
+				<li><strong>Numbers in decimals</strong> - Each part wrapped separately (3.14 becomes &lt;num&gt;3&lt;/num&gt;.&lt;num&gt;14&lt;/num&gt;)</li>
+				<li><strong>Contractions at start</strong> - 'twas, 'til may not convert properly without leading space</li>
+				<li><strong>Multiple consecutive quotes</strong> - May produce unexpected results</li>
+				<li><strong>Abbreviations with periods</strong> - U.S.A. gets split incorrectly</li>
+				<li><strong>Two dots</strong> - Not converted to ellipsis (only 3+ dots)</li>
+			</ul>
+		</div>
+
+		<hr>
+
+		<footer style="margin-top: 60px; padding-top: 20px; border-top: 2px solid #333; color: #666; text-align: center;">
+			<p><strong>Typesetter.js</strong> - Part of the OpenTypography project</p>
+			<p>© 2024 OpenTypography.org - This comprehensive demo showcases all typographic transformations</p>
+			<p>Visit <a href="http://www.opentypography.org">http://www.opentypography.org</a> for more information</p>
+		</footer>
+
+	</body>
+
 </html>
