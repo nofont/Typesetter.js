@@ -568,6 +568,737 @@
 
 		<hr>
 
+		<h2>10. COMPREHENSIVE REGEX EDGE CASES TEST SUITE</h2>
+		<p><em>This section tests boundary conditions and potential gaps in the regex patterns</em></p>
+
+		<!-- ELLIPSIS EDGE CASES -->
+		<h3 style="background: #333; color: white; padding: 10px; margin-top: 30px;">A. Ellipsis Edge Cases</h3>
+
+		<div class="section">
+			<h4>A1. Two Dots Only (not handled)</h4>
+			<div class="original">
+				<p><strong>Original:</strong> Wait.. No.. Stop..</p>
+			</div>
+			<div id="display" class="transformed">
+				<p><strong>Transformed:</strong> Wait.. No.. Stop..</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>A2. Four or More Dots</h4>
+			<div class="original">
+				<p><strong>Original:</strong> Wait.... Really.... Okay....</p>
+			</div>
+			<div id="display" class="transformed">
+				<p><strong>Transformed:</strong> Wait.... Really.... Okay....</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>A3. Dots with Irregular Spacing</h4>
+			<div class="original">
+				<p><strong>Original:</strong> Wait. . . and see. . .what happens.  .  .  .</p>
+			</div>
+			<div id="display" class="transformed">
+				<p><strong>Transformed:</strong> Wait. . . and see. . .what happens.  .  .  .</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>A4. Ellipsis at Start/End of Text</h4>
+			<div class="original">
+				<p><strong>Original:</strong> ...beginning of thought and end of thought...</p>
+			</div>
+			<div id="display" class="transformed">
+				<p><strong>Transformed:</strong> ...beginning of thought and end of thought...</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>A5. Ellipsis with Other Punctuation</h4>
+			<div class="original">
+				<p><strong>Original:</strong> What...! How...? Why..., Really...;</p>
+			</div>
+			<div id="display" class="transformed">
+				<p><strong>Transformed:</strong> What...! How...? Why..., Really...;</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>A6. Multiple Consecutive Ellipses</h4>
+			<div class="original">
+				<p><strong>Original:</strong> Wait...... and then......</p>
+			</div>
+			<div id="display" class="transformed">
+				<p><strong>Transformed:</strong> Wait...... and then......</p>
+			</div>
+		</div>
+
+		<!-- QUOTE EDGE CASES -->
+		<h3 style="background: #333; color: white; padding: 10px; margin-top: 30px;">B. Quote Edge Cases</h3>
+
+		<div class="section">
+			<h4>B1. Quote at Paragraph Start (no space before)</h4>
+			<div class="original">
+				<p><strong>Original:</strong> "Hello world" said the program.</p>
+			</div>
+			<div id="display" class="transformed">
+				<p><strong>Transformed:</strong> "Hello world" said the program.</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>B2. Multiple Consecutive Quotes</h4>
+			<div class="original">
+				<p><strong>Original:</strong> He said ""urgent"" and she replied '''immediately'''.</p>
+			</div>
+			<div id="display" class="transformed">
+				<p><strong>Transformed:</strong> He said ""urgent"" and she replied '''immediately'''.</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>B3. Quote Followed by Punctuation (not space)</h4>
+			<div class="original">
+				<p><strong>Original:</strong> "Hello"! "Goodbye"? "Maybe"; "Perhaps":</p>
+			</div>
+			<div id="display" class="transformed">
+				<p><strong>Transformed:</strong> "Hello"! "Goodbye"? "Maybe"; "Perhaps":</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>B4. Quote Without Spaces</h4>
+			<div class="original">
+				<p><strong>Original:</strong> He said"hello"and left. She replied'goodbye'quickly.</p>
+			</div>
+			<div id="display" class="transformed">
+				<p><strong>Transformed:</strong> He said"hello"and left. She replied'goodbye'quickly.</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>B5. Contractions vs Possessives vs Quotes</h4>
+			<div class="original">
+				<p><strong>Original:</strong> It's John's book. Can't won't don't I'm we're they're shouldn't couldn't wouldn't.</p>
+			</div>
+			<div id="display" class="transformed">
+				<p><strong>Transformed:</strong> It's John's book. Can't won't don't I'm we're they're shouldn't couldn't wouldn't.</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>B6. Nested Quotes Multiple Levels</h4>
+			<div class="original">
+				<p><strong>Original:</strong> He said "She told me 'He whispered "never" to her' yesterday" and left.</p>
+			</div>
+			<div id="display" class="transformed">
+				<p><strong>Transformed:</strong> He said "She told me 'He whispered "never" to her' yesterday" and left.</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>B7. Empty Quotes</h4>
+			<div class="original">
+				<p><strong>Original:</strong> He said "" and she replied ''.</p>
+			</div>
+			<div id="display" class="transformed">
+				<p><strong>Transformed:</strong> He said "" and she replied ''.</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>B8. Quote Before Comma/Period</h4>
+			<div class="original">
+				<p><strong>Original:</strong> He said "hello", then "goodbye". She said 'yes', then 'no'.</p>
+			</div>
+			<div id="display" class="transformed">
+				<p><strong>Transformed:</strong> He said "hello", then "goodbye". She said 'yes', then 'no'.</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>B9. Apostrophes in Different Positions</h4>
+			<div class="original">
+				<p><strong>Original:</strong> 'twas 'til 'cause rock'n'roll o'clock 'bout '90s ma'am</p>
+			</div>
+			<div id="display" class="transformed">
+				<p><strong>Transformed:</strong> 'twas 'til 'cause rock'n'roll o'clock 'bout '90s ma'am</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>B10. Possessive S with Capital S</h4>
+			<div class="original">
+				<p><strong>Original:</strong> John'S book Mary'S car (testing uppercase S after apostrophe)</p>
+			</div>
+			<div id="display" class="transformed">
+				<p><strong>Transformed:</strong> John'S book Mary'S car (testing uppercase S after apostrophe)</p>
+			</div>
+		</div>
+
+		<!-- LIGATURE EDGE CASES -->
+		<h3 style="background: #333; color: white; padding: 10px; margin-top: 30px;">C. Ligature Edge Cases</h3>
+
+		<div class="section">
+			<h4>C1. Triple Ligatures (not supported)</h4>
+			<div class="original">
+				<p><strong>Original:</strong>ffleффlе shuffleboard baffled waffles scofflaw</p>
+			</div>
+			<div id="display" class="transformed">
+				<p><strong>Transformed:</strong> fffle ffl shuffleboard baffled waffles scofflaw</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>C2. Uppercase Ligatures (should not transform)</h4>
+			<div class="original">
+				<p><strong>Original:</strong> FL FI FILM FLORAL FINISH FIFTY</p>
+			</div>
+			<div id="display" class="transformed">
+				<p><strong>Transformed:</strong> FL FI FILM FLORAL FINISH FIFTY</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>C3. Ligatures at Word Start/End</h4>
+			<div class="original">
+				<p><strong>Original:</strong> fl fi flfi fifl flflfl fififi</p>
+			</div>
+			<div id="display" class="transformed">
+				<p><strong>Transformed:</strong> fl fi flfi fifl flflfl fififi</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>C4. Ligatures in URLs (problematic)</h4>
+			<div class="original">
+				<p><strong>Original:</strong> Visit http://files.example.com or ftp://financial.server.org</p>
+			</div>
+			<div id="display" class="transformed">
+				<p><strong>Transformed:</strong> Visit http://files.example.com or ftp://financial.server.org</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>C5. Ligatures in Code/Technical Terms</h4>
+			<div class="original">
+				<p><strong>Original:</strong> file.txt filename filter config flags</p>
+			</div>
+			<div id="display" class="transformed">
+				<p><strong>Transformed:</strong> file.txt filename filter config flags</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>C6. Mixed Case Ligatures</h4>
+			<div class="original">
+				<p><strong>Original:</strong> Fl Fi FL FI fL fI Fl fi</p>
+			</div>
+			<div id="display" class="transformed">
+				<p><strong>Transformed:</strong> Fl Fi FL FI fL fI Fl fi</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>C7. Ligatures with Special Characters</h4>
+			<div class="original">
+				<p><strong>Original:</strong> "film" 'finish' (flow) [first] {field} fl-ag fi-le</p>
+			</div>
+			<div id="display" class="transformed">
+				<p><strong>Transformed:</strong> "film" 'finish' (flow) [first] {field} fl-ag fi-le</p>
+			</div>
+		</div>
+
+		<!-- DASH/HYPHEN EDGE CASES -->
+		<h3 style="background: #333; color: white; padding: 10px; margin-top: 30px;">D. Dash & Hyphen Edge Cases</h3>
+
+		<div class="section">
+			<h4>D1. Hyphen Without Spaces (should not transform)</h4>
+			<div class="original">
+				<p><strong>Original:</strong> state-of-the-art mother-in-law well-known twenty-one</p>
+			</div>
+			<div id="display" class="transformed">
+				<p><strong>Transformed:</strong> state-of-the-art mother-in-law well-known twenty-one</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>D2. Multiple Hyphens/Dashes</h4>
+			<div class="original">
+				<p><strong>Original:</strong> -- --- ---- ----- Words - with - dashes - everywhere</p>
+			</div>
+			<div id="display" class="transformed">
+				<p><strong>Transformed:</strong> -- --- ---- ----- Words - with - dashes - everywhere</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>D3. Dash at Start/End of Line</h4>
+			<div class="original">
+				<p><strong>Original:</strong> - beginning and end - </p>
+			</div>
+			<div id="display" class="transformed">
+				<p><strong>Transformed:</strong> - beginning and end - </p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>D4. Dash with Only One Space</h4>
+			<div class="original">
+				<p><strong>Original:</strong> word -space no-space- both</p>
+			</div>
+			<div id="display" class="transformed">
+				<p><strong>Transformed:</strong> word -space no-space- both</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>D5. Dash vs Minus Sign</h4>
+			<div class="original">
+				<p><strong>Original:</strong> 5 - 3 = 2, temperature is -5 degrees, result is -10</p>
+			</div>
+			<div id="display" class="transformed">
+				<p><strong>Transformed:</strong> 5 - 3 = 2, temperature is -5 degrees, result is -10</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>D6. Em-dash vs En-dash (not distinguished)</h4>
+			<div class="original">
+				<p><strong>Original:</strong> Long pause — like this or range 1990 - 2000 or London–Paris train</p>
+			</div>
+			<div id="display" class="transformed">
+				<p><strong>Transformed:</strong> Long pause — like this or range 1990 - 2000 or London–Paris train</p>
+			</div>
+		</div>
+
+		<!-- NUMBER EDGE CASES -->
+		<h3 style="background: #333; color: white; padding: 10px; margin-top: 30px;">E. Number Edge Cases</h3>
+
+		<div class="section">
+			<h4>E1. Single Digits vs Multi-Digits</h4>
+			<div class="original">
+				<p><strong>Original:</strong> 0 1 2 3 4 5 6 7 8 9 10 100 1000 10000</p>
+			</div>
+			<div id="display" class="transformed">
+				<p><strong>Transformed:</strong> 0 1 2 3 4 5 6 7 8 9 10 100 1000 10000</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>E2. Decimal Numbers</h4>
+			<div class="original">
+				<p><strong>Original:</strong> 3.14 2.5 0.5 100.00 1.234567</p>
+			</div>
+			<div id="display" class="transformed">
+				<p><strong>Transformed:</strong> 3.14 2.5 0.5 100.00 1.234567</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>E3. Negative Numbers</h4>
+			<div class="original">
+				<p><strong>Original:</strong> -1 -10 -100 -3.14 -0.5</p>
+			</div>
+			<div id="display" class="transformed">
+				<p><strong>Transformed:</strong> -1 -10 -100 -3.14 -0.5</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>E4. Numbers with Commas</h4>
+			<div class="original">
+				<p><strong>Original:</strong> 1,000 10,000 100,000 1,000,000 1,234,567,890</p>
+			</div>
+			<div id="display" class="transformed">
+				<p><strong>Transformed:</strong> 1,000 10,000 100,000 1,000,000 1,234,567,890</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>E5. Phone Numbers and Dates</h4>
+			<div class="original">
+				<p><strong>Original:</strong> 555-1234 (555) 123-4567 01/15/2024 2024-01-15 15.01.2024</p>
+			</div>
+			<div id="display" class="transformed">
+				<p><strong>Transformed:</strong> 555-1234 (555) 123-4567 01/15/2024 2024-01-15 15.01.2024</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>E6. Numbers in Links (should NOT be wrapped)</h4>
+			<div class="original">
+				<p><strong>Original:</strong> Visit <a href="http://example.com/page123">page 123</a> or call <a href="tel:5551234">555-1234</a></p>
+			</div>
+			<div id="display" class="transformed">
+				<p><strong>Transformed:</strong> Visit <a href="http://example.com/page123">page 123</a> or call <a href="tel:5551234">555-1234</a></p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>E7. Numbers at Start/End of Paragraph</h4>
+			<div class="original">
+				<p><strong>Original:</strong> 2024 was a great year and ended with 12345</p>
+			</div>
+			<div id="display" class="transformed">
+				<p><strong>Transformed:</strong> 2024 was a great year and ended with 12345</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>E8. Numbers with Units and Currencies</h4>
+			<div class="original">
+				<p><strong>Original:</strong> 100km 5lb $50 €100 £25 50% 37°C 5'10" 6:30pm</p>
+			</div>
+			<div id="display" class="transformed">
+				<p><strong>Transformed:</strong> 100km 5lb $50 €100 £25 50% 37°C 5'10" 6:30pm</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>E9. Mathematical Expressions</h4>
+			<div class="original">
+				<p><strong>Original:</strong> 2+2=4 5*3=15 10/2=5 100-50=50 2^8=256</p>
+			</div>
+			<div id="display" class="transformed">
+				<p><strong>Transformed:</strong> 2+2=4 5*3=15 10/2=5 100-50=50 2^8=256</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>E10. Version Numbers and IP Addresses</h4>
+			<div class="original">
+				<p><strong>Original:</strong> v1.0.0 2.5.1 192.168.1.1 127.0.0.1 255.255.255.0</p>
+			</div>
+			<div id="display" class="transformed">
+				<p><strong>Transformed:</strong> v1.0.0 2.5.1 192.168.1.1 127.0.0.1 255.255.255.0</p>
+			</div>
+		</div>
+
+		<!-- ABBREVIATION EDGE CASES -->
+		<h3 style="background: #333; color: white; padding: 10px; margin-top: 30px;">F. Abbreviation Edge Cases</h3>
+
+		<div class="section">
+			<h4>F1. Single Letters (should not transform, length > 1)</h4>
+			<div class="original">
+				<p><strong>Original:</strong> A B C D E F G H I J K L M N O P Q R S T U V W X Y Z</p>
+			</div>
+			<div id="display" class="transformed">
+				<p><strong>Transformed:</strong> A B C D E F G H I J K L M N O P Q R S T U V W X Y Z</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>F2. Abbreviations with Periods (known issue)</h4>
+			<div class="original">
+				<p><strong>Original:</strong> U.S.A. Ph.D. M.D. B.A. M.A. e.g. i.e. etc. a.m. p.m.</p>
+			</div>
+			<div id="display" class="transformed">
+				<p><strong>Transformed:</strong> U.S.A. Ph.D. M.D. B.A. M.A. e.g. i.e. etc. a.m. p.m.</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>F3. Abbreviations Ending with Punctuation (KNOWN BUG)</h4>
+			<div class="original">
+				<p><strong>Original:</strong> HTML. CSS: JSON; XML, API! PDF? HTTP& HTTPS%</p>
+			</div>
+			<div id="display" class="transformed">
+				<p><strong>Transformed:</strong> HTML. CSS: JSON; XML, API! PDF? HTTP& HTTPS%</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>F4. Abbreviations with Numbers</h4>
+			<div class="original">
+				<p><strong>Original:</strong> HTML5 CSS3 HTTP2 MP3 MP4 3M 4WD V8 747 F16 B2B B2C</p>
+			</div>
+			<div id="display" class="transformed">
+				<p><strong>Transformed:</strong> HTML5 CSS3 HTTP2 MP3 MP4 3M 4WD V8 747 F16 B2B B2C</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>F5. Mixed Case (should not transform)</h4>
+			<div class="original">
+				<p><strong>Original:</strong> Html Css Json Api Nasa Fbi Www Http Https</p>
+			</div>
+			<div id="display" class="transformed">
+				<p><strong>Transformed:</strong> Html Css Json Api Nasa Fbi Www Http Https</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>F6. Very Long Abbreviations</h4>
+			<div class="original">
+				<p><strong>Original:</strong> ABCDEFGHIJKLMNOPQRSTUVWXYZ WWWWWWWWWWWWWWW AAAAAAAAAAA</p>
+			</div>
+			<div id="display" class="transformed">
+				<p><strong>Transformed:</strong> ABCDEFGHIJKLMNOPQRSTUVWXYZ WWWWWWWWWWWWWWW AAAAAAAAAAA</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>F7. Abbreviations at Sentence Boundaries</h4>
+			<div class="original">
+				<p><strong>Original:</strong> NASA. FBI: CIA; JSON, HTML! API? XML& HTTP% CSS</p>
+			</div>
+			<div id="display" class="transformed">
+				<p><strong>Transformed:</strong> NASA. FBI: CIA; JSON, HTML! API? XML& HTTP% CSS</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>F8. Abbreviations in Parentheses and Brackets</h4>
+			<div class="original">
+				<p><strong>Original:</strong> (NASA) [FBI] {CIA} <API> "HTML" 'CSS' (JSON) [XML]</p>
+			</div>
+			<div id="display" class="transformed">
+				<p><strong>Transformed:</strong> (NASA) [FBI] {CIA} <API> "HTML" 'CSS' (JSON) [XML]</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>F9. Acronyms vs Initialisms</h4>
+			<div class="original">
+				<p><strong>Original:</strong> NATO UNESCO UNICEF NASA SCUBA RADAR LASER ASAP RSVP FYI TBD</p>
+			</div>
+			<div id="display" class="transformed">
+				<p><strong>Transformed:</strong> NATO UNESCO UNICEF NASA SCUBA RADAR LASER ASAP RSVP FYI TBD</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>F10. Abbreviations with Apostrophes and Hyphens</h4>
+			<div class="original">
+				<p><strong>Original:</strong> NASA's API's HTML's M-16 F-15 T-800 AT-AT X-MEN A-OK</p>
+			</div>
+			<div id="display" class="transformed">
+				<p><strong>Transformed:</strong> NASA's API's HTML's M-16 F-15 T-800 AT-AT X-MEN A-OK</p>
+			</div>
+		</div>
+
+		<!-- SYMBOL EDGE CASES -->
+		<h3 style="background: #333; color: white; padding: 10px; margin-top: 30px;">G. Symbol Edge Cases</h3>
+
+		<div class="section">
+			<h4>G1. Multiple Symbols Together</h4>
+			<div class="original">
+				<p><strong>Original:</strong> ©® ®© ©©© ®®®</p>
+			</div>
+			<div id="display" class="transformed">
+				<p><strong>Transformed:</strong> ©® ®© ©©© ®®®</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>G2. Symbols at Different Positions</h4>
+			<div class="original">
+				<p><strong>Original:</strong> © Start and End ® or Middle © Symbol or © Alone</p>
+			</div>
+			<div id="display" class="transformed">
+				<p><strong>Transformed:</strong> © Start and End ® or Middle © Symbol or © Alone</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>G3. Symbols with Other Special Characters</h4>
+			<div class="original">
+				<p><strong>Original:</strong> "©" '®' (©) [®] {©} ©! ®? ©. ®,</p>
+			</div>
+			<div id="display" class="transformed">
+				<p><strong>Transformed:</strong> "©" '®' (©) [®] {©} ©! ®? ©. ®,</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>G4. Trademark Variations (only © and ® handled)</h4>
+			<div class="original">
+				<p><strong>Original:</strong> © ® ™ ℠ (only first two should superscript)</p>
+			</div>
+			<div id="display" class="transformed">
+				<p><strong>Transformed:</strong> © ® ™ ℠ (only first two should superscript)</p>
+			</div>
+		</div>
+
+		<!-- COMBINED STRESS TESTS -->
+		<h3 style="background: #333; color: white; padding: 10px; margin-top: 30px;">H. Combined Stress Tests</h3>
+
+		<div class="section">
+			<h4>H1. Maximum Feature Density</h4>
+			<div class="original">
+				<p><strong>Original:</strong> "NASA's API documentation for HTML5 and CSS3... really?" she said. 'It's from 1990 - 2024 and has 1,234 examples!' The files like profile.txt and filter.js are © 2024 W3C®.</p>
+			</div>
+			<div id="display" class="transformed">
+				<p><strong>Transformed:</strong> "NASA's API documentation for HTML5 and CSS3... really?" she said. 'It's from 1990 - 2024 and has 1,234 examples!' The files like profile.txt and filter.js are © 2024 W3C®.</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>H2. Conflicting Patterns</h4>
+			<div class="original">
+				<p><strong>Original:</strong> The "film" about NASA's 'first' mission... launched in 1969 - 1972 with 150 - 200 people. "Amazing!" said the CEO's assistant.</p>
+			</div>
+			<div id="display" class="transformed">
+				<p><strong>Transformed:</strong> The "film" about NASA's 'first' mission... launched in 1969 - 1972 with 150 - 200 people. "Amazing!" said the CEO's assistant.</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>H3. Rapid Pattern Switching</h4>
+			<div class="original">
+				<p><strong>Original:</strong> "ABC" 123 'DEF' 456 "GHI" 789 'JKL' ... MNO! "PQR"? 'STU'. 2024 - 2025</p>
+			</div>
+			<div id="display" class="transformed">
+				<p><strong>Transformed:</strong> "ABC" 123 'DEF' 456 "GHI" 789 'JKL' ... MNO! "PQR"? 'STU'. 2024 - 2025</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>H4. Edge Case Soup</h4>
+			<div class="original">
+				<p><strong>Original:</strong> ""Empty"" quotes, 'twas ...ellipsis... fi-fl ligatures in "film" HTML5's API - 2024 © ® U.S.A. Ph.D. -5 degrees 3.14159 555-1234 http://files.com state-of-the-art NASA. FBI: CIA;</p>
+			</div>
+			<div id="display" class="transformed">
+				<p><strong>Transformed:</strong> ""Empty"" quotes, 'twas ...ellipsis... fi-fl ligatures in "film" HTML5's API - 2024 © ® U.S.A. Ph.D. -5 degrees 3.14159 555-1234 http://files.com state-of-the-art NASA. FBI: CIA;</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>H5. Pathological Input</h4>
+			<div class="original">
+				<p><strong>Original:</strong> """"'''''......------      multiple    spaces    ""'' "''" '""' NASA.NASA:NASA;NASA,NASA!NASA?</p>
+			</div>
+			<div id="display" class="transformed">
+				<p><strong>Transformed:</strong> """"'''''......------      multiple    spaces    ""'' "''" '""' NASA.NASA:NASA;NASA,NASA!NASA?</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>H6. Real-World Complex Sentence</h4>
+			<div class="original">
+				<p><strong>Original:</strong> According to NASA's 2024 report, the API (Application Programming Interface) handles 1,000 - 2,000 requests per second... "It's incredible," said the CTO. The HTML5/CSS3 implementation uses fi-ligatures in filenames like "profile.txt" and offers ©2024 protection. Contact us at 555-1234 or visit http://api.nasa.gov for Ph.D.-level documentation.</p>
+			</div>
+			<div id="display" class="transformed">
+				<p><strong>Transformed:</strong> According to NASA's 2024 report, the API (Application Programming Interface) handles 1,000 - 2,000 requests per second... "It's incredible," said the CTO. The HTML5/CSS3 implementation uses fi-ligatures in filenames like "profile.txt" and offers ©2024 protection. Contact us at 555-1234 or visit http://api.nasa.gov for Ph.D.-level documentation.</p>
+			</div>
+		</div>
+
+		<!-- SPECIAL CHARACTERS & UNICODE -->
+		<h3 style="background: #333; color: white; padding: 10px; margin-top: 30px;">I. Special Characters & Unicode</h3>
+
+		<div class="section">
+			<h4>I1. Already-Converted Smart Quotes (should not double-convert)</h4>
+			<div class="original">
+				<p><strong>Original:</strong> "Hello" and 'world' with "quotes" and 'apostrophes'</p>
+			</div>
+			<div id="display" class="transformed">
+				<p><strong>Transformed:</strong> "Hello" and 'world' with "quotes" and 'apostrophes'</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>I2. Mixed Quote Styles</h4>
+			<div class="original">
+				<p><strong>Original:</strong> "Straight" and "curly" and 'straight' and 'curly'</p>
+			</div>
+			<div id="display" class="transformed">
+				<p><strong>Transformed:</strong> "Straight" and "curly" and 'straight' and 'curly'</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>I3. En-dash vs Em-dash (already present)</h4>
+			<div class="original">
+				<p><strong>Original:</strong> En–dash Em—dash and regular - hyphen with - spaces</p>
+			</div>
+			<div id="display" class="transformed">
+				<p><strong>Transformed:</strong> En–dash Em—dash and regular - hyphen with - spaces</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>I4. Other Punctuation Marks</h4>
+			<div class="original">
+				<p><strong>Original:</strong> Question¿ Exclamation¡ Section§ Paragraph¶ Bullet• Dagger† Double‡</p>
+			</div>
+			<div id="display" class="transformed">
+				<p><strong>Transformed:</strong> Question¿ Exclamation¡ Section§ Paragraph¶ Bullet• Dagger† Double‡</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>I5. Non-Latin Characters Mixed with Latin Abbreviations</h4>
+			<div class="original">
+				<p><strong>Original:</strong> Α Β Γ with NASA and HTML. Cyrillic А Б В with API and CSS. Greek ΑΒΓΔ meets Latin ABCD.</p>
+			</div>
+			<div id="display" class="transformed">
+				<p><strong>Transformed:</strong> Α Β Γ with NASA and HTML. Cyrillic А Б В with API and CSS. Greek ΑΒΓΔ meets Latin ABCD.</p>
+			</div>
+		</div>
+
+		<!-- WHITESPACE & FORMATTING -->
+		<h3 style="background: #333; color: white; padding: 10px; margin-top: 30px;">J. Whitespace & Formatting Edge Cases</h3>
+
+		<div class="section">
+			<h4>J1. Multiple Spaces</h4>
+			<div class="original">
+				<p><strong>Original:</strong> Words    with    multiple    spaces   "quoted"    text   and   123   numbers</p>
+			</div>
+			<div id="display" class="transformed">
+				<p><strong>Transformed:</strong> Words    with    multiple    spaces   "quoted"    text   and   123   numbers</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>J2. Tabs and Non-Breaking Spaces</h4>
+			<div class="original">
+				<p><strong>Original:</strong> Tab→here and&nbsp;non-breaking&nbsp;space&nbsp;here with "quotes" and NASA</p>
+			</div>
+			<div id="display" class="transformed">
+				<p><strong>Transformed:</strong> Tab→here and&nbsp;non-breaking&nbsp;space&nbsp;here with "quotes" and NASA</p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>J3. Empty Elements</h4>
+			<div class="original">
+				<p><strong>Original:</strong> </p>
+			</div>
+			<div id="display" class="transformed">
+				<p><strong>Transformed:</strong> </p>
+			</div>
+		</div>
+
+		<div class="section">
+			<h4>J4. Very Long Lines</h4>
+			<div class="original">
+				<p><strong>Original:</strong> Thisisaverylongwordwithnospacesanditincludesthesequenceflfiandalsosomenumberslike123456789andabbreviationslikeHTMLandCSSandquotes"like"thisandellipsis...andeverythingelsealltogether</p>
+			</div>
+			<div id="display" class="transformed">
+				<p><strong>Transformed:</strong> Thisisaverylongwordwithnospacesanditincludesthesequenceflfiandalsosomenumberslike123456789andabbreviationslikeHTMLandCSSandquotes"like"thisandellipsis...andeverythingelsealltogether</p>
+			</div>
+		</div>
+
+		<hr>
+
+		<div style="background: #fff3cd; border: 2px solid #ffc107; padding: 20px; margin: 30px 0;">
+			<h3 style="color: #856404;">Known Issues Summary (from testing above)</h3>
+			<ul style="color: #856404;">
+				<li><strong>Abbreviations ending with punctuation</strong> (.,:;) - May wrap only first character</li>
+				<li><strong>Quote at paragraph start</strong> - No space before, may not convert to opening quote</li>
+				<li><strong>Ligatures in URLs</strong> - Will incorrectly create ligatures in technical URLs</li>
+				<li><strong>Numbers in decimals</strong> - Each part wrapped separately (3.14 becomes &lt;num&gt;3&lt;/num&gt;.&lt;num&gt;14&lt;/num&gt;)</li>
+				<li><strong>Contractions at start</strong> - 'twas, 'til may not convert properly without leading space</li>
+				<li><strong>Multiple consecutive quotes</strong> - May produce unexpected results</li>
+				<li><strong>Abbreviations with periods</strong> - U.S.A. gets split incorrectly</li>
+				<li><strong>Two dots</strong> - Not converted to ellipsis (only 3+ dots)</li>
+			</ul>
+		</div>
+
+		<hr>
+
 		<footer style="margin-top: 60px; padding-top: 20px; border-top: 2px solid #333; color: #666; text-align: center;">
 			<p><strong>Typesetter.js</strong> - Part of the OpenTypography project</p>
 			<p>© 2024 OpenTypography.org - This comprehensive demo showcases all typographic transformations</p>
