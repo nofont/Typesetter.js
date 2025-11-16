@@ -7,7 +7,7 @@
 		<title>Typesetter.js Comprehensive Demo</title>
 		<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 
-        <script type="text/javascript" src="typesetter.js"></script>
+        <script type="text/javascript" src="typesetter-debug.js"></script>
 
         <link href='http://fonts.googleapis.com/css?family=Mate:400,400italic|Mate+SC' rel='stylesheet' type='text/css'>
 
@@ -26,6 +26,10 @@
 
 			    $('#display p, #display li, #display h3, #display h4').addClass("typo");
 
+			    // Store original HTML before any transformations
+			    $('#display').find('.typo').each(function() {
+			    	$(this).data('original-html', $(this).html());
+			    });
 
 			   /********************************
 			    	FIRE THE FUNCTIONS
@@ -95,16 +99,181 @@
 				border: none;
 				border-top: 2px solid #ccc;
 			}
+
+			/* DEBUG MODE STYLES */
+			#debug-controls {
+				position: fixed;
+				top: 20px;
+				right: 20px;
+				z-index: 1000;
+				background: white;
+				padding: 15px;
+				border-radius: 8px;
+				box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+			}
+
+			#debug-toggle {
+				background-color: #f44336;
+				color: white;
+				border: none;
+				padding: 12px 24px;
+				font-size: 16px;
+				font-weight: bold;
+				border-radius: 5px;
+				cursor: pointer;
+				transition: all 0.3s;
+				display: block;
+				width: 100%;
+				margin-bottom: 10px;
+			}
+
+			#debug-toggle:hover {
+				opacity: 0.9;
+				transform: scale(1.05);
+			}
+
+			#debug-legend {
+				display: none;
+				background: #fff;
+				padding: 15px;
+				border-radius: 5px;
+				border: 2px solid #333;
+				margin-top: 10px;
+				max-width: 300px;
+			}
+
+			#debug-legend h4 {
+				margin: 0 0 10px 0;
+				color: #333;
+			}
+
+			.legend-item {
+				display: flex;
+				align-items: center;
+				margin: 5px 0;
+				font-size: 12px;
+			}
+
+			.legend-color {
+				width: 30px;
+				height: 20px;
+				margin-right: 10px;
+				border: 1px solid #000;
+				display: inline-block;
+			}
+
+			.debug-match {
+				cursor: help;
+				transition: all 0.2s;
+			}
+
+			.debug-match:hover {
+				transform: scale(1.1);
+				box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+				z-index: 100;
+			}
 		</style>
 
 	</head>
 
 	<body>
 
+		<!-- DEBUG CONTROLS -->
+		<div id="debug-controls">
+			<button id="debug-toggle" onclick="toggleTypesetterDebug()">Debug Mode: OFF</button>
+			<div id="debug-legend">
+				<h4>Regex Match Colors:</h4>
+				<div class="legend-item">
+					<span class="legend-color" style="background: #ffeb3b;"></span>
+					<span>Ellipsis (...)</span>
+				</div>
+				<div class="legend-item">
+					<span class="legend-color" style="background: #4caf50;"></span>
+					<span>Ligature fl</span>
+				</div>
+				<div class="legend-item">
+					<span class="legend-color" style="background: #8bc34a;"></span>
+					<span>Ligature fi</span>
+				</div>
+				<div class="legend-item">
+					<span class="legend-color" style="background: #ff9800;"></span>
+					<span>En-dash (space-hyphen-space)</span>
+				</div>
+				<div class="legend-item">
+					<span class="legend-color" style="background: #2196f3;"></span>
+					<span>Quote " closing</span>
+				</div>
+				<div class="legend-item">
+					<span class="legend-color" style="background: #03a9f4;"></span>
+					<span>Quote " opening</span>
+				</div>
+				<div class="legend-item">
+					<span class="legend-color" style="background: #9c27b0;"></span>
+					<span>Quote ' closing</span>
+				</div>
+				<div class="legend-item">
+					<span class="legend-color" style="background: #ba68c8;"></span>
+					<span>Quote ' opening</span>
+				</div>
+				<div class="legend-item">
+					<span class="legend-color" style="background: #e91e63;"></span>
+					<span>Possessive apostrophe</span>
+				</div>
+				<div class="legend-item">
+					<span class="legend-color" style="background: #f44336;"></span>
+					<span>Numbers wrapped</span>
+				</div>
+				<div class="legend-item">
+					<span class="legend-color" style="background: #795548;"></span>
+					<span>Copyright © symbol</span>
+				</div>
+				<div class="legend-item">
+					<span class="legend-color" style="background: #9e9e9e;"></span>
+					<span>Registered ® symbol</span>
+				</div>
+				<div class="legend-item">
+					<span class="legend-color" style="background: #00bcd4;"></span>
+					<span>Abbreviations (small caps)</span>
+				</div>
+				<div style="margin-top: 10px; padding-top: 10px; border-top: 1px solid #ccc; font-size: 11px; color: #666;">
+					<strong>Tip:</strong> Hover over highlighted elements to see details
+				</div>
+			</div>
+		</div>
+
 		<h1>Typesetter.js - Comprehensive Typography Demo</h1>
 
 		<p><strong>This demo showcases all typographic transformations handled by Typesetter.js</strong></p>
 		<p>Each section shows the original text (red) and the transformed text (green) with proper typographic enhancements.</p>
+		<p><strong style="color: #4caf50;">NEW!</strong> Use the <strong>Debug Mode</strong> button (top-right) to visualize exactly what each regex pattern matches. Hover over highlighted elements to see details about the transformation.</p>
+
+		<hr>
+
+		<div style="background: #e3f2fd; border-left: 5px solid #2196f3; padding: 20px; margin: 30px 0;">
+			<h2 style="margin-top: 0; color: #1976d2;">🔍 Debug Mode Demo</h2>
+			<p><strong>Try it now!</strong> Click the "Debug Mode: OFF" button in the top-right corner to see regex matches highlighted in different colors.</p>
+			<div class="section">
+				<h3>Quick Test</h3>
+				<div class="original">
+					<p><strong>Original:</strong> "Hello world!" said NASA's API in 2024... The film "Inception" is first-class. © 2024</p>
+				</div>
+				<div id="display" class="transformed">
+					<p><strong>Transformed:</strong> "Hello world!" said NASA's API in 2024... The film "Inception" is first-class. © 2024</p>
+				</div>
+			</div>
+			<p><strong>What to look for when debug mode is ON:</strong></p>
+			<ul>
+				<li><span style="background: #2196f3; padding: 2px 6px; border: 1px solid #000;">Blue</span> = Opening/closing double quotes</li>
+				<li><span style="background: #e91e63; padding: 2px 6px; border: 1px solid #000;">Pink</span> = Possessive apostrophe (NASA's)</li>
+				<li><span style="background: #00bcd4; padding: 2px 6px; border: 1px solid #000;">Cyan</span> = Abbreviations in small caps (NASA, API)</li>
+				<li><span style="background: #f44336; padding: 2px 6px; border: 1px solid #000;">Red</span> = Numbers wrapped (2024)</li>
+				<li><span style="background: #ffeb3b; padding: 2px 6px; border: 1px solid #000;">Yellow</span> = Ellipsis (...)</li>
+				<li><span style="background: #4caf50; padding: 2px 6px; border: 1px solid #000;">Green</span> = fl ligature (film → ﬁlm)</li>
+				<li><span style="background: #8bc34a; padding: 2px 6px; border: 1px solid #000;">Light Green</span> = fi ligature (first → ﬁrst)</li>
+				<li><span style="background: #795548; padding: 2px 6px; border: 1px solid #000;">Brown</span> = Copyright symbol (©)</li>
+			</ul>
+			<p style="font-size: 14px; color: #666;"><em>Hover over any highlighted element to see the exact transformation that occurred!</em></p>
+		</div>
 
 		<hr>
 
