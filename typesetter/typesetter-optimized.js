@@ -37,11 +37,11 @@ var TYPESETTER_REGEX = {
 //-------------------------------------
 
 var TYPESETTER_CONFIG = {
-    doubleQuoteCharClose: "&#8221;",
-    doubleQuoteCharOpen: "&#8220;",
-    singleQuoteCharClose: "&#8217;",
-    singleQuoteCharOpen: "&#8216;",
-    possessiveS: "&#8217;",
+    doubleQuoteCharClose: "\u201D",  // " (right double quotation mark)
+    doubleQuoteCharOpen: "\u201C",   // " (left double quotation mark)
+    singleQuoteCharClose: "\u2019",  // ' (right single quotation mark)
+    singleQuoteCharOpen: "\u2018",   // ' (left single quotation mark)
+    possessiveS: "\u2019",           // ' (apostrophe)
     triggerSelector: ".display",
     numeralClass: "num"
 };
@@ -121,10 +121,10 @@ function applyCharacterReplacements(text) {
     // Apply all transformations in sequence
     // Order matters - do quotes before possessives to avoid conflicts
 
-    text = text.replace(TYPESETTER_REGEX.ellipsis, "&#8230;");
-    text = text.replace(TYPESETTER_REGEX.ligatureFL, "&#xFB02;");
-    text = text.replace(TYPESETTER_REGEX.ligatureFI, "&#xFB01;");
-    text = text.replace(TYPESETTER_REGEX.enDash, " &#8210; ");
+    text = text.replace(TYPESETTER_REGEX.ellipsis, "\u2026");
+    text = text.replace(TYPESETTER_REGEX.ligatureFL, "\uFB02");
+    text = text.replace(TYPESETTER_REGEX.ligatureFI, "\uFB01");
+    text = text.replace(TYPESETTER_REGEX.enDash, " \u2013 ");
 
     // Quotes - close before open to handle nested quotes
     text = text.replace(TYPESETTER_REGEX.quoteCloseDouble, TYPESETTER_CONFIG.doubleQuoteCharClose + "$1");
@@ -134,8 +134,8 @@ function applyCharacterReplacements(text) {
 
     text = text.replace(TYPESETTER_REGEX.possessive, TYPESETTER_CONFIG.possessiveS + "$1");
     text = text.replace(TYPESETTER_REGEX.numbers, '<' + TYPESETTER_CONFIG.numeralClass + '>$1</' + TYPESETTER_CONFIG.numeralClass + '>');
-    text = text.replace(TYPESETTER_REGEX.copyright, "<sup class=\"sup\">&copy;</sup>");
-    text = text.replace(TYPESETTER_REGEX.registered, "<sup class=\"sup\">&reg;</sup>");
+    text = text.replace(TYPESETTER_REGEX.copyright, "<sup class=\"sup\">\u00A9</sup>");
+    text = text.replace(TYPESETTER_REGEX.registered, "<sup class=\"sup\">\u00AE</sup>");
 
     return text;
 }

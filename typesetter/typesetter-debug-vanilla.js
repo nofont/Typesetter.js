@@ -69,11 +69,11 @@ function debugHighlight(text, type, description) {
 //-------------------------------------
 
 var TYPESETTER_CONFIG = {
-    doubleQuoteCharClose: "&#8221;",
-    doubleQuoteCharOpen: "&#8220;",
-    singleQuoteCharClose: "&#8217;",
-    singleQuoteCharOpen: "&#8216;",
-    possessiveS: "&#8217;",
+    doubleQuoteCharClose: "\u201D",  // " (right double quotation mark)
+    doubleQuoteCharOpen: "\u201C",   // " (left double quotation mark)
+    singleQuoteCharClose: "\u2019",  // ' (right single quotation mark)
+    singleQuoteCharOpen: "\u2018",   // ' (left single quotation mark)
+    possessiveS: "\u2019",           // ' (apostrophe)
     triggerSelector: ".display",
     numeralClass: "num"
 };
@@ -152,19 +152,19 @@ function applyCharacterReplacements(text) {
     if (TYPESETTER_DEBUG) {
         // Debug mode - highlight each transformation
         text = text.replace(TYPESETTER_REGEX.ellipsis, function(match) {
-            return debugHighlight("&#8230;", 'ellipsis', 'Ellipsis: ' + match + ' → …');
+            return debugHighlight("\u2026", 'ellipsis', 'Ellipsis: ' + match + ' → …');
         });
 
         text = text.replace(TYPESETTER_REGEX.ligatureFL, function(match) {
-            return debugHighlight("&#xFB02;", 'ligature-fl', 'fl → ﬂ ligature');
+            return debugHighlight("\uFB02", 'ligature-fl', 'fl → ﬂ ligature');
         });
 
         text = text.replace(TYPESETTER_REGEX.ligatureFI, function(match) {
-            return debugHighlight("&#xFB01;", 'ligature-fi', 'fi → ﬁ ligature');
+            return debugHighlight("\uFB01", 'ligature-fi', 'fi → ﬁ ligature');
         });
 
         text = text.replace(TYPESETTER_REGEX.enDash, function(match) {
-            return " " + debugHighlight("&#8210;", 'dash', 'space-hyphen-space → en-dash') + " ";
+            return " " + debugHighlight("\u2013", 'dash', 'space-hyphen-space → en-dash') + " ";
         });
 
         text = text.replace(TYPESETTER_REGEX.quoteCloseDouble, function(match, p1) {
@@ -194,27 +194,27 @@ function applyCharacterReplacements(text) {
         });
 
         text = text.replace(TYPESETTER_REGEX.copyright, function(match) {
-            return "<sup class=\"sup\">" + debugHighlight("&copy;", 'symbol-copy', '© → superscript') + "</sup>";
+            return "<sup class=\"sup\">" + debugHighlight("\u00A9", 'symbol-copy', '© → superscript') + "</sup>";
         });
 
         text = text.replace(TYPESETTER_REGEX.registered, function(match) {
-            return "<sup class=\"sup\">" + debugHighlight("&reg;", 'symbol-reg', '® → superscript') + "</sup>";
+            return "<sup class=\"sup\">" + debugHighlight("\u00AE", 'symbol-reg', '® → superscript') + "</sup>";
         });
 
     } else {
         // Standard mode - fast replacements
-        text = text.replace(TYPESETTER_REGEX.ellipsis, "&#8230;");
-        text = text.replace(TYPESETTER_REGEX.ligatureFL, "&#xFB02;");
-        text = text.replace(TYPESETTER_REGEX.ligatureFI, "&#xFB01;");
-        text = text.replace(TYPESETTER_REGEX.enDash, " &#8210; ");
+        text = text.replace(TYPESETTER_REGEX.ellipsis, "\u2026");
+        text = text.replace(TYPESETTER_REGEX.ligatureFL, "\uFB02");
+        text = text.replace(TYPESETTER_REGEX.ligatureFI, "\uFB01");
+        text = text.replace(TYPESETTER_REGEX.enDash, " \u2013 ");
         text = text.replace(TYPESETTER_REGEX.quoteCloseDouble, TYPESETTER_CONFIG.doubleQuoteCharClose + "$1");
         text = text.replace(TYPESETTER_REGEX.quoteOpenDouble, "$1" + TYPESETTER_CONFIG.doubleQuoteCharOpen);
         text = text.replace(TYPESETTER_REGEX.quoteCloseSingle, TYPESETTER_CONFIG.singleQuoteCharClose + "$1");
         text = text.replace(TYPESETTER_REGEX.quoteOpenSingle, "$1" + TYPESETTER_CONFIG.singleQuoteCharOpen);
         text = text.replace(TYPESETTER_REGEX.possessive, TYPESETTER_CONFIG.possessiveS + "$1");
         text = text.replace(TYPESETTER_REGEX.numbers, '<' + TYPESETTER_CONFIG.numeralClass + '>$1</' + TYPESETTER_CONFIG.numeralClass + '>');
-        text = text.replace(TYPESETTER_REGEX.copyright, "<sup class=\"sup\">&copy;</sup>");
-        text = text.replace(TYPESETTER_REGEX.registered, "<sup class=\"sup\">&reg;</sup>");
+        text = text.replace(TYPESETTER_REGEX.copyright, "<sup class=\"sup\">\u00A9</sup>");
+        text = text.replace(TYPESETTER_REGEX.registered, "<sup class=\"sup\">\u00AE</sup>");
     }
 
     return text;
