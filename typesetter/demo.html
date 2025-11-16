@@ -669,7 +669,152 @@
 
 		<hr>
 
-		<h2>9. Edge Cases & Special Scenarios</h2>
+		<h2>9. Numbers & Amounts in Different Language Formats</h2>
+		<p><em>Testing how the script handles amounts formatted according to different language conventions</em></p>
+
+		<div class="language-section">
+			<h3>English (US) - Period for Decimals, Comma for Thousands</h3>
+			<div class="original">
+				<p><strong>Original:</strong> The company reported revenues of $1,234,567.89 in 2024. The cost was approximately $45.99 per unit. Population reached 7,890,123,456 people. Budget: $3.14 million or $3,140,000.00 exactly.</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> The company reported revenues of $1,234,567.89 in 2024. The cost was approximately $45.99 per unit. Population reached 7,890,123,456 people. Budget: $3.14 million or $3,140,000.00 exactly.</p>
+			</div>
+		</div>
+
+		<div class="language-section">
+			<h3>European (Germany, France, Spain, Italy) - Comma for Decimals, Period/Space for Thousands</h3>
+			<div class="original">
+				<p><strong>Original:</strong> Die Einnahmen betrugen 1.234.567,89 EUR im Jahr 2024. Der Preis war 45,99 EUR. Die Kosten: 3,14 Millionen oder genau 3.140.000,00 EUR. Temperature: 23,5°C.</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> Die Einnahmen betrugen 1.234.567,89 EUR im Jahr 2024. Der Preis war 45,99 EUR. Die Kosten: 3,14 Millionen oder genau 3.140.000,00 EUR. Temperature: 23,5°C.</p>
+			</div>
+		</div>
+
+		<div class="language-section">
+			<h3>French - Comma for Decimals, Space for Thousands</h3>
+			<div class="original">
+				<p><strong>Original:</strong> Les revenus s'élevaient à 1 234 567,89 EUR en 2024. Le prix était de 45,99 EUR l'unité. Budget: 3,14 millions soit exactement 3 140 000,00 EUR. Pi = 3,14159.</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> Les revenus s'élevaient à 1 234 567,89 EUR en 2024. Le prix était de 45,99 EUR l'unité. Budget: 3,14 millions soit exactement 3 140 000,00 EUR. Pi = 3,14159.</p>
+			</div>
+		</div>
+
+		<div class="language-section">
+			<h3>Swedish/Norwegian/Danish - Comma for Decimals, Space for Thousands</h3>
+			<div class="original">
+				<p><strong>Original:</strong> Intäkterna uppgick till 1 234 567,89 SEK år 2024. Priset var 45,99 kr per enhet. Budget: 3,14 miljoner eller exakt 3 140 000,00 SEK. Temperatur: 23,5°C.</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> Intäkterna uppgick till 1 234 567,89 SEK år 2024. Priset var 45,99 kr per enhet. Budget: 3,14 miljoner eller exakt 3 140 000,00 SEK. Temperatur: 23,5°C.</p>
+			</div>
+		</div>
+
+		<div class="language-section">
+			<h3>Swiss - Apostrophe for Thousands, Period for Decimals</h3>
+			<div class="original">
+				<p><strong>Original:</strong> Der Umsatz betrug 1'234'567.89 CHF im Jahr 2024. Der Preis war 45.99 CHF. Budget: 3.14 Millionen oder genau 3'140'000.00 CHF.</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> Der Umsatz betrug 1'234'567.89 CHF im Jahr 2024. Der Preis war 45.99 CHF. Budget: 3.14 Millionen oder genau 3'140'000.00 CHF.</p>
+			</div>
+		</div>
+
+		<div class="language-section">
+			<h3>Indian Numbering System - Lakhs and Crores</h3>
+			<div class="original">
+				<p><strong>Original:</strong> The budget was ₹12,34,567.89 (twelve lakh thirty-four thousand). Total: ₹1,23,45,678 (one crore twenty-three lakh). Small amount: ₹45.50 only.</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> The budget was ₹12,34,567.89 (twelve lakh thirty-four thousand). Total: ₹1,23,45,678 (one crore twenty-three lakh). Small amount: ₹45.50 only.</p>
+			</div>
+		</div>
+
+		<div class="language-section">
+			<h3>Large Numbers - Billions, Millions, Thousands</h3>
+			<div class="original">
+				<p><strong>Original:</strong> US GDP: $25,462,700,000,000 (25.46 trillion). World population: 8,045,311,447 people. Company valuation: $1,500,000,000 (1.5 billion). Annual revenue: $456,789,123.45 million.</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> US GDP: $25,462,700,000,000 (25.46 trillion). World population: 8,045,311,447 people. Company valuation: $1,500,000,000 (1.5 billion). Annual revenue: $456,789,123.45 million.</p>
+			</div>
+		</div>
+
+		<div class="language-section">
+			<h3>European Large Numbers</h3>
+			<div class="original">
+				<p><strong>Original:</strong> BIP Deutschland: 4.072.000.000.000 EUR (4,07 Billionen). Weltbevölkerung: 8.045.311.447 Menschen. Unternehmenswert: 1.500.000.000 EUR (1,5 Milliarden). Jahresumsatz: 456.789.123,45 EUR.</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> BIP Deutschland: 4.072.000.000.000 EUR (4,07 Billionen). Weltbevölkerung: 8.045.311.447 Menschen. Unternehmenswert: 1.500.000.000 EUR (1,5 Milliarden). Jahresumsatz: 456.789.123,45 EUR.</p>
+			</div>
+		</div>
+
+		<div class="language-section">
+			<h3>Mixed Formats in Same Text</h3>
+			<div class="original">
+				<p><strong>Original:</strong> The NASA budget was $25,200,000,000 (US format) while the ESA budget was 7.080.000.000 EUR (European format). Combined: approximately $32.28 billion or 30,15 Milliarden EUR at exchange rate 1.07.</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> The NASA budget was $25,200,000,000 (US format) while the ESA budget was 7.080.000.000 EUR (European format). Combined: approximately $32.28 billion or 30,15 Milliarden EUR at exchange rate 1.07.</p>
+			</div>
+		</div>
+
+		<div class="language-section">
+			<h3>Scientific Notation and Very Small Numbers</h3>
+			<div class="original">
+				<p><strong>Original:</strong> Speed of light: 299,792,458 m/s. Planck constant: 0.000000000000000000000000000000000662607015 (6.62607015×10⁻³⁴). Pi: 3.14159265358979323846. Avogadro: 602,214,076,000,000,000,000,000.</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> Speed of light: 299,792,458 m/s. Planck constant: 0.000000000000000000000000000000000662607015 (6.62607015×10⁻³⁴). Pi: 3.14159265358979323846. Avogadro: 602,214,076,000,000,000,000,000.</p>
+			</div>
+		</div>
+
+		<div class="language-section">
+			<h3>Financial Statements - Various Currencies</h3>
+			<div class="original">
+				<p><strong>Original:</strong> Revenue: $1,234,567.89 USD, £987,654.32 GBP, €1,111,222.33 EUR, ¥123,456,789 JPY, ₹12,34,567.89 INR, 1'234'567.89 CHF, $1,234,567.89 AUD, $1,234,567.89 CAD.</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> Revenue: $1,234,567.89 USD, £987,654.32 GBP, €1,111,222.33 EUR, ¥123,456,789 JPY, ₹12,34,567.89 INR, 1'234'567.89 CHF, $1,234,567.89 AUD, $1,234,567.89 CAD.</p>
+			</div>
+		</div>
+
+		<div class="language-section">
+			<h3>Percentages and Ratios</h3>
+			<div class="original">
+				<p><strong>Original:</strong> Growth rate: 3.14% (US) or 3,14% (EU). Market share: 23.456% vs 23,456% formatting. Ratio: 1:1.618 (golden ratio). Interest: 4.5% per annum or 4,5% p.a. Inflation: 2.3% to 2,3%.</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> Growth rate: 3.14% (US) or 3,14% (EU). Market share: 23.456% vs 23,456% formatting. Ratio: 1:1.618 (golden ratio). Interest: 4.5% per annum or 4,5% p.a. Inflation: 2.3% to 2,3%.</p>
+			</div>
+		</div>
+
+		<div class="language-section">
+			<h3>Measurements and Units</h3>
+			<div class="original">
+				<p><strong>Original:</strong> Distance: 1,234.56 km or 1.234,56 km. Weight: 45.67 kg or 45,67 kg. Volume: 2,345.67 liters or 2.345,67 Liter. Temperature: 23.5°C or 23,5°C or -40.0°F or -40,0°F.</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> Distance: 1,234.56 km or 1.234,56 km. Weight: 45.67 kg or 45,67 kg. Volume: 2,345.67 liters or 2.345,67 Liter. Temperature: 23.5°C or 23,5°C or -40.0°F or -40,0°F.</p>
+			</div>
+		</div>
+
+		<div class="language-section">
+			<h3>Complex Financial Data</h3>
+			<div class="original">
+				<p><strong>Original:</strong> "The Q4 2024 results show revenue of $12,345,678.90 million," said the CFO. Operating margin improved from 23.45% to 25.67%. EPS: $3.14 vs $2.89 YoY. Market cap: $456.78 billion. P/E ratio: 18.5x.</p>
+			</div>
+			<div class="display" class="transformed">
+				<p><strong>Transformed:</strong> "The Q4 2024 results show revenue of $12,345,678.90 million," said the CFO. Operating margin improved from 23.45% to 25.67%. EPS: $3.14 vs $2.89 YoY. Market cap: $456.78 billion. P/E ratio: 18.5x.</p>
+			</div>
+		</div>
+
+		<hr>
+
+		<h2>10. Edge Cases & Special Scenarios</h2>
 
 		<div class="section">
 			<h3>Mixed Quotes and Abbreviations</h3>
@@ -737,7 +882,7 @@
 
 		<hr>
 
-		<h2>10. COMPREHENSIVE REGEX EDGE CASES TEST SUITE</h2>
+		<h2>11. COMPREHENSIVE REGEX EDGE CASES TEST SUITE</h2>
 		<p><em>This section tests boundary conditions and potential gaps in the regex patterns</em></p>
 
 		<!-- ELLIPSIS EDGE CASES -->
