@@ -24,10 +24,10 @@
 			    	TYPOGRAPHIC ENHANCEMENTS
 			    ********************************/
 
-			    $('#display p, #display li, #display h3, #display h4').addClass("typo");
+			    $('.display p, .display li, .display h3, .display h4').addClass("typo");
 
 			    // Store original HTML before any transformations
-			    $('#display').find('.typo').each(function() {
+			    $('.display').find('.typo').each(function() {
 			    	$(this).data('original-html', $(this).html());
 			    });
 
@@ -257,7 +257,7 @@
 				<div class="original">
 					<p><strong>Original:</strong> "Hello world!" said NASA's API in 2024... The film "Inception" is first-class. © 2024</p>
 				</div>
-				<div id="display" class="transformed">
+				<div class="display" class="transformed">
 					<p><strong>Transformed:</strong> "Hello world!" said NASA's API in 2024... The film "Inception" is first-class. © 2024</p>
 				</div>
 			</div>
@@ -284,7 +284,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> He said "Hello world" and then "Goodbye".</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> He said "Hello world" and then "Goodbye".</p>
 			</div>
 		</div>
@@ -294,7 +294,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> She said 'Wait here' and I replied 'Okay'.</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> She said 'Wait here' and I replied 'Okay'.</p>
 			</div>
 		</div>
@@ -304,7 +304,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> It's John's book. Mary's car is in Bob's garage. The dog's collar is red.</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> It's John's book. Mary's car is in Bob's garage. The dog's collar is red.</p>
 			</div>
 		</div>
@@ -314,7 +314,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> "She told me 'never give up' and I believed her," he said.</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> "She told me 'never give up' and I believed her," he said.</p>
 			</div>
 		</div>
@@ -328,7 +328,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> The film festival was filled with flowers, flamingos, and fiction writers finishing their final drafts.</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> The film festival was filled with flowers, flamingos, and fiction writers finishing their final drafts.</p>
 			</div>
 		</div>
@@ -338,7 +338,7 @@
 			<div class="original">
 				<p><strong>Original:</strong>efile, profile, rifle,ffle,ffle, fiasco, fire, first, fish, flat, flight, flip, floor, fluid, fly.</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong>efile, profile, rifle,ffle,ffle, fiasco, fire, first, fish, flat, flight, flip, floor, fluid, fly.</p>
 			</div>
 		</div>
@@ -352,7 +352,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> Wait... I'm thinking... Maybe... Yes!</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> Wait... I'm thinking... Maybe... Yes!</p>
 			</div>
 		</div>
@@ -362,7 +362,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> The years 1990 - 2000 were significant. Pages 45 - 67 contain the answer. Office hours: 9 AM - 5 PM.</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> The years 1990 - 2000 were significant. Pages 45 - 67 contain the answer. Office hours: 9 AM - 5 PM.</p>
 			</div>
 		</div>
@@ -376,7 +376,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> NASA, FBI, CIA, API, HTML, CSS, XML, JSON, HTTP, HTTPS, FTP, SSH, DNS, URL, URI, PDF, GIF, JPEG, PNG, SVG, USA, UK, EU, UN, NATO, WHO, UNESCO.</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> NASA, FBI, CIA, API, HTML, CSS, XML, JSON, HTTP, HTTPS, FTP, SSH, DNS, URL, URI, PDF, GIF, JPEG, PNG, SVG, USA, UK, EU, UN, NATO, WHO, UNESCO.</p>
 			</div>
 		</div>
@@ -386,7 +386,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> NASA's mission, FBI's investigation, CIA's report, API's documentation, HTML's structure, CSS's styling.</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> NASA's mission, FBI's investigation, CIA's report, API's documentation, HTML's structure, CSS's styling.</p>
 			</div>
 		</div>
@@ -396,7 +396,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> Abbreviations A–Z, ATF's guide covers topics from A-Z. The range (A-Z) includes all letters.</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> Abbreviations A–Z, ATF's guide covers topics from A-Z. The range (A-Z) includes all letters.</p>
 			</div>
 		</div>
@@ -406,7 +406,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> The "HTML" standard and (CSS) framework work together. "API" integration with (JSON) format.</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> The "HTML" standard and (CSS) framework work together. "API" integration with (JSON) format.</p>
 			</div>
 		</div>
@@ -416,7 +416,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> MIT, UCLA, NYU, IBM, HP, AMD, NVIDIA, ASUS, UNICEF, OPEC, NAFTA, ASEAN, IMF, WTO, NGO, CEO, CFO, CTO, VP, HR, PR, IT, R&D.</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> MIT, UCLA, NYU, IBM, HP, AMD, NVIDIA, ASUS, UNICEF, OPEC, NAFTA, ASEAN, IMF, WTO, NGO, CEO, CFO, CTO, VP, HR, PR, IT, R&D.</p>
 			</div>
 		</div>
@@ -430,7 +430,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> The year 2024 was significant. Call me at 555-1234 or 555-5678.</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> The year 2024 was significant. Call me at 555-1234 or 555-5678.</p>
 			</div>
 		</div>
@@ -440,7 +440,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> There are 365 days in a year, 24 hours in a day, 60 minutes in an hour, and 60 seconds in a minute. The result is 123,456,789.</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> There are 365 days in a year, 24 hours in a day, 60 minutes in an hour, and 60 seconds in a minute. The result is 123,456,789.</p>
 			</div>
 		</div>
@@ -450,7 +450,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> The temperature is 23.5 degrees. Pi equals approximately 3.14159. The distance is 42.195 kilometers.</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> The temperature is 23.5 degrees. Pi equals approximately 3.14159. The distance is 42.195 kilometers.</p>
 			</div>
 		</div>
@@ -464,7 +464,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> © 2024 OpenTypography. All rights reserved. Typesetter.js® is a registered trademark.</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> © 2024 OpenTypography. All rights reserved. Typesetter.js® is a registered trademark.</p>
 			</div>
 		</div>
@@ -478,7 +478,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> In typography, a typeface (also known as font family) is a set of one or more fonts each composed of glyphs that share common design features. The "ITC Garamond Bold Condensed Italic" is different from "ITC Garamond Condensed Italic" and "ITC Garamond Bold Condensed," but all are fonts within the same typeface, "ITC Garamond."</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> In typography, a typeface (also known as font family) is a set of one or more fonts each composed of glyphs that share common design features. The "ITC Garamond Bold Condensed Italic" is different from "ITC Garamond Condensed Italic" and "ITC Garamond Bold Condensed," but all are fonts within the same typeface, "ITC Garamond."</p>
 			</div>
 		</div>
@@ -488,7 +488,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> The HTML5 specification defines the API for DOM manipulation. CSS3's flexbox and grid layouts revolutionized web design in the 2010 - 2020 decade. JSON's simplicity made it NASA's choice for data interchange...</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> The HTML5 specification defines the API for DOM manipulation. CSS3's flexbox and grid layouts revolutionized web design in the 2010 - 2020 decade. JSON's simplicity made it NASA's choice for data interchange...</p>
 			</div>
 		</div>
@@ -498,7 +498,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> Abbreviations A–Z, ATF's, A–Z, ATF's wrapped in "ITC" and (ITC), a CSS typeface is in the ODE: 123, 124 (also family) is "ITC Garamond Bold Condensed Italic"</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> Abbreviations A–Z, ATF's, A–Z, ATF's wrapped in "ITC" and (ITC), a CSS typeface is in the ODE: 123, 124 (also family) is "ITC Garamond Bold Condensed Italic"</p>
 			</div>
 		</div>
@@ -512,7 +512,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> "The quick brown fox jumps over the lazy dog," she said. It's a pangram that's been used for 100 - 200 years. The BBC, CNN, and NBC all reported it.</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> "The quick brown fox jumps over the lazy dog," she said. It's a pangram that's been used for 100 - 200 years. The BBC, CNN, and NBC all reported it.</p>
 			</div>
 		</div>
@@ -522,7 +522,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> "Bonjour le monde," dit-il. C'est la phrase classique. L'UNESCO et l'ONU travaillent ensemble depuis 1945 - 2024. Les films "Amélie" et "Les Misérables" sont magnifiques...</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> "Bonjour le monde," dit-il. C'est la phrase classique. L'UNESCO et l'ONU travaillent ensemble depuis 1945 - 2024. Les films "Amélie" et "Les Misérables" sont magnifiques...</p>
 			</div>
 		</div>
@@ -532,7 +532,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> "Guten Tag," sagte er. Das ist Deutschland's Hauptstadt. Die NATO und die EU arbeiten zusammen. Von 1990 - 2000 war es eine wichtige Zeit... "Wunderbar!" rief sie.</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> "Guten Tag," sagte er. Das ist Deutschland's Hauptstadt. Die NATO und die EU arbeiten zusammen. Von 1990 - 2000 war es eine wichtige Zeit... "Wunderbar!" rief sie.</p>
 			</div>
 		</div>
@@ -542,7 +542,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> "Hola mundo," dijo ella. Es la frase típica. La ONU y la UNESCO trabajan juntos. Los años 1500 - 1600 fueron importantes. "Fantástico!" exclamó. FIFA's headquarters is in Switzerland.</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> "Hola mundo," dijo ella. Es la frase típica. La ONU y la UNESCO trabajan juntos. Los años 1500 - 1600 fueron importantes. "Fantástico!" exclamó. FIFA's headquarters is in Switzerland.</p>
 			</div>
 		</div>
@@ -552,7 +552,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> "Ciao mondo," disse lui. È la frase classica. L'UNESCO e l'ONU lavorano insieme. Gli anni 1400 - 1500 furono il Rinascimento... "Bellissimo!" esclamò. FIFA's tournaments attract millions.</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> "Ciao mondo," disse lui. È la frase classica. L'UNESCO e l'ONU lavorano insieme. Gli anni 1400 - 1500 furono il Rinascimento... "Bellissimo!" esclamò. FIFA's tournaments attract millions.</p>
 			</div>
 		</div>
@@ -562,7 +562,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> "Olá mundo," disse ela. É a frase clássica. A ONU e a UNESCO trabalham juntas. Os anos 1500 - 1600 foram importantes... "Maravilhoso!" exclamou. FIFA's Brazil hosted the 2014 World Cup.</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> "Olá mundo," disse ela. É a frase clássica. A ONU e a UNESCO trabalham juntas. Os anos 1500 - 1600 foram importantes... "Maravilhoso!" exclamou. FIFA's Brazil hosted the 2014 World Cup.</p>
 			</div>
 		</div>
@@ -572,7 +572,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> "Hej världen," sa hon. Det är den klassiska frasen. FN och UNESCO arbetar tillsammans. Åren 1900 - 2000 var viktiga... "Fantastiskt!" utropade han. IKEA's furniture is worldwide.</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> "Hej världen," sa hon. Det är den klassiska frasen. FN och UNESCO arbetar tillsammans. Åren 1900 - 2000 var viktiga... "Fantastiskt!" utropade han. IKEA's furniture is worldwide.</p>
 			</div>
 		</div>
@@ -582,7 +582,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> "Hallo wereld," zei hij. Het is de klassieke zin. De VN en UNESCO werken samen. De jaren 1600 - 1700 waren belangrijk... "Geweldig!" riep ze. KLM's flights connect the world.</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> "Hallo wereld," zei hij. Het is de klassieke zin. De VN en UNESCO werken samen. De jaren 1600 - 1700 waren belangrijk... "Geweldig!" riep ze. KLM's flights connect the world.</p>
 			</div>
 		</div>
@@ -592,7 +592,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> "Hei verden," sa han. Det er den klassiske setningen. FN og UNESCO jobber sammen. Årene 1800 - 1900 var viktige... "Fantastisk!" utbrøt hun.</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> "Hei verden," sa han. Det er den klassiske setningen. FN og UNESCO jobber sammen. Årene 1800 - 1900 var viktige... "Fantastisk!" utbrøt hun.</p>
 			</div>
 		</div>
@@ -602,7 +602,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> "Hej verden," sagde hun. Det er den klassiske sætning. FN og UNESCO arbejder sammen. Årene 1700 - 1800 var vigtige... "Fantastisk!" udbrød han.</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> "Hej verden," sagde hun. Det er den klassiske sætning. FN og UNESCO arbejder sammen. Årene 1700 - 1800 var vigtige... "Fantastisk!" udbrød han.</p>
 			</div>
 		</div>
@@ -612,7 +612,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> "Hei maailma," hän sanoi. Se on klassinen lause. YK ja UNESCO työskentelevät yhdessä. Vuodet 1900 - 2000 olivat tärkeitä... "Fantastista!" hän huudahti.</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> "Hei maailma," hän sanoi. Se on klassinen lause. YK ja UNESCO työskentelevät yhdessä. Vuodet 1900 - 2000 olivat tärkeitä... "Fantastista!" hän huudahti.</p>
 			</div>
 		</div>
@@ -622,7 +622,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> "Witaj świecie," powiedział. To klasyczne zdanie. ONZ i UNESCO pracują razem. Lata 1900 - 2000 były ważne... "Fantastycznie!" wykrzyknęła.</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> "Witaj świecie," powiedział. To klasyczne zdanie. ONZ i UNESCO pracują razem. Lata 1900 - 2000 były ważne... "Fantastycznie!" wykrzyknęła.</p>
 			</div>
 		</div>
@@ -632,7 +632,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> "Привет мир," сказал он. Это классическая фраза. ООН и UNESCO работают вместе. Годы 1917 - 2000 были важными... "Фантастика!" воскликнула она. USSR's history is complex.</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> "Привет мир," сказал он. Это классическая фраза. ООН и UNESCO работают вместе. Годы 1917 - 2000 были важными... "Фантастика!" воскликнула она. USSR's history is complex.</p>
 			</div>
 		</div>
@@ -642,7 +642,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> HTML と CSS は重要です。The years 2000 - 2024 saw major changes. "技術は進化する," と彼は言った... NHK's broadcasts reach millions. JR's trains are punctual.</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> HTML と CSS は重要です。The years 2000 - 2024 saw major changes. "技術は進化する," と彼は言った... NHK's broadcasts reach millions. JR's trains are punctual.</p>
 			</div>
 		</div>
@@ -652,7 +652,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> HTML 和 CSS 很重要。The years 1949 - 2024 were transformative. "技术发展," 他说... CCTV's coverage is extensive. NBA's popularity is global.</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> HTML 和 CSS 很重要。The years 1949 - 2024 were transformative. "技术发展," 他说... CCTV's coverage is extensive. NBA's popularity is global.</p>
 			</div>
 		</div>
@@ -662,7 +662,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> HTML و CSS مهمان جداً. The years 1950 - 2024 brought changes. "التكنولوجيا تتطور," قال... BBC's Arabic service is popular. FIFA's tournaments unite nations.</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> HTML و CSS مهمان جداً. The years 1950 - 2024 brought changes. "التكنولوجيا تتطور," قال... BBC's Arabic service is popular. FIFA's tournaments unite nations.</p>
 			</div>
 		</div>
@@ -676,7 +676,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> The "NASA" program and 'FBI' investigation both used HTML5 technology. "It's the API's fault," they said, "not the SDK's."</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> The "NASA" program and 'FBI' investigation both used HTML5 technology. "It's the API's fault," they said, "not the SDK's."</p>
 			</div>
 		</div>
@@ -686,7 +686,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> NASA launched 150 missions. The FBI's 2024 report shows 1,234 cases. HTML5 and CSS3 were released in the 2010 - 2015 timeframe.</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> NASA launched 150 missions. The FBI's 2024 report shows 1,234 cases. HTML5 and CSS3 were released in the 2010 - 2015 timeframe.</p>
 			</div>
 		</div>
@@ -696,7 +696,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> "In 2024," she said, "the API's documentation referenced NASA's findings from 1969 - 1972... It's a first-class example of fine typography!" The HTML file contained 1,234 lines. © 2024 by the W3C®.</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> "In 2024," she said, "the API's documentation referenced NASA's findings from 1969 - 1972... It's a first-class example of fine typography!" The HTML file contained 1,234 lines. © 2024 by the W3C®.</p>
 			</div>
 		</div>
@@ -713,7 +713,7 @@
 					<li>FBI - Federal Bureau of Investigation</li>
 				</ul>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<ul>
 					<li>HTML - HyperText Markup Language</li>
 					<li>CSS - Cascading Style Sheets</li>
@@ -730,7 +730,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> The office verified the official files. Fifty affluent officers were affiliated with the firm. The firefly flew first through the field of flowers...</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> The office verified the official files. Fifty affluent officers were affiliated with the firm. The firefly flew first through the field of flowers...</p>
 			</div>
 		</div>
@@ -748,7 +748,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> Wait.. No.. Stop..</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> Wait.. No.. Stop..</p>
 			</div>
 		</div>
@@ -758,7 +758,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> Wait.... Really.... Okay....</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> Wait.... Really.... Okay....</p>
 			</div>
 		</div>
@@ -768,7 +768,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> Wait. . . and see. . .what happens.  .  .  .</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> Wait. . . and see. . .what happens.  .  .  .</p>
 			</div>
 		</div>
@@ -778,7 +778,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> ...beginning of thought and end of thought...</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> ...beginning of thought and end of thought...</p>
 			</div>
 		</div>
@@ -788,7 +788,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> What...! How...? Why..., Really...;</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> What...! How...? Why..., Really...;</p>
 			</div>
 		</div>
@@ -798,7 +798,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> Wait...... and then......</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> Wait...... and then......</p>
 			</div>
 		</div>
@@ -811,7 +811,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> "Hello world" said the program.</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> "Hello world" said the program.</p>
 			</div>
 		</div>
@@ -821,7 +821,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> He said ""urgent"" and she replied '''immediately'''.</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> He said ""urgent"" and she replied '''immediately'''.</p>
 			</div>
 		</div>
@@ -831,7 +831,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> "Hello"! "Goodbye"? "Maybe"; "Perhaps":</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> "Hello"! "Goodbye"? "Maybe"; "Perhaps":</p>
 			</div>
 		</div>
@@ -841,7 +841,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> He said"hello"and left. She replied'goodbye'quickly.</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> He said"hello"and left. She replied'goodbye'quickly.</p>
 			</div>
 		</div>
@@ -851,7 +851,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> It's John's book. Can't won't don't I'm we're they're shouldn't couldn't wouldn't.</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> It's John's book. Can't won't don't I'm we're they're shouldn't couldn't wouldn't.</p>
 			</div>
 		</div>
@@ -861,7 +861,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> He said "She told me 'He whispered "never" to her' yesterday" and left.</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> He said "She told me 'He whispered "never" to her' yesterday" and left.</p>
 			</div>
 		</div>
@@ -871,7 +871,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> He said "" and she replied ''.</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> He said "" and she replied ''.</p>
 			</div>
 		</div>
@@ -881,7 +881,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> He said "hello", then "goodbye". She said 'yes', then 'no'.</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> He said "hello", then "goodbye". She said 'yes', then 'no'.</p>
 			</div>
 		</div>
@@ -891,7 +891,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> 'twas 'til 'cause rock'n'roll o'clock 'bout '90s ma'am</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> 'twas 'til 'cause rock'n'roll o'clock 'bout '90s ma'am</p>
 			</div>
 		</div>
@@ -901,7 +901,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> John'S book Mary'S car (testing uppercase S after apostrophe)</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> John'S book Mary'S car (testing uppercase S after apostrophe)</p>
 			</div>
 		</div>
@@ -914,7 +914,7 @@
 			<div class="original">
 				<p><strong>Original:</strong>ffleффlе shuffleboard baffled waffles scofflaw</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> fffle ffl shuffleboard baffled waffles scofflaw</p>
 			</div>
 		</div>
@@ -924,7 +924,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> FL FI FILM FLORAL FINISH FIFTY</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> FL FI FILM FLORAL FINISH FIFTY</p>
 			</div>
 		</div>
@@ -934,7 +934,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> fl fi flfi fifl flflfl fififi</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> fl fi flfi fifl flflfl fififi</p>
 			</div>
 		</div>
@@ -944,7 +944,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> Visit http://files.example.com or ftp://financial.server.org</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> Visit http://files.example.com or ftp://financial.server.org</p>
 			</div>
 		</div>
@@ -954,7 +954,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> file.txt filename filter config flags</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> file.txt filename filter config flags</p>
 			</div>
 		</div>
@@ -964,7 +964,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> Fl Fi FL FI fL fI Fl fi</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> Fl Fi FL FI fL fI Fl fi</p>
 			</div>
 		</div>
@@ -974,7 +974,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> "film" 'finish' (flow) [first] {field} fl-ag fi-le</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> "film" 'finish' (flow) [first] {field} fl-ag fi-le</p>
 			</div>
 		</div>
@@ -987,7 +987,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> state-of-the-art mother-in-law well-known twenty-one</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> state-of-the-art mother-in-law well-known twenty-one</p>
 			</div>
 		</div>
@@ -997,7 +997,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> -- --- ---- ----- Words - with - dashes - everywhere</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> -- --- ---- ----- Words - with - dashes - everywhere</p>
 			</div>
 		</div>
@@ -1007,7 +1007,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> - beginning and end - </p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> - beginning and end - </p>
 			</div>
 		</div>
@@ -1017,7 +1017,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> word -space no-space- both</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> word -space no-space- both</p>
 			</div>
 		</div>
@@ -1027,7 +1027,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> 5 - 3 = 2, temperature is -5 degrees, result is -10</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> 5 - 3 = 2, temperature is -5 degrees, result is -10</p>
 			</div>
 		</div>
@@ -1037,7 +1037,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> Long pause — like this or range 1990 - 2000 or London–Paris train</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> Long pause — like this or range 1990 - 2000 or London–Paris train</p>
 			</div>
 		</div>
@@ -1050,7 +1050,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> 0 1 2 3 4 5 6 7 8 9 10 100 1000 10000</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> 0 1 2 3 4 5 6 7 8 9 10 100 1000 10000</p>
 			</div>
 		</div>
@@ -1060,7 +1060,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> 3.14 2.5 0.5 100.00 1.234567</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> 3.14 2.5 0.5 100.00 1.234567</p>
 			</div>
 		</div>
@@ -1070,7 +1070,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> -1 -10 -100 -3.14 -0.5</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> -1 -10 -100 -3.14 -0.5</p>
 			</div>
 		</div>
@@ -1080,7 +1080,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> 1,000 10,000 100,000 1,000,000 1,234,567,890</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> 1,000 10,000 100,000 1,000,000 1,234,567,890</p>
 			</div>
 		</div>
@@ -1090,7 +1090,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> 555-1234 (555) 123-4567 01/15/2024 2024-01-15 15.01.2024</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> 555-1234 (555) 123-4567 01/15/2024 2024-01-15 15.01.2024</p>
 			</div>
 		</div>
@@ -1100,7 +1100,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> Visit <a href="http://example.com/page123">page 123</a> or call <a href="tel:5551234">555-1234</a></p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> Visit <a href="http://example.com/page123">page 123</a> or call <a href="tel:5551234">555-1234</a></p>
 			</div>
 		</div>
@@ -1110,7 +1110,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> 2024 was a great year and ended with 12345</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> 2024 was a great year and ended with 12345</p>
 			</div>
 		</div>
@@ -1120,7 +1120,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> 100km 5lb $50 €100 £25 50% 37°C 5'10" 6:30pm</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> 100km 5lb $50 €100 £25 50% 37°C 5'10" 6:30pm</p>
 			</div>
 		</div>
@@ -1130,7 +1130,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> 2+2=4 5*3=15 10/2=5 100-50=50 2^8=256</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> 2+2=4 5*3=15 10/2=5 100-50=50 2^8=256</p>
 			</div>
 		</div>
@@ -1140,7 +1140,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> v1.0.0 2.5.1 192.168.1.1 127.0.0.1 255.255.255.0</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> v1.0.0 2.5.1 192.168.1.1 127.0.0.1 255.255.255.0</p>
 			</div>
 		</div>
@@ -1153,7 +1153,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> A B C D E F G H I J K L M N O P Q R S T U V W X Y Z</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> A B C D E F G H I J K L M N O P Q R S T U V W X Y Z</p>
 			</div>
 		</div>
@@ -1163,7 +1163,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> U.S.A. Ph.D. M.D. B.A. M.A. e.g. i.e. etc. a.m. p.m.</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> U.S.A. Ph.D. M.D. B.A. M.A. e.g. i.e. etc. a.m. p.m.</p>
 			</div>
 		</div>
@@ -1173,7 +1173,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> HTML. CSS: JSON; XML, API! PDF? HTTP& HTTPS%</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> HTML. CSS: JSON; XML, API! PDF? HTTP& HTTPS%</p>
 			</div>
 		</div>
@@ -1183,7 +1183,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> HTML5 CSS3 HTTP2 MP3 MP4 3M 4WD V8 747 F16 B2B B2C</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> HTML5 CSS3 HTTP2 MP3 MP4 3M 4WD V8 747 F16 B2B B2C</p>
 			</div>
 		</div>
@@ -1193,7 +1193,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> Html Css Json Api Nasa Fbi Www Http Https</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> Html Css Json Api Nasa Fbi Www Http Https</p>
 			</div>
 		</div>
@@ -1203,7 +1203,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> ABCDEFGHIJKLMNOPQRSTUVWXYZ WWWWWWWWWWWWWWW AAAAAAAAAAA</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> ABCDEFGHIJKLMNOPQRSTUVWXYZ WWWWWWWWWWWWWWW AAAAAAAAAAA</p>
 			</div>
 		</div>
@@ -1213,7 +1213,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> NASA. FBI: CIA; JSON, HTML! API? XML& HTTP% CSS</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> NASA. FBI: CIA; JSON, HTML! API? XML& HTTP% CSS</p>
 			</div>
 		</div>
@@ -1223,7 +1223,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> (NASA) [FBI] {CIA} <API> "HTML" 'CSS' (JSON) [XML]</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> (NASA) [FBI] {CIA} <API> "HTML" 'CSS' (JSON) [XML]</p>
 			</div>
 		</div>
@@ -1233,7 +1233,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> NATO UNESCO UNICEF NASA SCUBA RADAR LASER ASAP RSVP FYI TBD</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> NATO UNESCO UNICEF NASA SCUBA RADAR LASER ASAP RSVP FYI TBD</p>
 			</div>
 		</div>
@@ -1243,7 +1243,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> NASA's API's HTML's M-16 F-15 T-800 AT-AT X-MEN A-OK</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> NASA's API's HTML's M-16 F-15 T-800 AT-AT X-MEN A-OK</p>
 			</div>
 		</div>
@@ -1256,7 +1256,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> ©® ®© ©©© ®®®</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> ©® ®© ©©© ®®®</p>
 			</div>
 		</div>
@@ -1266,7 +1266,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> © Start and End ® or Middle © Symbol or © Alone</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> © Start and End ® or Middle © Symbol or © Alone</p>
 			</div>
 		</div>
@@ -1276,7 +1276,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> "©" '®' (©) [®] {©} ©! ®? ©. ®,</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> "©" '®' (©) [®] {©} ©! ®? ©. ®,</p>
 			</div>
 		</div>
@@ -1286,7 +1286,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> © ® ™ ℠ (only first two should superscript)</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> © ® ™ ℠ (only first two should superscript)</p>
 			</div>
 		</div>
@@ -1299,7 +1299,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> "NASA's API documentation for HTML5 and CSS3... really?" she said. 'It's from 1990 - 2024 and has 1,234 examples!' The files like profile.txt and filter.js are © 2024 W3C®.</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> "NASA's API documentation for HTML5 and CSS3... really?" she said. 'It's from 1990 - 2024 and has 1,234 examples!' The files like profile.txt and filter.js are © 2024 W3C®.</p>
 			</div>
 		</div>
@@ -1309,7 +1309,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> The "film" about NASA's 'first' mission... launched in 1969 - 1972 with 150 - 200 people. "Amazing!" said the CEO's assistant.</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> The "film" about NASA's 'first' mission... launched in 1969 - 1972 with 150 - 200 people. "Amazing!" said the CEO's assistant.</p>
 			</div>
 		</div>
@@ -1319,7 +1319,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> "ABC" 123 'DEF' 456 "GHI" 789 'JKL' ... MNO! "PQR"? 'STU'. 2024 - 2025</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> "ABC" 123 'DEF' 456 "GHI" 789 'JKL' ... MNO! "PQR"? 'STU'. 2024 - 2025</p>
 			</div>
 		</div>
@@ -1329,7 +1329,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> ""Empty"" quotes, 'twas ...ellipsis... fi-fl ligatures in "film" HTML5's API - 2024 © ® U.S.A. Ph.D. -5 degrees 3.14159 555-1234 http://files.com state-of-the-art NASA. FBI: CIA;</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> ""Empty"" quotes, 'twas ...ellipsis... fi-fl ligatures in "film" HTML5's API - 2024 © ® U.S.A. Ph.D. -5 degrees 3.14159 555-1234 http://files.com state-of-the-art NASA. FBI: CIA;</p>
 			</div>
 		</div>
@@ -1339,7 +1339,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> """"'''''......------      multiple    spaces    ""'' "''" '""' NASA.NASA:NASA;NASA,NASA!NASA?</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> """"'''''......------      multiple    spaces    ""'' "''" '""' NASA.NASA:NASA;NASA,NASA!NASA?</p>
 			</div>
 		</div>
@@ -1349,7 +1349,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> According to NASA's 2024 report, the API (Application Programming Interface) handles 1,000 - 2,000 requests per second... "It's incredible," said the CTO. The HTML5/CSS3 implementation uses fi-ligatures in filenames like "profile.txt" and offers ©2024 protection. Contact us at 555-1234 or visit http://api.nasa.gov for Ph.D.-level documentation.</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> According to NASA's 2024 report, the API (Application Programming Interface) handles 1,000 - 2,000 requests per second... "It's incredible," said the CTO. The HTML5/CSS3 implementation uses fi-ligatures in filenames like "profile.txt" and offers ©2024 protection. Contact us at 555-1234 or visit http://api.nasa.gov for Ph.D.-level documentation.</p>
 			</div>
 		</div>
@@ -1362,7 +1362,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> "Hello" and 'world' with "quotes" and 'apostrophes'</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> "Hello" and 'world' with "quotes" and 'apostrophes'</p>
 			</div>
 		</div>
@@ -1372,7 +1372,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> "Straight" and "curly" and 'straight' and 'curly'</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> "Straight" and "curly" and 'straight' and 'curly'</p>
 			</div>
 		</div>
@@ -1382,7 +1382,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> En–dash Em—dash and regular - hyphen with - spaces</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> En–dash Em—dash and regular - hyphen with - spaces</p>
 			</div>
 		</div>
@@ -1392,7 +1392,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> Question¿ Exclamation¡ Section§ Paragraph¶ Bullet• Dagger† Double‡</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> Question¿ Exclamation¡ Section§ Paragraph¶ Bullet• Dagger† Double‡</p>
 			</div>
 		</div>
@@ -1402,7 +1402,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> Α Β Γ with NASA and HTML. Cyrillic А Б В with API and CSS. Greek ΑΒΓΔ meets Latin ABCD.</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> Α Β Γ with NASA and HTML. Cyrillic А Б В with API and CSS. Greek ΑΒΓΔ meets Latin ABCD.</p>
 			</div>
 		</div>
@@ -1415,7 +1415,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> Words    with    multiple    spaces   "quoted"    text   and   123   numbers</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> Words    with    multiple    spaces   "quoted"    text   and   123   numbers</p>
 			</div>
 		</div>
@@ -1425,7 +1425,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> Tab→here and&nbsp;non-breaking&nbsp;space&nbsp;here with "quotes" and NASA</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> Tab→here and&nbsp;non-breaking&nbsp;space&nbsp;here with "quotes" and NASA</p>
 			</div>
 		</div>
@@ -1435,7 +1435,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> </p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> </p>
 			</div>
 		</div>
@@ -1445,7 +1445,7 @@
 			<div class="original">
 				<p><strong>Original:</strong> Thisisaverylongwordwithnospacesanditincludesthesequenceflfiandalsosomenumberslike123456789andabbreviationslikeHTMLandCSSandquotes"like"thisandellipsis...andeverythingelsealltogether</p>
 			</div>
-			<div id="display" class="transformed">
+			<div class="display" class="transformed">
 				<p><strong>Transformed:</strong> Thisisaverylongwordwithnospacesanditincludesthesequenceflfiandalsosomenumberslike123456789andabbreviationslikeHTMLandCSSandquotes"like"thisandellipsis...andeverythingelsealltogether</p>
 			</div>
 		</div>

@@ -57,7 +57,7 @@ var charReplacements = function() {
 	var singleQuoteCharClose = "&#8217;";
 	var singleQuoteCharOpen = "&#8216;";
 	var posessiveS = "&#8217;";
-	var triggerID = "#display";
+	var triggerID = ".display";
 	var numeralClass = "num"
 
 	// END SETTINGS
@@ -441,7 +441,7 @@ function toggleTypesetterDebug() {
 	TYPESETTER_DEBUG = !TYPESETTER_DEBUG;
 
 	// Clear all existing transformations
-	$('#display').find('*').each(function() {
+	$('.display').find('*').each(function() {
 		if ($(this).hasClass('typo')) {
 			// Store original if not already stored
 			if (!$(this).data('original-html')) {
