@@ -99,11 +99,11 @@
 
 		<!-- TAB NAVIGATION -->
 		<div class="tab-navigation">
-			<button class="tab-button active" onclick="switchTab(event, 'tab-basic')">Basic Typography</button>
-			<button class="tab-button" onclick="switchTab(event, 'tab-multilang')">Multi-Language Scenarios</button>
-			<button class="tab-button" onclick="switchTab(event, 'tab-numbers')">Numbers & Amounts in Different Language Formats</button>
-			<button class="tab-button" onclick="switchTab(event, 'tab-edge')">Edge Cases & Special Scenarios</button>
-			<button class="tab-button" onclick="switchTab(event, 'tab-regex')">COMPREHENSIVE REGEX EDGE CASES TEST SUITE</button>
+			<button class="tab-button active" onclick="switchTab(event, 'tab-basic')">Typography</button>
+			<button class="tab-button" onclick="switchTab(event, 'tab-multilang')">Multi-Language</button>
+			<button class="tab-button" onclick="switchTab(event, 'tab-numbers')">Numbers & Amounts</button>
+			<button class="tab-button" onclick="switchTab(event, 'tab-edge')">Edge Cases</button>
+			<button class="tab-button" onclick="switchTab(event, 'tab-regex')">Regex tests</button>
 		</div>
 
 		<!--
@@ -665,7 +665,7 @@
 		</div>
 
 		<div class="language-section">
-			<h3>Measurements and Units</h3>
+			<h3>Measurements and units</h3>
 			<div class="original">
 				<p><strong>Original</strong> Distance: 1,234.56 km or 1.234,56 km. Weight: 45.67 kg or 45,67 kg. Volume: 2,345.67 liters or 2.345,67 Liter. Temperature: 23.5°C or 23,5°C or -40.0°F or -40,0°F.</p>
 			</div>
@@ -675,7 +675,7 @@
 		</div>
 
 		<div class="language-section">
-			<h3>Complex Financial Data</h3>
+			<h3>Complex financial data</h3>
 			<div class="original">
 				<p><strong>Original</strong> "The Q4 2024 results show revenue of $12,345,678.90 million," said the CFO. Operating margin improved from 23.45% to 25.67%. EPS: $3.14 vs $2.89 YoY. Market cap: $456.78 billion. P/E ratio: 18.5x.</p>
 			</div>
@@ -759,12 +759,26 @@
 		</div>
 		<!-- End Tab 4: Edge Cases & Special Scenarios -->
 
-		<!-- Tab 5: COMPREHENSIVE REGEX EDGE CASES TEST SUITE -->
+		<!-- Tab 5: Comprehensive regex edge cases tests -->
 		<div id="tab-regex" class="tab-content">
 
-		<h2>11. COMPREHENSIVE REGEX EDGE CASES TEST SUITE</h2>
+		<h2>11. Comprehensive regex edge cases tests</h2>
 		<p><em>This section tests boundary conditions and potential gaps in the regex patterns</em></p>
-
+		
+		<div style="background: #fff3cd; border: 2px solid #ffc107; padding: 20px; margin: 30px 0;">
+			<h3 style="color: #856404;">Known Issues Summary (from testing above)</h3>
+			<ul style="color: #856404;">
+				<li><strong>Abbreviations ending with punctuation</strong> (.,:;) - May wrap only first character</li>
+				<li><strong>Quote at paragraph start</strong> - No space before, may not convert to opening quote</li>
+				<li><strong>Ligatures in URLs</strong> - Will incorrectly create ligatures in technical URLs</li>
+				<li><strong>Numbers in decimals</strong> - Each part wrapped separately (3.14 becomes &lt;num&gt;3&lt;/num&gt;.&lt;num&gt;14&lt;/num&gt;)</li>
+				<li><strong>Contractions at start</strong> - 'twas, 'til may not convert properly without leading space</li>
+				<li><strong>Multiple consecutive quotes</strong> - May produce unexpected results</li>
+				<li><strong>Abbreviations with periods</strong> - U.S.A. gets split incorrectly</li>
+				<li><strong>Two dots</strong> - Not converted to ellipsis (only 3+ dots)</li>
+			</ul>
+		</div>
+		
 		<!-- ELLIPSIS EDGE CASES -->
 		<h3 style="background: #333; color: white; padding: 10px; margin-top: 30px;">A. Ellipsis Edge Cases</h3>
 
@@ -1475,21 +1489,6 @@
 			</div>
 		</div>
 
-		
-
-		<div style="background: #fff3cd; border: 2px solid #ffc107; padding: 20px; margin: 30px 0;">
-			<h3 style="color: #856404;">Known Issues Summary (from testing above)</h3>
-			<ul style="color: #856404;">
-				<li><strong>Abbreviations ending with punctuation</strong> (.,:;) - May wrap only first character</li>
-				<li><strong>Quote at paragraph start</strong> - No space before, may not convert to opening quote</li>
-				<li><strong>Ligatures in URLs</strong> - Will incorrectly create ligatures in technical URLs</li>
-				<li><strong>Numbers in decimals</strong> - Each part wrapped separately (3.14 becomes &lt;num&gt;3&lt;/num&gt;.&lt;num&gt;14&lt;/num&gt;)</li>
-				<li><strong>Contractions at start</strong> - 'twas, 'til may not convert properly without leading space</li>
-				<li><strong>Multiple consecutive quotes</strong> - May produce unexpected results</li>
-				<li><strong>Abbreviations with periods</strong> - U.S.A. gets split incorrectly</li>
-				<li><strong>Two dots</strong> - Not converted to ellipsis (only 3+ dots)</li>
-			</ul>
-		</div>
 
 		</div>
 		<!-- End Tab 5: COMPREHENSIVE REGEX EDGE CASES TEST SUITE -->
