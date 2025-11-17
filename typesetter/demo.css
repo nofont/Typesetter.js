@@ -105,3 +105,119 @@ hr {
 	border: none;
 	border-top: 2px solid #ccc;
 }
+
+/* Tab Navigation Styles */
+.tab-navigation {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+	margin: 30px 0;
+	border-bottom: 3px solid #333;
+	padding-bottom: 0;
+}
+
+.tab-button {
+	background-color: #f0f0f0;
+	border: 2px solid #ccc;
+	border-bottom: none;
+	padding: 12px 20px;
+	cursor: pointer;
+	font-family: 'Mate', serif;
+	font-size: 14px;
+	transition: all 0.3s ease;
+	border-radius: 5px 5px 0 0;
+	position: relative;
+	bottom: -3px;
+}
+
+.tab-button:hover {
+	background-color: #e0e0e0;
+}
+
+.tab-button.active {
+	background-color: white;
+	border-color: #333;
+	border-bottom: 3px solid white;
+	font-weight: bold;
+	color: #333;
+}
+
+.tab-content {
+	display: none;
+	animation: fadeIn 0.3s ease-in;
+}
+
+.tab-content.active {
+	display: block;
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+		transform: translateY(10px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+/* Responsive tab navigation for mobile */
+@media (max-width: 768px) {
+	.tab-navigation {
+		flex-direction: column;
+		gap: 5px;
+	}
+
+	.tab-button {
+		width: 100%;
+		text-align: left;
+		border-radius: 5px;
+		border: 2px solid #ccc;
+		bottom: 0;
+	}
+
+	.tab-button.active {
+		border: 2px solid #333;
+	}
+}
+
+/* Back to Top Button */
+#back-to-top {
+	display: none;
+	position: fixed;
+	bottom: 30px;
+	right: 30px;
+	background-color: #333;
+	color: white;
+	border: 2px solid #333;
+	padding: 12px 20px;
+	font-size: 14px;
+	font-family: 'Mate', serif;
+	cursor: pointer;
+	border-radius: 5px;
+	z-index: 1000;
+	transition: all 0.3s ease;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+#back-to-top:hover {
+	background-color: #555;
+	border-color: #555;
+	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+	transform: translateY(-2px);
+}
+
+#back-to-top:active {
+	transform: translateY(0);
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 768px) {
+	#back-to-top {
+		bottom: 20px;
+		right: 20px;
+		padding: 10px 16px;
+		font-size: 12px;
+	}
+}
