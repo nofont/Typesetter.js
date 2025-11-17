@@ -4,9 +4,10 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta charset="utf-8">
-		<title>Typesetter.js Comprehensive Demo - Vanilla JS (No jQuery)</title>
+		<title>Typesetter.js Comprehensive Demo</title>
+		<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 
-        <script type="text/javascript" src="typesetter-debug-vanilla.js"></script>
+        <script type="text/javascript" src="typesetter-debug.js"></script>
 
         <link href='http://fonts.googleapis.com/css?family=Mate:400,400italic|Mate+SC' rel='stylesheet' type='text/css'>
 
@@ -14,6 +15,31 @@
 		<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0">
 		<meta name="apple-mobile-web-app-capable" content="no">
 		<meta name="apple-touch-fullscreen" content="no">
+
+		<script>
+
+			$(document).ready(function() {
+
+			    /********************************
+			    	TYPOGRAPHIC ENHANCEMENTS
+			    ********************************/
+
+			    $('.display p, .display li, .display h3, .display h4').addClass("typo");
+
+			    // Store original HTML before any transformations
+			    $('.display').find('.typo').each(function() {
+			    	$(this).data('original-html', $(this).html());
+			    });
+
+			   /********************************
+			    	FIRE THE FUNCTIONS
+			    ********************************/
+
+			    smallcapsReplacement();
+
+			});
+
+		</script>
 
 		<style>
 			body {
@@ -216,12 +242,6 @@
 		</div>
 
 		<h1>Typesetter.js - Comprehensive Typography Demo</h1>
-
-		<div style="background: #e8f5e9; border-left: 5px solid #4caf50; padding: 20px; margin: 20px 0;">
-			<h2 style="margin-top: 0; color: #2e7d32;">⚡ Vanilla JavaScript Version - No jQuery</h2>
-			<p><strong>Performance:</strong> This version is <strong>40% faster</strong> than the jQuery version and <strong>30KB smaller</strong> (no jQuery library required).</p>
-			<p><strong>Benefits:</strong> Zero dependencies, native DOM APIs, better mobile performance, lower memory usage.</p>
-		</div>
 
 		<p><strong>This demo showcases all typographic transformations handled by Typesetter.js</strong></p>
 		<p>Each section shows the original text (red) and the transformed text (green) with proper typographic enhancements.</p>

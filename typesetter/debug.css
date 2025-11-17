@@ -1,0 +1,72 @@
+/* DEBUG MODE STYLES */
+#debug-controls {
+	position: fixed;
+	top: 20px;
+	right: 20px;
+	z-index: 1000;
+	background: white;
+	padding: 15px;
+	border-radius: 8px;
+	box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+#debug-toggle {
+	background-color: #f44336;
+	color: white;
+	border: none;
+	padding: 12px 24px;
+	font-size: 16px;
+	font-weight: bold;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: all 0.3s;
+	display: block;
+	width: 100%;
+	margin-bottom: 10px;
+}
+
+#debug-toggle:hover {
+	opacity: 0.9;
+	transform: scale(1.05);
+}
+
+#debug-legend {
+	display: none;
+	background: #fff;
+	padding: 15px;
+	border-radius: 5px;
+	border: 2px solid #333;
+	margin-top: 10px;
+	max-width: 300px;
+}
+
+#debug-legend h4 {
+	margin: 0 0 10px 0;
+	color: #333;
+}
+
+.legend-item {
+	display: flex;
+	align-items: center;
+	margin: 5px 0;
+	font-size: 12px;
+}
+
+.legend-color {
+	width: 30px;
+	height: 20px;
+	margin-right: 10px;
+	border: 1px solid #000;
+	display: inline-block;
+}
+
+.debug-match {
+	cursor: help;
+	transition: all 0.2s;
+}
+
+.debug-match:hover {
+	transform: scale(1.1);
+	box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+	z-index: 100;
+}
