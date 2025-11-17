@@ -96,6 +96,16 @@
 
 		<p>This demo showcases all typographic transformations handled by Typesetter.js</p>
 		<p>Each section shows the original text (red) and the transformed text (green) with proper typographic enhancements.</p>
+
+		<!-- TAB NAVIGATION -->
+		<div class="tab-navigation">
+			<button class="tab-button active" onclick="switchTab(event, 'tab-basic')">Basic Typography</button>
+			<button class="tab-button" onclick="switchTab(event, 'tab-multilang')">Multi-Language Scenarios</button>
+			<button class="tab-button" onclick="switchTab(event, 'tab-numbers')">Numbers & Amounts in Different Language Formats</button>
+			<button class="tab-button" onclick="switchTab(event, 'tab-edge')">Edge Cases & Special Scenarios</button>
+			<button class="tab-button" onclick="switchTab(event, 'tab-regex')">COMPREHENSIVE REGEX EDGE CASES TEST SUITE</button>
+		</div>
+
 		<!--
 			<p><strong style="color: #4caf50;">NEW!</strong> Use the <strong>Debug Mode</strong> button (top-right) to visualize exactly what each regex pattern matches. Hover over highlighted elements to see details about the transformation.</p>
 
@@ -128,6 +138,8 @@
 		</div>
 	-->
 
+		<!-- TAB CONTENT -->
+		<div id="tab-basic" class="tab-content active">
 
 		<h2>1. Quotation Marks (Smart Quotes)</h2>
 
@@ -355,7 +367,11 @@
 			</div>
 		</div>
 
-		
+		</div>
+		<!-- End Tab 1: Basic Typography -->
+
+		<!-- Tab 2: Multi-Language Scenarios -->
+		<div id="tab-multilang" class="tab-content">
 
 		<h2>8. Multi-Language Scenarios</h2>
 
@@ -519,7 +535,11 @@
 			</div>
 		</div>
 
-		
+		</div>
+		<!-- End Tab 2: Multi-Language Scenarios -->
+
+		<!-- Tab 3: Numbers & Amounts in Different Language Formats -->
+		<div id="tab-numbers" class="tab-content">
 
 		<h2>9. Numbers & Amounts in Different Language Formats</h2>
 		<p><em>Testing how the script handles amounts formatted according to different language conventions</em></p>
@@ -664,7 +684,11 @@
 			</div>
 		</div>
 
-		
+		</div>
+		<!-- End Tab 3: Numbers & Amounts in Different Language Formats -->
+
+		<!-- Tab 4: Edge Cases & Special Scenarios -->
+		<div id="tab-edge" class="tab-content">
 
 		<h2>10. Edge Cases & Special Scenarios</h2>
 
@@ -732,7 +756,11 @@
 			</div>
 		</div>
 
-		
+		</div>
+		<!-- End Tab 4: Edge Cases & Special Scenarios -->
+
+		<!-- Tab 5: COMPREHENSIVE REGEX EDGE CASES TEST SUITE -->
+		<div id="tab-regex" class="tab-content">
 
 		<h2>11. COMPREHENSIVE REGEX EDGE CASES TEST SUITE</h2>
 		<p><em>This section tests boundary conditions and potential gaps in the regex patterns</em></p>
@@ -1463,13 +1491,40 @@
 			</ul>
 		</div>
 
-		
+		</div>
+		<!-- End Tab 5: COMPREHENSIVE REGEX EDGE CASES TEST SUITE -->
 
 		<footer style="margin-top: 60px; padding-top: 20px; border-top: 2px solid #333; color: #666; text-align: center;">
 			<p><strong>Typesetter.js</strong> - part of the OpenTypography project</p>
 			<p>© 2025 OpenTypography.org - This comprehensive demo showcases all typographic transformations</p>
 			<p>Visit <a href="https://www.nofont.com/asides/opentypography">https://www.nofont.com/asides/opentypography</a> for more information</p>
 		</footer>
+
+	<script>
+		// Tab switching functionality (vanilla JavaScript)
+		function switchTab(event, tabId) {
+			// Hide all tab content
+			var tabContents = document.querySelectorAll('.tab-content');
+			tabContents.forEach(function(content) {
+				content.classList.remove('active');
+			});
+
+			// Remove active class from all buttons
+			var tabButtons = document.querySelectorAll('.tab-button');
+			tabButtons.forEach(function(button) {
+				button.classList.remove('active');
+			});
+
+			// Show the selected tab content
+			document.getElementById(tabId).classList.add('active');
+
+			// Add active class to clicked button
+			event.currentTarget.classList.add('active');
+
+			// Scroll to top of content
+			window.scrollTo({top: 0, behavior: 'smooth'});
+		}
+	</script>
 
 	</body>
 
